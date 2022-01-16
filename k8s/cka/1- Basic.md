@@ -70,7 +70,7 @@ spec:
     matchLabels:
       type: back
   template:
-   # yaml of pod without apiVersion and king
+   # yaml of a pod without apiVersion and kind
 ```
 
 ## Get ReplicaSet

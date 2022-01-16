@@ -1,5 +1,3 @@
-# Yaml file
-
 # Pods
 
 ## Yaml structure

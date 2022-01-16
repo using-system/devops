@@ -47,7 +47,7 @@ spec:
 
 ## Create a yaml template
 
-`kubectl run nginx --image=nginx --dry-run -o yaml > pod.yaml`
+`kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml`
 
 ## Edit a pod
 
@@ -84,3 +84,33 @@ spec:
 ## Edit a ReplicaSet
 
 `kubectl edit replicaset replica1`
+
+# Deployment
+
+## Create a yaml template
+
+`kubectl create deployment --image=nginx nginx --replicas=5 --dry-run=client -o yaml > deployment.yaml`
+
+## Yaml structure
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: deploy1
+    labels:
+      app: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+
+   # yaml of a pod without apiVersion and kind
+```
+
+## Scale
+
+`kubectl scale deployment --replicas=5 deploy1`

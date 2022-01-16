@@ -1,2 +1,2 @@
 # devops
-Devops stuff about Azure Devops, terraform, k8s
+Devops stuffs about Azure Devops, terraform, k8s

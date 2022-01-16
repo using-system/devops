@@ -9,9 +9,9 @@ apiVersion: v1
 kind: Pod
 
 metadata:
-  name:mypod
+  name: mypod
     labels:
-      app:mypod-app
+      app: mypod-app
 
 spec:
   containers:
@@ -114,3 +114,37 @@ spec:
 ## Scale
 
 `kubectl scale deployment --replicas=5 deploy1`
+
+# Namespace
+
+## Get resource from namespace
+
+`kubectl get [resource=pods/deploy..] --namespace=myns`
+
+`kubectl get [resource=pods/deploy..] -n myns`
+
+## Get resource from all namespaces
+
+`kubectl get [resource=pods/deploy..] --all-namespaces`
+
+## Create a pod with namespace specified
+
+```yaml
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: mypod
+  namespace: myns
+    labels:
+      app: mypod-app
+
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+```
+
+## Switch namespace
+
+kubectl config set-context --current --namespace=myns

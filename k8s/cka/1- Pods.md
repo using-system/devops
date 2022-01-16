@@ -24,7 +24,7 @@
 
 # Create a yaml template
 
-`kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml`
+`kubectl run nginx --image=nginx --dry-run -o yaml > pod.yaml`
 
 # Edit a pod
 

@@ -89,6 +89,8 @@ spec:
 
 `kubectl create deployment --image=nginx nginx --replicas=5 --dry-run=client -o yaml > deployment.yaml`
 
+`kubectl create deployment --image=nginx nginx --dry-run=client -o yaml > deployment.yaml`
+
 ## Yaml structure
 
 ```yaml
@@ -111,7 +113,7 @@ spec:
 
 ## Scale
 
-`kubectl scale deployment --replicas=5 deploy1`
+`kubectl scale deployment deploy1 --replicas=5 ` 
 
 # Namespace
 
@@ -153,7 +155,13 @@ kubectl config set-context --current --namespace=myns
 
 `kubectl expose deployment mydeploy --name=myservice --target-port=8080 --type=NodePort --port=8080 --dry-run=client -o yaml > service.yaml`
 
+`kubectl expose deployment nginx --port 80 --dry-run=client -o yaml > service.yaml`
 
+`kubectl expose pod mypod --name=myservice  --type=NodePort --port=8080 --dry-run=client -o yaml > service.yaml`
+
+`kubectl run mypod --image:nginx --port=8080 --expose --dry-run=client -o yaml > podwithservice.yaml`
+
+By default the type of a service is ClusterIp.
 
 ## Yaml structure (Node Port)
 

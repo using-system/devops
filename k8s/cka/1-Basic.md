@@ -146,3 +146,33 @@ spec:
 ## Switch namespace
 
 kubectl config set-context --current --namespace=myns
+
+# Services
+
+## Create a yaml template
+
+`kubectl expose deployment mydeploy --name=myservice --target-port=8080 --type=NodePort --port=8080 --dry-run=client -o yaml > service.yaml`
+
+
+
+## Yaml structure (Node Port)
+
+~~~yaml
+ apiVersion: v1
+ kind: Service
+ metadata:
+   name: myService
+ spec:
+   type: NodePort
+   ports:
+    - targetPort: 8080
+      port: 80
+      nodePort: 30008
+        selector:
+          name: myApp
+
+~~~
+
+
+​     
+

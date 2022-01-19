@@ -60,5 +60,14 @@ tolerations:
 
 Tips for have details for the pod yaml schema
 
-`kubectl explain pod --recursive | less`
+`kubectl explain pod.spec.tolerations --recursive`
 
+# Node affinity
+
+## Set label
+
+`kubectl label nodes mynode color=blue`
+
+## Set node affinity
+
+`kubectl explain pod.spec.affinity.nodeAffinity --recursive`

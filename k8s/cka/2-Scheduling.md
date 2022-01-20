@@ -71,3 +71,47 @@ Tips for have details for the pod yaml schema
 ## Set node affinity
 
 `kubectl explain pod.spec.affinity.nodeAffinity --recursive`
+
+# Resources
+
+## Resources request
+
+`kubectl explain pod.spec.containers.resources.requests --recursive`
+
+## Resources limit
+
+`kubectl explain pod.spec.containers.resources.limits--recursive`
+
+# Daemon Sets
+
+## Definition
+
+Daemon sets ensure that the pod is deployed on each node (use case : kube-proxy, wants to monitor each node...)
+
+Yaml file definition is like a ReplicaSet.
+
+## Get  Daemon Sets
+
+`kubectl get daemonsets`
+
+## Create DaemonSets template
+
+`kubectl create deploy mydeploy --image=nginx --dry-run=client -o yaml > daemonset.yaml`
+
+Then with vim, change kind to DaemonSet and remove strategy (replicas) element.
+
+# Statics pods
+
+## Definition
+
+If no master node, a worker node can create pod with putting pod yaml files in /etc/kubernetes/manifests (by default. check with `ps -aux | grep kubelet` to check the config parameter/file)
+
+Run `docker ps` to view container (no kubectl beacause no k8s api).
+
+It's with statics pods that kube admin tools is configured on master node.
+
+## Connect to another node
+
+`kubectl get nodes -o wide`
+
+Then take the ip and execute `ssh [ip]` the execute `logout` when finished.

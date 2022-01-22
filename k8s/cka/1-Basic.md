@@ -181,6 +181,20 @@ By default the type of a service is ClusterIp.
 
 ~~~
 
+# Basic monitoring
 
-​     
+Basic monitoring in memory can be performed with metrics-server
 
+Once deployed run : 
+
+`kubectl top node`
+
+`kubectl top pod`
+
+# Logging
+
+`kubectl logs -f my-pod`
+
+Whit multiple containers:
+
+`kubectl logs -f my-pod container-name`

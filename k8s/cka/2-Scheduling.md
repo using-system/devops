@@ -115,3 +115,26 @@ It's with statics pods that kube admin tools is configured on master node.
 `kubectl get nodes -o wide`
 
 Then take the ip and execute `ssh [ip]` the execute `logout` when finished.
+
+
+
+# Multiple scheduler
+
+## Why ?
+
+- Hpa  mutilple master nodes
+- Custom scheduling algo
+
+## How to create custom scheduler
+
+Copy scheduler static pod yaml file and add `--schedule-name` and `--lock-object-name` to the name of custom schedule and set `--leader-elect` to false (for hpa/multiple master nodes) and update `--secure-port` or `--port` options + liveness probes.
+
+## Specify scheduler on a pod
+
+Add `schedulerName` yaml options under spec of a pod.
+
+## Get events of a scheduler
+
+`kubectl get events`
+
+`kubectl logs myscheduler --namespace=kube-system`

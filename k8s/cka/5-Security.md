@@ -66,3 +66,63 @@ apiserver-kubelet-client, kubelet-client, apiserver-etcd-client
 ## View logs to investigate
 
 `kubectl logs` or `docker logs` (if kubectl doesn't working)
+
+## Generate user certificate for access to k8s API
+
+`openssl genrsa -out mat.key 2048`
+
+`openssl req -new -key mat.key -subj "/CN=mat" -out mat.csr`
+
+`cat mat.csr | base64`
+
+Then create a yaml file with kind : `CertificateSigningRequest`
+
+`kubectl get csr`
+
+`kubectl certificate approve mat`
+
+`kubectl get csr mat -o yaml`
+
+`echo 'LS...=' | base64 --decode`
+
+# KubeConfig
+
+## Where is the kubeconfig file ?
+
+`$home/.kube/config`
+
+## Structure of the configuration file
+
+```yaml
+apiVersion: v1
+kind: Config
+
+current-context: ""
+
+clusters:
+- cluster:
+    certificate-authority: fake-ca-file
+    server: https://1.2.3.4
+  name: development
+
+contexts:
+- context:
+    cluster: development
+    namespace: frontend
+    user: developer
+  name: dev-frontend
+
+users:
+- name: developer
+  user:
+    client-certificate: fake-cert-file
+    client-key: fake-key-file
+```
+
+## Commands
+
+`kubectl config view`
+
+`kubectl config use-context dev-frontend`
+
+`kubectl config use-context dev-frontend --kubeconfig=/home/myconfig`

@@ -126,3 +126,57 @@ users:
 `kubectl config use-context dev-frontend`
 
 `kubectl config use-context dev-frontend --kubeconfig=/home/myconfig`
+
+# Authorization modes
+
+Node, ABAC, RBAC, WEBHOOK, AlwaysDeny, AlwaysAllow
+
+Set the modes with kube-apiserver option `--authorization-mode`.
+
+# RBAC
+
+## Role yaml structure
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+```
+
+Same object exists for ClusterRole.
+
+## RoleBinding yaml structure
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: default
+subjects:
+# You can specify more than one "subject"
+- kind: User
+  name: jane # "name" is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  # "roleRef" specifies the binding to a Role / ClusterRole
+  kind: Role #this must be Role or ClusterRole
+  name: pod-reader # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
+```
+
+Same object exists for ClusterRoleBiding
+
+## Commands
+
+`kubectl get roles`
+
+`kubectl get rolebindings`
+
+`kubectl auth can-i delete nodes --as dev-user`

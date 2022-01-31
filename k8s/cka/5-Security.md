@@ -180,3 +180,31 @@ Same object exists for ClusterRoleBiding
 `kubectl get rolebindings`
 
 `kubectl auth can-i delete nodes --as dev-user`
+
+# Service account
+
+## Create by command
+
+`kubectl create serviceaccount myserviceaccount`
+
+## Token
+
+It's create a secret object with the token of the service account. Run `kubectl describe` of the service account to get the secret name.
+
+The token can be used with bearer token header when request kubernetes api.
+
+The token can me mounted in volume. The default token of the namespace is automatically mounted. We can specify a custom service account with the property `serviceAccountName` under pod/spec yaml definition file.
+
+# Image security
+
+To specify image full form a private registry, use docker-registry secret :  [Pull an Image from a Private Registry | Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+
+# Security context
+
+## Get the user run a pod
+
+`kubectl exec mypod -- whoami`
+
+To modify the user, set the security context a the pod/spec level or pod/spec/contrainers level : [Configure a Security Context for a Pod or Container | Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+
+To get the id of a user : `id -u root`

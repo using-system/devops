@@ -19,6 +19,8 @@ For information the command cordon ensure that no future pods will be scheduled 
 
 # Cluster upgrade
 
+[Upgrading kubeadm clusters | Kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
+
 ## Versionning
 
 kube-apiserver must have the higher version.
@@ -69,6 +71,8 @@ Reschedule the node :  `kubectl uncordon mynode`
 `kubectl get all --all-namespaces -o yaml > all.yaml`
 
 ## Etcd data directory
+
+[Operating etcd clusters for Kubernetes | Kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
 
 All kubernetes datas are stored in the etcd database. 
 

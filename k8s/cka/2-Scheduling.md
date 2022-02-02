@@ -28,6 +28,8 @@ spec:
 
 # Taints and tolerations
 
+[Taints and Tolerations | Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+
 ## Taints
 
 ### Add taint
@@ -63,6 +65,8 @@ Tips for have details for the pod yaml schema
 `kubectl explain pod.spec.tolerations --recursive`
 
 # Node affinity
+
+[Assigning Pods to Nodes | Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 
 ## Set label
 

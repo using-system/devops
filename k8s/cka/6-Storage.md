@@ -113,3 +113,11 @@ into the spec of the pod :
       persistentVolumeClaim:
         claimName: myclaim
 ```
+
+# Storage class
+
+[Storage Classes | Kubernetes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+
+A storage class permit you to provision the volume automatically with your third party (aws, azure...)
+
+The storage class is defined on the pvc.

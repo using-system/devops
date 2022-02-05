@@ -95,6 +95,28 @@ Create a network namespace for each container.
 
 Calico is a CNI plugin for k8s for example.
 
+The cni plugin is configured in the kubelet config : 
+
+`ps -aux | grep kubelet`
+
+and see cni options (bin and config dir)
+
+## Weaveworks
+
+Weaveworks install an agent (daemonset) on each node to intercept out/in tcp package to reroute them to the good destination.
+
+## Cni configuration
+
+`/etc/cni/net.d/`
+
+Inspect the type parameter of the conf file to determine bin executed by kubelet
+
+## Bin configuration
+
+by default : 
+
+`/opt/cni/bin`
+
 # Netstat
 
 Run :

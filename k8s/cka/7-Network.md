@@ -81,6 +81,8 @@ When a container is created, a  network namespace is create. To view it :
 
 # CNI
 
+[Network Plugins | Kubernetes](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)
+
 ## Name
 
 Container Network interface
@@ -117,6 +119,13 @@ by default :
 
 `/opt/cni/bin`
 
+## IP Address management
+
+IP addr management is need to avoid duplicate ip adressing.
+Cni comes with 2 plugins for that : "DHCP" or "host-local".
+
+It's configured into the file `/etc/cni/net.d/net-script.com` into "`ipam.type`" value
+
 # Netstat
 
 Run :
@@ -124,3 +133,16 @@ Run :
 `netstat -anp | grep etcd`
 
 for view all connection for a system (example etcd above)
+
+## Exec ip/route command on a pod to examine networking
+
+```
+kubectl run busybox2 --image=busybox --command sleep 5000 --dry-run=client -o yaml > pod.yaml
+kubectl apply -f pod.yaml
+kubectl exec busybox2 -- route
+```
+
+To schedule the pod on a specific node, edit yaml and add into spec : 
+
+`nodeName: mynode`
+

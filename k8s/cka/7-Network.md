@@ -43,7 +43,7 @@ search           mycompany.com
 where 
 
 - nameserver  : Specify a dns
-- search : to shortness a dns entry (ping myserver instead myserver.company.com)
+- ## search : to shortness a dns entry (ping myserver instead myserver.company.com)
 
 ## Priorize the host file or dns use the file
 
@@ -55,7 +55,35 @@ where
 - AAAA: map to a IPV7 address
 - CNAME : map to dns entry
 
-## Tooling
+## DNS in K8s cluster
+
+K8s create a dns entry for each service created :
+
+```
+myservice.mynamespace.svc.cluster.local
+```
+
+and via `search` entry in `/etc/resolv.conf`  can be access via 
+
+```
+myservice
+myservice.mynamespace
+myservice.mynamespace.svc
+```
+
+Entries can be created for pod by not by default must be configured:
+
+`10-244-1-5.mynamespace.pod`
+
+## CoreDNS
+
+Dns in k8s is managed by kube-dns  : CoreDNS.
+
+Configuration file : `/etc/coredns/Corefile` passed via configmap object (edit it to update config)
+
+CoreDns is deployed via a service nammed kube-dns. Get the ip of this service to configure dns in `/etc/resolv.conf`. It's configured autmaticly by kubelet (dns server setted in kubelet configuration file).
+
+## DNS Tooling
 
 `nslookup`
 
@@ -146,3 +174,10 @@ To schedule the pod on a specific node, edit yaml and add into spec :
 
 `nodeName: mynode`
 
+# Service networking
+
+When a service is creating, the ip of the service redirecting to  kubeproxy on each node (daemonset) to intercept the message and redirect to the good destination/pod.
+
+3 mode for kubeproxy : iptables (default), userspace, ipvs. The mode can be set with the option `--proxy-mode` of the kube-proxy process.
+
+The ip range for service are set with the option `--service-ip-range` of the kube-api process.

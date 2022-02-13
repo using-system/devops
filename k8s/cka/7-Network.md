@@ -181,3 +181,29 @@ When a service is creating, the ip of the service redirecting to  kubeproxy on e
 3 mode for kubeproxy : iptables (default), userspace, ipvs. The mode can be set with the option `--proxy-mode` of the kube-proxy process.
 
 The ip range for service are set with the option `--service-ip-range` of the kube-api process.
+
+# Ingress
+
+[Ingress | Kubernetes](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+## Ingress controller
+
+The solution manage the ingress (traefik, nginx, haproxy...)
+
+## Ingress resources
+
+All defintions file to expose service.
+
+## Create Ingress by command
+
+`kubectl create ingress ingress-test --rule="wear.my-online-store.com/wear*=wear-service:80"`
+
+## Metadata annotation
+
+```yaml
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+```
+

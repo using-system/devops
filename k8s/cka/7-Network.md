@@ -207,3 +207,11 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 ```
 
+## Create Ingress Controller from scratch
+
+- create namespace
+- create configmap
+- create serviceaccount
+- create role to get/update configmap and binding to the service account
+- create the deployment file (with nginx controller for example)
+- For onpremise structure : create a service to expose the deployment via --type=NodePort. (cloud platform create a loadbalancer directly). Can use too metalllb for onpremise structure.

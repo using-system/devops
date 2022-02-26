@@ -104,3 +104,50 @@ Then configure the new --data-dit in etcd.service params or edit the static pod 
 
 For https endpoint add parameters : `--cacert`, `--cert`, `--key`.
 All this values can be retrieved on get the etcd pod description.       
+
+# High Availability
+
+## Kube api
+
+Create a load balancer to access to the kube api
+
+## Multiple master nodes
+
+In High availability cluster, we have multiple master nodes.
+
+For controller manager sheduler.. components, only on master node is active in the same time. Other master node are in a standby mode. The cluster achieved this process with a leader election process (lock object component in the cluster and the component try to be the leader each n secondes with the param `--leader-elect-retry period`)
+
+## Etcd
+
+### Stacked topology
+
+In this schenario, etcd is in each master node.
+
+(easier to setup/manager, fewer servers, risk during features)
+
+### External topology
+
+Etcd is in sepaparted nodes. 
+
+(Less risky, harder to step, more servers)
+
+### Kube api
+
+Kube api is the only component communicate with etcd (`--etcd-servers` option)
+
+### Data stores
+
+We whill have on each master/etcd (depends topology) a copy of the etcd nosql database. All nodes can read but only one can write in the same time. It's the leader node with RAFT protocol. The other nodes redirect the write request to the leader node. The write process is completed when the data is replicated to all etcd nodes.
+
+RAFT protocol consider to elect the leader with communication with the nodes and choose the leader. Quorum = minimal nodes to continue to works. For example, with 5 instances the quorum is 3. Minimal recommended is 3 nodes (quorum is 2, so we can have one node is failure status).
+
+Number to remember for quorum 
+
+- 3 (fault tolorenance : 1)
+- 5 (fault tolorenance : 2)
+- 7 (fault tolorenance : 3)
+
+### Installation
+
+- Download binaries and install etcd.service
+- set the `--initial-cluster` option to define the etcd peers.

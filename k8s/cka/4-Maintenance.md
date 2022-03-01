@@ -151,3 +151,16 @@ Number to remember for quorum
 
 - Download binaries and install etcd.service
 - set the `--initial-cluster` option to define the etcd peers.
+
+# Kubeadm
+
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ 
+
+## Steps
+
+- Install docker
+- Install kubeadm (https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+- Intialize master node (kubeadm with options then initialize kube config with instruction output of the kubeadm command : https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+- Join nodes
+- Add Pod network (kubectl apply intstruction with wave, flannel... : https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model)
+

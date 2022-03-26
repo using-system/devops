@@ -120,3 +120,53 @@ Filer : `kubectl -get pods -o=jsonpath='{.item[0].spec.containers[0].image'}`
 ## Sorting
 
 `kubectl get nodes --sort-by=.metadata.name`
+
+# KubeConfig
+
+## View config of a file
+
+`kubectl config view --kubeconfig /root/myconfif.kubeconfig`
+
+## Annalyse cluster
+
+`kubectl cluster-info --kubeconfig /root/config.kubeconfig`
+
+# Upgrade node 1.19 to 1.20
+
+## Master node
+
+apt update
+
+apt-get install kubeadm=1.20.0-00
+
+kubeadm upgrade plan v1.20.0
+
+kubeadm upgrade apply v1.20.0
+
+apt-get install kubelet=1.20.0-00
+
+systemctl daemon-reload
+
+systemctl restart kubelet
+
+kubectl uncordon controlplane 
+
+kubectl drain node01 --ignore-daemonsets
+
+## Node01 node
+
+apt update
+
+apt-get install kubeadm=1.20.0-00
+
+kubeadm upgrade node
+
+apt-get install kubelet=1.20.0-00
+
+systemctl daemon-reload
+
+systemctl restart kubelet
+
+## Master node
+
+kubectl uncordon node01

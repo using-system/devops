@@ -18,7 +18,7 @@ Update pod on by one (default strategy)
 
 ## Update image
 
-`kubectl set image mydeploy image`
+`kubectl set image mydeploy image --record`
 
 ## Rollback
 

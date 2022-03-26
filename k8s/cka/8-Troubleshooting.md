@@ -57,7 +57,7 @@ There are severals network plugins : Weave, Flannel,  Calico
 ## Troubleshooting
 
 - pod pending : check netowrk pluging
-- pod failed, crashloopback : upgrade docker, dsable selinux, modify coredns deploy to set allowPrivilegeEscalation to true 
+- ### pod failed, crashloopback : upgrade docker, dsable selinux, modify coredns deploy to set allowPrivilegeEscalation to true 
 - Check service
 
 # Kube-proxy
@@ -76,3 +76,47 @@ In the config we can override the hostname with the node name of at which the po
 - check if kube-proxy running
 - check kube-proxy logs
 - check kube-proxy configmap
+
+# Json Path
+
+## Use Json Path with kubectl
+
+Get the json format : `kubectl -get pods -o json`
+
+Filer : `kubectl -get pods -o=jsonpath='{.item[0].spec.containers[0].image'}`
+
+## Samples
+
+### Get all nodes names
+
+`kubectl get nodes -o=jsonpath='{.items[*].metadata.name}'`
+
+### Get all node architectures proc
+
+`kubectl get nodes -o=jsonpath='{.items[*].status.nodeInfo.architecture}'`
+
+### Get all node cpu capacity
+
+`kubectl get nodes -o=jsonpath='{.items[*].status.capacity.cpu}'`
+
+## Merge request
+
+`kubectl get nodes -o=jsonpath='{.items[*].metadata.name} {.items[*].status.capacity.cpu}'`
+
+### Formatting
+
+`kubectl get nodes -o=jsonpath='{.items[*].metadata.name} {"\n"} {.items[*].status.capacity.cpu}'`
+
+`kubectl get nodes -o=jsonpath='{range .items[*]} {.metadata.name} {"\t"} {.status.capacity.cpu} {"\n"}{end}'`
+
+## Filter
+
+`kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.contexts[?(@.context.user=='aws-user')].name}"`
+
+## Custom columns
+
+`kubectl get nodes -o=custom-columns=MYCOLUMN:.metadata.name,COLUMN2:.status.capacity.cpu` (path starting with each items)
+
+## Sorting
+
+`kubectl get nodes --sort-by=.metadata.name`

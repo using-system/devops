@@ -40,7 +40,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name                          = "defaultpool"
     node_count                    = var.configuration.node_pool.count
     vm_size                       = var.configuration.node_pool.vm_size
-    availability_zones            = var.configuration.node_pool.availability_zones
+    zones                         = var.configuration.node_pool.availability_zones
     os_disk_type                  = var.configuration.node_pool.os_disk_type
     os_disk_size_gb               = var.configuration.node_pool.os_disk_size
     type                          = var.configuration.node_pool.type
@@ -49,7 +49,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   identity {
     type                          =  "UserAssigned"
-    user_assigned_identity_id     = azurerm_user_assigned_identity.aks.id
+    identity_ids                  = [ azurerm_user_assigned_identity.aks.id ]
   }
 
   azure_policy_enabled            = var.configuration.addon.enable_azure_policy
@@ -72,8 +72,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     outbound_type                 = "userDefinedRouting"
   }
 
-  role_based_access_control {
-    enabled                       = true
+  azure_active_directory_role_based_access_control {
+    managed                       = true
   }
 
   tags                            =  var.tags

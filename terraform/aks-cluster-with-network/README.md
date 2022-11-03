@@ -55,8 +55,8 @@ network_configuration    = {
                 name                                                = "K8sSubnet"
                 address_prefixes                                    = ["20.105.45.0/25"] 
                 service_endpoints                                   = ["Microsoft.Storage"]
-                enforce_private_link_service_network_policies       = true
-                enforce_private_link_endpoint_network_policies      = true
+                private_link_service_network_policies_enabled       = true
+                private_endpoint_network_policies_enabled           = true
             }
         ]
 }

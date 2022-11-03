@@ -66,7 +66,7 @@ network_configuration    = {
 #------------------------------------------------------------------------------
 
 aks_configuration    = {
-    version         = "1.22.4"
+    version         = "1.24.6"
     sku             = "Paid"
     private_cluster = true
     admin_username  = "cct_admin"
@@ -74,10 +74,10 @@ aks_configuration    = {
     node_pool       = {
         type                        = "VirtualMachineScaleSets"
         count                       = 3
-        vm_size                     = "Standard_B2s"
+        vm_size                     = "Standard_DS2_v2"
         availability_zones          = [1, 2, 3]
-        os_disk_type                = "Managed"
-        os_disk_size                = 128
+        os_disk_type                = "Ephemeral"
+        os_disk_size                = 80
     }
     addon = {
         enable_open_service_mesh    = true

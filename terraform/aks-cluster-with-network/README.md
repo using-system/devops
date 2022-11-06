@@ -85,4 +85,4 @@ aks_configuration    = {
     }
 }
 ```
-
+For admin_ssh_key you can use PuTTY Key Generator tool to generate the ssh key

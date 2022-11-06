@@ -14,7 +14,7 @@ resource "azurerm_user_assigned_identity" "aks" {
 }
 
 
-resource "azurerm_role_assignment" "aks_user_assigned_network" {
+resource "azurerm_role_assignment" "aks" {
 
   depends_on = [ azurerm_user_assigned_identity.aks ]
 
@@ -25,7 +25,7 @@ resource "azurerm_role_assignment" "aks_user_assigned_network" {
 
 resource "azurerm_kubernetes_cluster" "aks" {
 
-  depends_on = [ azurerm_user_assigned_identity.aks, azurerm_role_assignment.aks_user_assigned_network ]
+  depends_on = [ azurerm_user_assigned_identity.aks, azurerm_role_assignment.aks ]
 
   name                            = "${var.naming}-aks"
   location                        = azurerm_resource_group.aks.location
@@ -77,11 +77,4 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   tags                            =  var.tags
-}
-
-resource "azurerm_role_assignment" "aks_user_assigned_infra" {
-
-  principal_id                    = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
-  scope                           = format("/subscriptions/%s/resourceGroups/%s", var.subscription_id, azurerm_kubernetes_cluster.aks.node_resource_group)
-  role_definition_name            = "Contributor"
 }

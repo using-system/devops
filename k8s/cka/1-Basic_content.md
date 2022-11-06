@@ -77,7 +77,7 @@ spec:
 
 ## Create a yaml template
 
-`kubectl get replicaset replica1 -o yaml > replica1.yaml`
+`kubectl create replicaset replica1 -o yaml > replica1.yaml`
 
 ## Edit a ReplicaSet
 

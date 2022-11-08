@@ -145,7 +145,7 @@ Then :
 
 `echo -n 'bXlzcUe=' | base64 --decode`
 
-### Specify a config map to a pod
+### Specify a secret to a pod
 
 In the definition of the pod/spec/containers/name add
 

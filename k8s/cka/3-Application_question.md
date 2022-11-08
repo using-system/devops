@@ -9,6 +9,7 @@
 # Commands
 
  - Specify command and args in yaml definition of a pod
+ - Entrypoint and Cmd instructions of a DockerFile correspond to wich element in yaml k8s pod spect definition file ?
 
 # Environment variables
 

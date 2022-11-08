@@ -4,7 +4,7 @@
  - Command to get history of a deplou
  - List of different strategies of a deploy
  - Command to rollback a deploy
- - 
+  
 # Commands
 
  - Specify command and args in yaml definition of a pod

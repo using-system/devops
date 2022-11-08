@@ -1,9 +1,10 @@
 # Rollout
 
  - Command to get status of a deploy
- - Command to get history of a deplou
+ - Command to get history of a deploy
  - List of different strategies of a deploy
  - Command to rollback a deploy
+ - Command to edit image of a deploy
   
 # Commands
 
@@ -25,9 +26,9 @@
 
 # Pod lifecyle
 
- - Execute a command on a pod start
+ - Execute a command after pod start
  - Execute a command before the pod stop event
 
 # Init container
 
- - Execute a command on a pod intialization
+ - Specify in pod defintion  init containers with commad to specify

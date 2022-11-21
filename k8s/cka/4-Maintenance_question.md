@@ -9,6 +9,7 @@
 
   - Where is doc for upgrade cluster with kubeadm
   - Versionning strategy
+  - Command to get the plan of a upgrade
   - Procedure to upgrade cluster with kubeadm
 
 # Backup and restore

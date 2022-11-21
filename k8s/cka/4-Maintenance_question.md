@@ -1,11 +1,10 @@
 # Node maintenance
 
  - What is a eviction timeout
- - Definition of drain
- - Commant to drain node
- - Definition for uncordon
- - Command to uncordon node
-- 
+ - How to move all pods of a node (kubectl command with options)
+ - How to ensure no pod will be scheduled on a node
+ - How to reintegrate pod for a node
+
 # Cluster upgrade
 
   - Where is doc for upgrade cluster with kubeadm
@@ -16,6 +15,7 @@
 
  - Command to get all k8s objects in a file
  - Where is doc for etcd maintenance
+ - Procedure to determine where is etcd database
  - Procedure to save and restore etcd
  - Etcd with https : where is info and wich parameters    
 

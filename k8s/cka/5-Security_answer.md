@@ -19,6 +19,9 @@ Pass the file to the kube-api-server option `--token-auth-file`.
 
 # Cluster certificates
 
+[Generate Certificates Manually | Kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/certificates/)
+Tasks > Administer a Cluster > Generate Certificates Manually
+
 ## Generate CA
 
 `openssl genrsa -out ca.key 2048` --> ca.key
@@ -95,6 +98,8 @@ Then create a yaml file with kind : `CertificateSigningRequest`
 
 [Configure Access to Multiple Clusters | Kubernetes](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
 
+Tasks > Access Applications in a cluster > Configure Access to multiple clusters
+
 ```yaml
 apiVersion: v1
 kind: Config
@@ -138,6 +143,8 @@ Set the modes with kube-apiserver option `--authorization-mode`.
 # RBAC
 
 [Using RBAC Authorization | Kubernetes](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+
+Reference > API Access Control > Using RBAC Authorization
 
 ## Role yaml structure
 
@@ -189,6 +196,8 @@ Same object exists for ClusterRoleBiding
 
 [Managing Service Accounts | Kubernetes](https://v1-20.docs.kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)
 
+Reference > API Access Control > Managing Service account
+
 ## Create by command
 
 `kubectl create serviceaccount myserviceaccount`
@@ -205,6 +214,8 @@ The token can me mounted in volume. The default token of the namespace is automa
 
 To specify image full form a private registry, use docker-registry secret :  [Pull an Image from a Private Registry | Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
 
+Tasks > Configure Pods and Containers > Pull an Image from a private registry
+
 # Security context
 
 ## Get the user run a pod
@@ -212,6 +223,8 @@ To specify image full form a private registry, use docker-registry secret :  [Pu
 `kubectl exec mypod -- whoami`
 
 To modify the user, set the security context a the pod/spec level or pod/spec/contrainers level : [Configure a Security Context for a Pod or Container | Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+
+Tasks > Configure Pods and Containers > Configure a Security Context for a Pod or Container
 
 To get the id of a user : `id -u root`
 
@@ -223,9 +236,11 @@ Ingress : incoming traffic (perspective from the object associated to the Networ
 
 Egress : outcoming traffic (perspective from the object associated to the Network policy)
 
-## Yaml schéma
+## Yaml schema
 
 [Network Policies | Kubernetes](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+
+Concepts > Services, Load Balancing and Networking > Network Policies
 
 ```yaml
 apiVersion: networking.k8s.io/v1

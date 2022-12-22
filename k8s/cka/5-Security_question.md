@@ -30,6 +30,7 @@
  - Command to get roles
  - Commant to get role binding
  - Command to determine if user has right to delete node
+ - Command to get resources of k8s api
 
 # Service account
 

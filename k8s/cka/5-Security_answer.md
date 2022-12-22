@@ -192,6 +192,8 @@ Same object exists for ClusterRoleBiding
 
 `kubectl auth can-i delete nodes --as dev-user`
 
+`kubectl api-resources`
+
 # Service account
 
 [Managing Service Accounts | Kubernetes](https://v1-20.docs.kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)

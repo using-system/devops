@@ -212,6 +212,10 @@ The token can be used with bearer token header when request kubernetes api.
 
 The token can me mounted in volume. The default token of the namespace is automatically mounted. We can specify a custom service account with the property `serviceAccountName` under pod/spec yaml definition file.
 
+Command to create a token 
+
+`kubectl create token myserviceaccount`
+
 # Image security
 
 To specify image full form a private registry, use docker-registry secret :  [Pull an Image from a Private Registry | Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)

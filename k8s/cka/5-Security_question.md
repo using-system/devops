@@ -38,6 +38,7 @@
  - Command to create service account
  - How to get token of the service account
  - How to set the serviceAccount to a pod
+ - Command to create a token
 
 # Image security
 

@@ -5,7 +5,7 @@
 # Volumes
 
  - Where is doc of Volumes
- - Yaml definition
+ - Yaml definition for hostpath
  - Hostpath : avantage / problems
  - Alternatives solution to hostpath
 
@@ -18,6 +18,7 @@
 # Persistent Volume Claims
 
  - Definition
+ - Different mode to remove pvc
  - Yaml definition
  - Use the claims in a pod
 

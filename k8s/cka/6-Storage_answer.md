@@ -8,6 +8,8 @@ Define a rpc standard for CreateVolume, DeleteVolume... and permitt Amazon, Goog
 
 [Volumes | Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/)
 
+Concept > Storage > Volumes
+
 ## Yaml definition
 
 ```yaml
@@ -48,6 +50,8 @@ volumes:
 # Persistent Volume
 
 [Persistent Volumes | Kubernetes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+
+Concept > Storage > Persitent Volumes
 
 ## Definition
 
@@ -117,6 +121,8 @@ into the spec of the pod :
 # Storage class
 
 [Storage Classes | Kubernetes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+
+Concept > Storage > Storage classes
 
 A storage class permit you to provision the volume automatically with your third party (aws, azure...)
 

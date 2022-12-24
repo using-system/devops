@@ -32,4 +32,4 @@
 
 # Init container
 
- - Specify in pod defintion  init containers with commad to specify
+ - Specify in pod defintion  init containers with command to specify

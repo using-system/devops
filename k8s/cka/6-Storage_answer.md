@@ -82,7 +82,7 @@ spec:
 
 A pvc is bound to a pv to declare what we need for storage use.
 
-Can be remove with the option : Retain (the pv si not deleted but can be used by other pvc), Delete (the pv si deleted), Recycle (the pv si not deleted, the data is recycled and can be used by other pvc).
+Can be remove with the option : Retain (the pv si not deleted but can not be used by other pvc), Delete (the pv si deleted), Recycle (the pv si not deleted, the data is recycled and can be used by other pvc).
 
 ## Yaml definition
 

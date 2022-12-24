@@ -43,7 +43,7 @@ search           mycompany.com
 where 
 
 - nameserver  : Specify a dns
-- ## search : to shortness a dns entry (ping myserver instead myserver.company.com)
+- search : to shortness a dns entry (ping myserver instead myserver.company.com)
 
 ## Priorize the host file or dns use the file
 
@@ -110,6 +110,8 @@ When a container is created, a  network namespace is create. To view it :
 # CNI
 
 [Network Plugins | Kubernetes](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)
+
+Concept > Extending Kubernetes > Compute, Storage, and Networking Extensions > Network Plugins
 
 ## Name
 
@@ -185,6 +187,8 @@ The ip range for service are set with the option `--service-ip-range` of the kub
 # Ingress
 
 [Ingress | Kubernetes](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+Concepts > Service, Load Balancing, and Networking > Ingress
 
 ## Ingress controller
 

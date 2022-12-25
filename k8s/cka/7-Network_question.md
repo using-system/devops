@@ -8,7 +8,7 @@
  - Get the route table
  - Add route
  - Add default route
- - Enable on a host to forward traffoc for 2 network interfaces
+ - Enable on a host to forward traffic for 2 network interfaces
 
 # DNS 
 

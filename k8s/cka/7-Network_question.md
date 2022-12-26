@@ -40,6 +40,7 @@
  - Where is cni configuration
  - Cni bin default directory
  - CNI ip address management
+ - How to determine pod ip allocation
 
 
 # Netstat

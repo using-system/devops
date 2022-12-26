@@ -156,6 +156,12 @@ Cni comes with 2 plugins for that : "DHCP" or "host-local".
 
 It's configured into the file `/etc/cni/net.d/net-script.com` into "`ipam.type`" value
 
+## Pod ip allocation
+
+To determine pod ip allocation run :
+
+`kubectl logs <weave-pod-name> weave -n kube-system` (for example with weave)
+
 # Netstat
 
 Run :
@@ -180,7 +186,9 @@ To schedule the pod on a specific node, edit yaml and add into spec :
 
 When a service is creating, the ip of the service redirecting to  kubeproxy on each node (daemonset) to intercept the message and redirect to the good destination/pod.
 
-3 mode for kubeproxy : iptables (default), userspace, ipvs. The mode can be set with the option `--proxy-mode` of the kube-proxy process.
+3 mode for kubeproxy : iptables (default), userspace, ipvs. The mode can be set with the option `--proxy-mode` of the kube-proxy process or run : 
+
+`kubectl logs <kube-proxy-pod-name> -n kube-system`
 
 The ip range for service are set with the option `--service-ip-range` of the kube-api process.
 

@@ -10,7 +10,7 @@ Then
 
 ## With services
 
-## `service kube-proxy status`
+`service kube-proxy status`
 
 `sudo journalctl -u kube-apiserver`
 
@@ -42,6 +42,8 @@ There are severals network plugins : Weave, Flannel,  Calico
 ## Installation
 
 [Cluster Networking | Kubernetes](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model)
+
+Concept > Cluster Administration > Cluster Networking
 
 # DNS
 
@@ -78,6 +80,12 @@ In the config we can override the hostname with the node name of at which the po
 - check kube-proxy configmap
 
 # Json Path
+
+## Documentation
+
+[JSONPath Support](https://kubernetes.io/docs/reference/kubectl/jsonpath/)
+
+Reference > Command line tool (kubectl) > JSONPath Support
 
 ## Use Json Path with kubectl
 

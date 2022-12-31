@@ -12,7 +12,7 @@
 
  - View kubelet status and logs
  - Restart kubelet
- - How to determine where is kubelet config file (with kubeadm)
+ - How to determine where is kubelet config  yaml file (with kubeadm)
  - View kubelet configuration
 
 # CNI

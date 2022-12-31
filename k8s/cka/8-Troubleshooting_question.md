@@ -6,7 +6,7 @@
 
 ## With services
 
- - Inspect system pod and logs
+ - Inspect system pod and logs (for kube-proxy and kube api for example)
 
 ## Kubelet
 
@@ -14,7 +14,7 @@
  - Restart kubelet
  - How to determine where is kubelet config file (with kubeadm)
  - View kubelet configuration
- - 
+
 # CNI
 
  - Differents network plugins

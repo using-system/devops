@@ -59,7 +59,7 @@ Concept > Cluster Administration > Cluster Networking
 ## Troubleshooting
 
 - pod pending : check netowrk pluging
-- ### pod failed, crashloopback : upgrade docker, dsable selinux, modify coredns deploy to set allowPrivilegeEscalation to true 
+- pod failed, crashloopback : upgrade docker, dsable selinux, modify coredns deploy to set allowPrivilegeEscalation to true 
 - Check service
 
 # Kube-proxy

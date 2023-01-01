@@ -20,6 +20,7 @@
  - Differents network plugins
  - How to determine bin and network plugins
  - Where is doc for networking model implementation
+-  How to install a puglin network (weave for exemple)
 
 # DNS
 

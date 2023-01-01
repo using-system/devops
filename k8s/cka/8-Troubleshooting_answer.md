@@ -45,6 +45,12 @@ There are severals network plugins : Weave, Flannel,  Calico
 
 Concept > Cluster Administration > Cluster Networking
 
+## Installing addons
+
+[Cluster Networking | Add-On](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
+
+Concept > Cluster Administration > Installing Addons
+
 # DNS
 
 ## Resources

@@ -1,4 +1,4 @@
-# Scenario 1
+# Exercise 1
 
 ## Analyse kube configuration file
 

@@ -48,4 +48,4 @@ Reference > API Access Control > Certifcate Signing requests
 
 to get the pod id, replace dot by - then 
 
-`kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup 10-244-192-4-default.pod`
+`kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup 10-244-192-4.default.pod`

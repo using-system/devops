@@ -11,7 +11,7 @@
 # Exercise 3
 
  - Where is doc for create an user and certificate associated
- - Different steps to assocate user with rights
+ - Different steps to associate user with rights
 
 # Exercise 4
 

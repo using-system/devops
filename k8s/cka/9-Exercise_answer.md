@@ -1,3 +1,21 @@
+# Exercise 0
+
+## Prepare environment
+
+`alias k=kubectl`                         # will already be pre-configured
+
+`export do="--dry-run=client -o yaml`    # k create deploy nginx --image=nginx $do
+
+`export now="--force --grace-period 0`   # k delete pod x $now
+
+The following settings will already be configured in your real exam environment in ~/.vimrc. But it can never hurt to be able to type these down:
+
+`
+set tabstop=2
+set expandtab
+set shiftwidth=2
+`
+
 # Exercise 1
 
 ## Analyse kube configuration file
@@ -49,3 +67,13 @@ Reference > API Access Control > Certifcate Signing requests
 to get the pod id, replace dot by - then 
 
 `kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup 10-244-192-4.default.pod`
+
+## Execute a long command with split it
+
+~~~yaml
+exec:
+        command:
+        - sh
+        - -c
+        - 'wget -T2 -O- http://service-am-i-ready:80'   # to here
+~~~

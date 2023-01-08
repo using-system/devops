@@ -17,3 +17,4 @@
 
  - Resolve service check in a pod
  - Resolve pod check in a pod
+ - Execute a long command with split it

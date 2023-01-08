@@ -25,3 +25,7 @@
 # Exercise 5
 
  - Show container usage
+
+# Exercise 6
+
+ - Show the current context 

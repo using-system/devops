@@ -4,9 +4,9 @@
 
 `alias k=kubectl`                         # will already be pre-configured
 
-`export do="--dry-run=client -o yaml`    # k create deploy nginx --image=nginx $do
+`export do="--dry-run=client -o yaml"`    # k create deploy nginx --image=nginx $do
 
-`export now="--force --grace-period 0`   # k delete pod x $now
+`export now="--force --grace-period 0"`   # k delete pod x $now
 
 Then use like this : 
 
@@ -87,3 +87,13 @@ exec:
 Result : 
 
 `k top pod --containers=true`
+
+# Exercise 6
+
+## Show the current context 
+
+`kubectl config current-context`
+
+## Show the context names
+
+`k config get-contexts -o name`

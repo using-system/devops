@@ -8,13 +8,9 @@
 
 `export now="--force --grace-period 0`   # k delete pod x $now
 
-The following settings will already be configured in your real exam environment in ~/.vimrc. But it can never hurt to be able to type these down:
+Then use like this : 
 
-`
-set tabstop=2
-set expandtab
-set shiftwidth=2
-`
+`k run pod1 --image=httpd:2.4.41-alpine $do > 2.yaml`
 
 # Exercise 1
 
@@ -75,5 +71,19 @@ exec:
         command:
         - sh
         - -c
-        - 'wget -T2 -O- http://service-am-i-ready:80'   # to here
+        - 'wget -T2 -O- http://service-am-i-ready:80' 
 ~~~
+
+# Exercise 5
+
+## Show container usage
+
+`k top pod -h` to have the help documentation
+
+~~~
+--containers=false: If present, print usage of containers within a pod.
+~~~
+
+Result : 
+
+`k top pod --containers=true`

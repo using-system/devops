@@ -1,3 +1,6 @@
+# Exercise 0
+ - Prepare exam env
+ 
 # Exercise 1
 
  - How to analyse kube configuration file
@@ -18,3 +21,7 @@
  - Resolve service check in a pod
  - Resolve pod check in a pod
  - Execute a long command with split it
+
+# Exercise 5
+
+ - Show container usage

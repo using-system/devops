@@ -29,3 +29,18 @@
 # Exercise 6
 
  - Show the current context 
+ - Show the context names
+
+# Exercise 7
+
+ - Show kubeadm version
+ - Show kubectl version
+ - Show kubelet version
+ - Print Join node command with kubeadm
+ - Where is cert management with kubeadm doc
+ - Check certificate expiration with kubeadm
+ - Renew certificate of a component with kubeadm
+
+# Exercise 8
+
+ - Restore etcd snapshots steps

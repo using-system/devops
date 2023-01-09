@@ -97,3 +97,55 @@ Result :
 ## Show the context names
 
 `k config get-contexts -o name`
+
+# Exercise 7
+
+## Show kubeadm version
+
+`kubeadm version`
+
+## Show kubectl version
+
+`kubectl version --short`
+
+## Show kubelet version
+
+`kubelet --version
+
+## Print Join node command with kubeadm
+
+`kubeadm token create`
+
+`kubeadm token create --print-join-command`
+
+## Renew certificate with kubeadm
+
+### Documentation
+
+[Certificate Management with kubeadm](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/)
+
+Taks > Administer a Cluster > Administration with kubeadm > Certificate Management with kubeadm
+
+### Check certificate expiration with kubeadm
+
+`kubeadm certs check-expiration`
+
+### Renew certificate of a component with kubeadm
+
+`kubeadm certs renew`
+
+# Exercise 8
+
+## Restore etcd snapshots
+
+`cd /etc/kubernetes/manifests/`
+
+`mv * ..`
+
+`ETCDCTL_API=3 etcdctl snapshot restore path.db ..certinfo.. --data-dir /var/lib/etcd-backup`
+
+`vim /etc/kubernetes/etcd.yaml`
+
+`mv ../*.yaml .`
+
+Change hostPath path for etcd-data with -data-dir info.

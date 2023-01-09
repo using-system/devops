@@ -74,6 +74,34 @@ exec:
         - 'wget -T2 -O- http://service-am-i-ready:80' 
 ~~~
 
+## Map a secret to variable env in a pod spec
+
+~~~yaml
+    - name: APP_PASS
+      valueFrom:
+        secretKeyRef:
+          name: secret2
+          key: pass
+~~~
+
+## Map the current node name to a variable env
+
+~~~yaml
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName 
+~~~
+
+## Create an empty dir volume
+
+~~~yaml
+
+  volumes:
+    - name: vol
+      emptyDir: {} 
+
+~~~
 # Exercise 5
 
 ## Show container usage
@@ -88,8 +116,6 @@ Result :
 
 `k top pod --containers=true`
 
-# Exercise 6
-
 ## Show the current context 
 
 `kubectl config current-context`
@@ -98,7 +124,19 @@ Result :
 
 `k config get-contexts -o name`
 
-# Exercise 7
+## Write the resources names
+
+`k api-resources --namespaced -o name`
+
+## Get number of roles for the namespace myns
+
+`k -n myns get role --no-headers | wc -l`
+
+## Get number of pods for the namespace myns
+
+`k -n myns get pods --no-headers | wc -l`
+
+# Exercise 6
 
 ## Show kubeadm version
 
@@ -134,7 +172,7 @@ Taks > Administer a Cluster > Administration with kubeadm > Certificate Manageme
 
 `kubeadm certs renew`
 
-# Exercise 8
+# Exercise 7
 
 ## Restore etcd snapshots
 
@@ -149,3 +187,33 @@ Taks > Administer a Cluster > Administration with kubeadm > Certificate Manageme
 `mv ../*.yaml .`
 
 Change hostPath path for etcd-data with -data-dir info.
+
+# Exercise 8
+
+## List container on a kubernetes node
+
+`crictl ps`
+
+
+## Get kube-proxy container on a kubenetes node
+
+`crictl ps | grep kube-proxy`
+
+## Remove kube-proxy container on a kubernetes node
+
+`crictl stop container_id`
+`crictl rm container_id`
+
+## Get the info.runtimeType of a container
+
+`crictl inspect container_id | grep runtimeType`
+
+# Exercise 9
+
+## Find where is kubelet binary
+
+`whereis kubelet`
+
+## Restart kubelet
+
+`systemctl daemon-reload && systemctl restart kubelet`

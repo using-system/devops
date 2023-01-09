@@ -21,17 +21,20 @@
  - Resolve service check in a pod
  - Resolve pod check in a pod
  - Execute a long command with split it
-
+ - Map a secret to variable env in a pod spec
+ - Map the current node name to a variable env
+ - Create an empty dir volume
+  
 # Exercise 5
 
  - Show container usage
-
-# Exercise 6
-
  - Show the current context 
  - Show the context names
+ - Write the resources names
+ - Get number of roles for the namespace myns
+ - Get number of pods for the namespace myns
 
-# Exercise 7
+# Exercise 6
 
  - Show kubeadm version
  - Show kubectl version
@@ -41,6 +44,19 @@
  - Check certificate expiration with kubeadm
  - Renew certificate of a component with kubeadm
 
-# Exercise 8
+# Exercise 7
 
  - Restore etcd snapshots steps
+
+
+# Exercise 8
+
+ - List container on a kubernetes node
+ - Get kube-proxy container on a kubenetes node
+ - Remove kube-proxy container on a kubernetes node
+ - Get the info.runtimeType of a container
+
+# Exercise 9
+
+ - Find where is kubelet binary
+ - Restart kubelet

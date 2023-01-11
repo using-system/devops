@@ -148,7 +148,7 @@ Result :
 
 ## Show kubelet version
 
-`kubelet --version
+`kubelet --version`
 
 ## Print Join node command with kubeadm
 

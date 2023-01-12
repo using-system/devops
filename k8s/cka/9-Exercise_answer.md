@@ -210,6 +210,10 @@ Change hostPath path for etcd-data with -data-dir info.
 
 # Exercise 9
 
+## Where is by default kubelet server certificate
+
+`/var/lib/kubelet/pki`
+
 ## Find where is kubelet binary
 
 `whereis kubelet`
@@ -217,3 +221,60 @@ Change hostPath path for etcd-data with -data-dir info.
 ## Restart kubelet
 
 `systemctl daemon-reload && systemctl restart kubelet`
+
+# Exercise 10
+
+## Run a pod on a control plane node
+
+`k describe node masternode`
+
+and inspect taint and labels
+
+And apply it on the pod spec : 
+
+~~~yaml
+spec:
+  tolerations:                                 # Taint
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+  nodeSelector:                                # Label
+    node-role.kubernetes.io/control-plane: ""
+~~~
+
+## Schedule a pod only one instance for each node
+
+Go the the k8s documentation 
+
+[Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+
+Concepts > Scheduling, Preemption and Eviction > Assigining Pods to Nodes
+
+and search for podAntiAffinity with topologyKey == kubernetes.io/hostname
+
+~~~yaml
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+            topologyKey: "kubernetes.io/hostname"
+~~~
+
+
+# Exercise 11
+
+## Command to create role
+
+`kubectl create role developer --verb=create --verb=get --verb=list --verb=update --verb=delete --resource=pods`
+
+## Command to create rolebinding (mapped to user)
+
+`kubectl create rolebinding developer-binding-myuser --role=developer --user=myuser`
+
+## Command to create rolebinding (mapped to service account)
+
+`kubectl create rolebinding developer-binding-myuser --role=developer --serviceaccount=default:myservice`

@@ -58,5 +58,17 @@
 
 # Exercise 9
 
+ - Where is by default kubelet server certificate
  - Find where is kubelet binary
  - Restart kubelet
+
+# Exercise 10
+
+ - Run a pod on a control plane node
+ - Schedule a pod only one instance for each node
+
+# Exercise 11
+
+ - Command to create role
+ - Command to create rolebinding (mapped to user)
+ - Command to create rolebinding (mapped to service account)

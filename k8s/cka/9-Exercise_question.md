@@ -47,7 +47,7 @@
 # Exercise 7
 
  - Restore etcd snapshots steps
-
+ - Get status of a snapshot
 
 # Exercise 8
 
@@ -66,6 +66,7 @@
 
  - Run a pod on a control plane node
  - Schedule a pod only one instance for each node
+ - Get iptables rules for a service
 
 # Exercise 11
 

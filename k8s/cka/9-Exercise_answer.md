@@ -188,6 +188,10 @@ Taks > Administer a Cluster > Administration with kubeadm > Certificate Manageme
 
 Change hostPath path for etcd-data with -data-dir info.
 
+## Get status of a snapshot
+
+`ETCDCTL_API=3 etcdctl ..certinfo.. snapshot status /etc/my-snapshot.db`
+
 # Exercise 8
 
 ## List container on a kubernetes node
@@ -264,6 +268,9 @@ and search for podAntiAffinity with topologyKey == kubernetes.io/hostname
             topologyKey: "kubernetes.io/hostname"
 ~~~
 
+## Get iptables rules for a service
+
+`iptables-save | grep myservice`
 
 # Exercise 11
 

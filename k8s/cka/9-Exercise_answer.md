@@ -285,3 +285,29 @@ and search for podAntiAffinity with topologyKey == kubernetes.io/hostname
 ## Command to create rolebinding (mapped to service account)
 
 `kubectl create rolebinding developer-binding-myuser --role=developer --serviceaccount=default:myservice`
+
+# Exercise 12
+
+## View pod log without client
+
+`cat /var/log/pods/...` on the node
+
+## View in live containers on a k8s node
+
+`watch crictl ps`
+
+## How to view ingress classes
+
+`k get ingressclass`
+
+## Check rights for service account
+
+`k auth can-i get pods --as system:serviceaccount:ns2:myserviceaccount`
+
+## Map a RoleBinding to a clusterole
+
+`k -n default create rolebinding myrolebinding --clusterrole view --user user1`
+
+## Append data in a text file
+
+`command >> mylog.txt`

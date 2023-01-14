@@ -73,3 +73,12 @@
  - Command to create role
  - Command to create rolebinding (mapped to user)
  - Command to create rolebinding (mapped to service account)
+
+# Exercise 12
+
+ - View pod log without client
+ - View in live containers on a k8s node
+ - How to view ingress classes
+ - Check rights for service account
+ - Map a RoleBinding to a clusterole
+ - Append data in a text file

@@ -311,3 +311,13 @@ and search for podAntiAffinity with topologyKey == kubernetes.io/hostname
 ## Append data in a text file
 
 `command >> mylog.txt`
+
+## 100 mega, 1 go for memory resource
+
+`100Mi`
+
+`1Gi`
+
+## 100 milli for cpu resource
+
+`100m`

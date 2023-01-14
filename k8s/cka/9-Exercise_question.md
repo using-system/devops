@@ -82,3 +82,5 @@
  - Check rights for service account
  - Map a RoleBinding to a clusterole
  - Append data in a text file
+ - 100 mega, 1 go for memory resource limit
+ - 100 milli for cpu resource

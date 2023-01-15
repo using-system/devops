@@ -1,6 +1,4 @@
-# Exercise 0
-
-## Prepare environment for kubectl alias et basic export
+### Prepare environment for kubectl alias et basic export
 
 <details>
 <summary>show</summary>

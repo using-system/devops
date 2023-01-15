@@ -178,9 +178,11 @@ exec:
 </p>
 </details>
 
-# Exercise 5
+### Show container usage
 
-## Show container usage
+<details>
+<summary>show</summary>
+<p>
 
 `k top pod -h` to have the help documentation
 
@@ -192,65 +194,161 @@ Result :
 
 `k top pod --containers=true`
 
-## Show the current context 
+</p>
+</details>
+
+### Show the current context 
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl config current-context`
 
-## Show the context names
+</p>
+</details>
+
+### Show the context names
+
+<details>
+<summary>show</summary>
+<p>
 
 `k config get-contexts -o name`
 
-## Write the resources names
+</p>
+</details>
+
+
+
+### Write the resources names
+
+<details>
+<summary>show</summary>
+<p>
 
 `k api-resources --namespaced -o name`
 
-## Get number of roles for the namespace myns
+</p>
+</details>
+
+
+
+### Get number of roles for the namespace myns
+
+<details>
+<summary>show</summary>
+<p>
 
 `k -n myns get role --no-headers | wc -l`
 
-## Get number of pods for the namespace myns
+</p>
+</details>
+
+
+
+### Get number of pods for the namespace myns
+
+<details>
+<summary>show</summary>
+<p>
 
 `k -n myns get pods --no-headers | wc -l`
 
-# Exercise 6
+</p>
+</details>
 
-## Show kubeadm version
+### Show kubeadm version
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubeadm version`
 
-## Show kubectl version
+</p>
+</details>
+
+### Show kubectl version
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl version --short`
 
-## Show kubelet version
+</p>
+</details>
+
+### Show kubelet version
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubelet --version`
 
-## Print Join node command with kubeadm
+</p>
+</details>
+
+### Print Join node command with kubeadm
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubeadm token create`
 
 `kubeadm token create --print-join-command`
 
-## Renew certificate with kubeadm
+</p>
+</details>
 
-### Documentation
+
+
+### Where is Renew certificate doc with kubeadm
+
+<details>
+<summary>show</summary>
+<p>
 
 [Certificate Management with kubeadm](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/)
 
 Taks > Administer a Cluster > Administration with kubeadm > Certificate Management with kubeadm
 
+</p>
+</details>
+
+
 ### Check certificate expiration with kubeadm
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubeadm certs check-expiration`
 
+</p>
+</details>
+
+
+
 ### Renew certificate of a component with kubeadm
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubeadm certs renew`
 
-# Exercise 7
+</p>
+</details>
 
-## Restore etcd snapshots
+### Restore etcd snapshots
+
+<details>
+<summary>show</summary>
+<p>
 
 `cd /etc/kubernetes/manifests/`
 
@@ -264,47 +362,109 @@ Taks > Administer a Cluster > Administration with kubeadm > Certificate Manageme
 
 Change hostPath path for etcd-data with -data-dir info.
 
-## Get status of a snapshot
+</p>
+</details>
+
+
+### Get status of a snapshot
+
+<details>
+<summary>show</summary>
+<p>
 
 `ETCDCTL_API=3 etcdctl ..certinfo.. snapshot status /etc/my-snapshot.db`
 
-# Exercise 8
+</p>
+</details>
 
-## List container on a kubernetes node
+
+
+### List container on a kubernetes node
+
+<details>
+<summary>show</summary>
+<p>
 
 `crictl ps`
 
+</p>
+</details>
 
-## Get kube-proxy container on a kubenetes node
+### Get kube-proxy container on a kubenetes node
+
+<details>
+<summary>show</summary>
+<p>
 
 `crictl ps | grep kube-proxy`
 
-## Remove kube-proxy container on a kubernetes node
+</p>
+</details>
+
+
+### Remove kube-proxy container on a kubernetes node
+
+<details>
+<summary>show</summary>
+<p>
 
 `crictl stop container_id`
 `crictl rm container_id`
 
-## Get the info.runtimeType of a container
+</p>
+</details>
+
+### Get the info.runtimeType of a container
+
+<details>
+<summary>show</summary>
+<p>
 
 `crictl inspect container_id | grep runtimeType`
 
-# Exercise 9
+</p>
+</details>
 
-## Where is by default kubelet server certificate
+### Where is by default kubelet server certificate
+
+<details>
+<summary>show</summary>
+<p>
 
 `/var/lib/kubelet/pki`
 
-## Find where is kubelet binary
+</p>
+</details>
+
+### Find where is kubelet binary
+
+<details>
+<summary>show</summary>
+<p>
 
 `whereis kubelet`
 
-## Restart kubelet
+</p>
+</details>
+
+### Restart kubelet
+
+<details>
+<summary>show</summary>
+<p>
 
 `systemctl daemon-reload && systemctl restart kubelet`
 
+</p>
+</details>
+
 # Exercise 10
 
-## Run a pod on a control plane node
+### Run a pod on a control plane node
+
+<details>
+<summary>show</summary>
+<p>
 
 `k describe node masternode`
 
@@ -321,7 +481,15 @@ spec:
     node-role.kubernetes.io/control-plane: ""
 ~~~
 
-## Schedule a pod only one instance for each node
+</p>
+</details>
+
+
+### Schedule a pod only one instance for each node
+
+<details>
+<summary>show</summary>
+<p>
 
 Go the the k8s documentation 
 
@@ -344,62 +512,158 @@ and search for podAntiAffinity with topologyKey == kubernetes.io/hostname
             topologyKey: "kubernetes.io/hostname"
 ~~~
 
-## Get iptables rules for a service
+</p>
+</details>
+
+### Get iptables rules for a service
+
+<details>
+<summary>show</summary>
+<p>
 
 `iptables-save | grep myservice`
 
-# Exercise 11
+</p>
+</details>
 
-## Command to create role
+### Command to create role
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl create role developer --verb=create --verb=get --verb=list --verb=update --verb=delete --resource=pods`
 
-## Command to create rolebinding (mapped to user)
+</p>
+</details>
+
+### Command to create rolebinding (mapped to user)
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl create rolebinding developer-binding-myuser --role=developer --user=myuser`
 
-## Command to create rolebinding (mapped to service account)
+</p>
+</details>
+
+### Command to create rolebinding (mapped to service account)
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl create rolebinding developer-binding-myuser --role=developer --serviceaccount=default:myservice`
 
-# Exercise 12
+</p>
+</details>
 
-## View pod log without client
+### View pod log without client
+
+<details>
+<summary>show</summary>
+<p>
 
 `cat /var/log/pods/...` on the node
 
-## View in live containers on a k8s node
+</p>
+</details>
+
+
+### View in live containers on a k8s node
+
+<details>
+<summary>show</summary>
+<p>
 
 `watch crictl ps`
 
-## How to view ingress classes
+</p>
+</details>
+
+### How to view ingress classes
+
+<details>
+<summary>show</summary>
+<p>
 
 `k get ingressclass`
 
-## Check rights for service account
+</p>
+</details>
+
+
+
+### Check rights for service account
+
+<details>
+<summary>show</summary>
+<p>
 
 `k auth can-i get pods --as system:serviceaccount:ns2:myserviceaccount`
 
-## Map a RoleBinding to a clusterole
+</p>
+</details>
+
+
+
+### Map a RoleBinding to a clusterole
+
+<details>
+<summary>show</summary>
+<p>
 
 `k -n default create rolebinding myrolebinding --clusterrole view --user user1`
 
-## Append data in a text file
+</p>
+</details>
+
+### Append data in a text file
+
+<details>
+<summary>show</summary>
+<p>
 
 `command >> mylog.txt`
 
-## 100 mega, 1 go for memory resource
+</p>
+</details>
+
+### 100 mega, 1 go for memory resource
+
+<details>
+<summary>show</summary>
+<p>
 
 `100Mi`
 
 `1Gi`
 
-## 100 milli for cpu resource
+</p>
+</details>
+
+
+### 100 milli for cpu resource
+
+<details>
+<summary>show</summary>
+<p>
+
 
 `100m`
 
-# Exercise 13
+</p>
+</details>
 
-## Copy files form node to another
+### Copy files form node to another
+
+<details>
+<summary>show</summary>
+<p>
 
 `scp /var/log/*.* NODE_IP:/data`
+
+</p>
+</details>
+

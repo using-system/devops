@@ -458,8 +458,6 @@ Change hostPath path for etcd-data with -data-dir info.
 </p>
 </details>
 
-# Exercise 10
-
 ### Run a pod on a control plane node
 
 <details>

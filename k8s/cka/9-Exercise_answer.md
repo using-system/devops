@@ -321,3 +321,9 @@ and search for podAntiAffinity with topologyKey == kubernetes.io/hostname
 ## 100 milli for cpu resource
 
 `100m`
+
+# Exercise 13
+
+## Copy files form node to another
+
+`scp /var/log/*.* NODE_IP:/data`

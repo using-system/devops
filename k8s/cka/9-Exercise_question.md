@@ -84,3 +84,7 @@
  - Append data in a text file
  - 100 mega, 1 go for memory resource limit
  - 100 milli for cpu resource
+
+# Exercise 13
+
+ - Copy files form node to another

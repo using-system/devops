@@ -17,51 +17,89 @@ Then use like this :
 </p>
 </details>
 
-# Exercise 1
+### Analyse kube configuration file
 
-## Analyse kube configuration file
+<details>
+<summary>show</summary>
+<p>
 
 Run `kubectl cluster-info --kubeconfig PATH`
+OR `kubectl cluster-info --kubeconfig PATH` to specify another configuration file
 
-## Default port for kube api
+</p>
+</details>
+
+### Default port for kube api
+
+<details>
+<summary>show</summary>
+<p>
 
 `6443`
 
-# Exercise 2
+</p>
+</details>
 
-## Pod creation
+### Specify label with pod creation imperative command
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl run messaging --image=redis:alpine -l tier=msg`
 
-## Service creation
+</p>
+</details>
+
+### How to create NodePort service by specifying port imperative command
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl expose deployment hr-web-app --type=NodePort --port=8080 --name=hr-web-app-service --dry-run=client -o yaml > hr-web-app-service.yaml`
 
 Then add the nodePort field with the given port number under the ports section and create a service.
 
-# Exercise 3
+</p>
+</details>
 
-## User certificate documentation
+### Where is K8s Doc for user certificate creation and define the steps
+
+<details>
+<summary>show</summary>
+<p>
 
 [Certificate Signing Requests](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
 
 Reference > API Access Control > Certifcate Signing requests
 
-## Steps
-
+Steps : 
  - Create CertificateSigningRequest object
  - Approve : `kubectl certificate approve mycsr`
  - Create role : `kubectl create role myrole --resource=pods --verb=create,list,get,update,delete --namespace=myns`
  - Create role binding : `kubectl create rolebinding myrolebinding --role=myrole --user=myuser --namespace=myns`
  - Check : `kubectl auth can-i update pods --as=myuser --namespace=myns`
 
-# Exercise 4
+</p>
+</details>
 
-## Resolve service check in a pod
+### Resolve service check in a pod
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl run test-nslookup --image=busybox --rm -it --restart=Never -- nslookup myservice`
 
-## Resolve pod check in a pod
+</p>
+</details>
+
+### Resolve pod check in a pod
+
+<details>
+<summary>show</summary>
+<p>
 
 `kubectl get pod nginx-resolver -o wide`
 
@@ -69,7 +107,14 @@ to get the pod id, replace dot by - then
 
 `kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup 10-244-192-4.default.pod`
 
-## Execute a long command with split it
+</p>
+</details>
+
+### Execute a long command in a container
+
+<details>
+<summary>show</summary>
+<p>
 
 ~~~yaml
 exec:
@@ -79,7 +124,14 @@ exec:
         - 'wget -T2 -O- http://service-am-i-ready:80' 
 ~~~
 
-## Map a secret to variable env in a pod spec
+</p>
+</details>
+
+### Map a secret to variable env in a pod spec
+
+<details>
+<summary>show</summary>
+<p>
 
 ~~~yaml
     - name: APP_PASS
@@ -89,7 +141,14 @@ exec:
           key: pass
 ~~~
 
-## Map the current node name to a variable env
+</p>
+</details>
+
+### Map the current node name to a variable env
+
+<details>
+<summary>show</summary>
+<p>
 
 ~~~yaml
     - name: MY_NODE_NAME
@@ -98,7 +157,15 @@ exec:
           fieldPath: spec.nodeName 
 ~~~
 
-## Create an empty dir volume
+</p>
+</details>
+
+
+### Create an empty dir volume
+
+<details>
+<summary>show</summary>
+<p>
 
 ~~~yaml
 
@@ -107,6 +174,10 @@ exec:
       emptyDir: {} 
 
 ~~~
+
+</p>
+</details>
+
 # Exercise 5
 
 ## Show container usage

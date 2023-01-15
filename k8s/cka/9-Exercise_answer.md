@@ -1,6 +1,10 @@
 # Exercise 0
 
-## Prepare environment
+## Prepare environment for kubectl alias et basic export
+
+<details>
+<summary>show</summary>
+<p>
 
 `alias k=kubectl`                         # will already be pre-configured
 
@@ -11,6 +15,9 @@
 Then use like this : 
 
 `k run pod1 --image=httpd:2.4.41-alpine $do > 2.yaml`
+
+</p>
+</details>
 
 # Exercise 1
 

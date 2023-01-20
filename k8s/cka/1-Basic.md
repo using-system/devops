@@ -316,6 +316,17 @@ spec:
 
 ### Command to get log for a pod (without or with container name specified)
 
+<details>
+<summary>show</summary>
+<p>
+
+`kubectl logs mypod`
+
+`kubectl logs mypod mycontainer`
+
+</p>
+</details>
+
 # VI editor
 
 ### Shortcut to insert text

@@ -35,6 +35,7 @@ apiserver <- kube-proxy (informs services changed)
 <p>
 
 [Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components)
+
 Concepts > Overview > Kubernetes components
 
 </p>
@@ -148,6 +149,7 @@ on master node /etc/kubernetes/pki/apiserver-etcd-client.crt,key
 <p>
 
 [PKI certificates and requirements](https://kubernetes.io/docs/setup/best-practices/certificates/)
+
 Getting started > Best practices > PKI certificates and requirements
 
 

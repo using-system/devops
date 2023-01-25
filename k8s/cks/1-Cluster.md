@@ -22,6 +22,7 @@ controller manager -> apiserver
 <p>
 
 apiserver <-> kubelet (run pod and informs api server pod state changes)
+
 apiserver <- kube-proxy (informs services changed)
 
 </p>

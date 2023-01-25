@@ -28,6 +28,18 @@ apiserver <- kube-proxy (informs services changed)
 </p>
 </details>
 
+### Where is documentation of kubernetes components
+
+<details>
+<summary>show</summary>
+<p>
+
+[Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components)
+Concepts > Overview > Kubernetes components
+
+</p>
+</details>
+
 # Certificates location 
 
 ### CA
@@ -125,6 +137,19 @@ on master node /etc/kubernetes/pki/etcd/server.crt,key
 <p>
 
 on master node /etc/kubernetes/pki/apiserver-etcd-client.crt,key
+
+</p>
+</details>
+
+### Where is documentation for components certificates
+
+<details>
+<summary>show</summary>
+<p>
+
+[PKI certificates and requirements](https://kubernetes.io/docs/setup/best-practices/certificates/)
+Getting started > Best practices > PKI certificates and requirements
+
 
 </p>
 </details>

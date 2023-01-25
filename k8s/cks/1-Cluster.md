@@ -6,8 +6,10 @@
 <summary>show</summary>
 <p>
 
-apiserver -> etcd (k8s database) 
+apiserver -> etcd (k8s database)
+
 scheduler (assign pod to nodes) -> apiserver
+
 controller manager -> apiserver
 
 </p>

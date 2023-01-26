@@ -1,4 +1,6 @@
-# Kubernetes components
+# Overview 
+
+## Kubernetes components
 
 ### Control plane components
 
@@ -41,7 +43,7 @@ Concepts > Overview > Kubernetes components
 </p>
 </details>
 
-# Certificates location 
+## Certificates location 
 
 ### CA
 

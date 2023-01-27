@@ -179,7 +179,7 @@ Concepts > Services, Load Balancing and Networking > Network Policies
 <summary>show</summary>
 <p>
 
-`dk exec frontpod -- curl backpod`
+`k exec frontpod -- curl backpod`
 
 </p>
 </details>

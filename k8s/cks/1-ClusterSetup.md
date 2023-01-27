@@ -259,4 +259,51 @@ spec:
 </p>
 </details>
 
+# Port forward
 
+### Use an HTTP Proxy to Access the Kubernetes API on port 8080
+
+<details>
+<summary>show</summary>
+<p>
+
+`kubectl proxy --port=8080`
+
+</p>
+</details>
+
+
+### Where is doc to use port forward command
+
+<details>
+<summary>show</summary>
+<p>
+
+[Use Port Forwarding to Access Applications in a Cluster](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
+
+Tasks > Access Applications on a Cluster > Use port forwarding to access application in a cluster
+
+</p>
+</details>
+
+### Export service db(port=8745) on localhost port 8080 
+
+<details>
+<summary>show</summary>
+<p>
+
+`kubectl port-forward service/mongo 8080:8745`
+
+</p>
+</details>
+
+### Export pod dbpod(port=8745) on localhost port 8080 
+
+<details>
+<summary>show</summary>
+<p>
+
+`kubectl port-forward pod/dbpod 8080:8745`
+
+</p>
+</details>

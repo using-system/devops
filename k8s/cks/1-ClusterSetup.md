@@ -157,3 +157,106 @@ Getting started > Best practices > PKI certificates and requirements
 
 </p>
 </details>
+
+# Network policies
+
+### Where is doc of Network policy
+
+<details>
+<summary>show</summary>
+<p>
+
+[Network Policies | Kubernetes](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+
+Concepts > Services, Load Balancing and Networking > Network Policies
+
+</p>
+</details>
+
+### Check communication from frontpod to backpod
+
+<details>
+<summary>show</summary>
+<p>
+
+`dk exec frontpod -- curl backpod`
+
+</p>
+</details>
+
+### Default deny policy (allow dns outcomming traffic)
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  - Ingress
+  egress:
+  - ports:
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
+```
+
+</p>
+</details>
+
+### Allow frontend to communicate to backend pod and backend pods to receive incomming traffic from frontend
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: frontend
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: frontend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          run: backend
+```
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          run: frontend
+```
+
+</p>
+</details>
+
+

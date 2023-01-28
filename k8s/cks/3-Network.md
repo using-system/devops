@@ -99,6 +99,28 @@ spec:
 </p>
 </details>
 
+### Disable traffic to the ip 1.1.1.1 for pods with label trust=nope
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: metadata-server
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      trust: nope
+  policyTypes:
+  - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+            - 1.1.1.1/32
+```
+
 # Port forward
 
 ### Use an HTTP Proxy to Access the Kubernetes API on port 8080

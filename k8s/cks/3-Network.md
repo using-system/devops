@@ -101,6 +101,10 @@ spec:
 
 ### Disable traffic to the ip 1.1.1.1 for pods with label trust=nope
 
+<details>
+<summary>show</summary>
+<p>
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -120,6 +124,11 @@ spec:
             except:
             - 1.1.1.1/32
 ```
+
+</p>
+</details>
+
+
 
 # Port forward
 

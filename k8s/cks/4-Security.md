@@ -90,3 +90,76 @@ spec:
 
 </p>
 </details>
+
+# Security benchmark
+
+## CIS
+
+### Acronym of CIS
+
+<details>
+<summary>show</summary>
+<p>
+
+CIS : Center for Internet Security
+
+</p>
+</details>
+
+### What is CIS
+
+<details>
+<summary>show</summary>
+<p>
+
+kube-bench can check automaticly CIS rules. Follows the instruction in the kube-bench guthub repository (https://github.com/aquasecurity/kube-bench), --> Running inside a container
+
+</p>
+</details>
+
+## kube-bench
+
+### What is kube-bench
+
+<details>
+<summary>show</summary>
+<p>
+
+kube-bench can check automaticly CIS rules. Follows the instruction in the kube-bench guthub repository (https://github.com/aquasecurity/kube-bench), --> Running inside a container
+
+</p>
+</details>
+
+### Check all cis rules on master node with kube-bench
+
+<details>
+<summary>show</summary>
+<p>
+
+`kube-bench run --targets master`
+
+</p>
+</details>
+
+### Check the cis rule 1.2.20 on master node with kube-bench
+
+<details>
+<summary>show</summary>
+<p>
+
+`kube-bench run --targets master --check 1.2.20`
+
+</p>
+</details>
+
+### Check cis rules on worker node with kube-bench
+
+<details>
+<summary>show</summary>
+<p>
+
+`kube-bench run --targets node`
+
+</p>
+</details>
+

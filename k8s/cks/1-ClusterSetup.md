@@ -157,3 +157,24 @@ Getting started > Best practices > PKI certificates and requirements
 
 </p>
 </details>
+
+# Check k8s binaries
+
+### How to check kube-apiserver binary
+
+
+<details>
+<summary>show</summary>
+<p>
+
+ - Go the kubernetes github repo https://github.com/kubernetes/kubernetes and choose the k8s version with tags and download server binaries (changelog)
+ - `tar xzf kubernetes-server-linux-amd64.tar.gz`
+ - `sha512sum kubernetes/server/bin/kube-apiserver > compare`
+ - run `ps aux | grep kube-apiserver` to get the pid
+ - `find /proc/[PID]/root/ | grep kube-api`
+ - `sha512sum [BINARY_PATH] >> compare`
+ - after cleanup compare file, run `cat compate | uniq`
+
+
+</p>
+</details>

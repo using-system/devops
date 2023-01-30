@@ -173,7 +173,7 @@ Getting started > Best practices > PKI certificates and requirements
  - run `ps aux | grep kube-apiserver` to get the pid
  - `find /proc/[PID]/root/ | grep kube-api`
  - `sha512sum [BINARY_PATH] >> compare`
- - after cleanup compare file, run `cat compate | uniq`
+ - after cleanup compare file, run `cat compare | uniq`
 
 
 </p>

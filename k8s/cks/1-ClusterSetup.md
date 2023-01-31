@@ -178,3 +178,29 @@ Getting started > Best practices > PKI certificates and requirements
 
 </p>
 </details>
+
+# Client configuration
+
+### Set a new credential in the kube config with private key and certificate
+
+
+<details>
+<summary>show</summary>
+<p>
+
+`k config set-credentials myuser --client-key=myuser.key --client-certificate=myuser.crt`
+
+</p>
+</details>
+
+### Set a new context myuser linked to user myuser and cluster kubernetes
+
+
+<details>
+<summary>show</summary>
+<p>
+
+`k config set-context myuser --user=myuser --cluster=kubernetes`
+
+</p>
+</details>

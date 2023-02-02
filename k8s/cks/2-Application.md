@@ -124,3 +124,84 @@ CMD ["ping", "google.com"]
 
 </p>
 </details>
+
+# Use service accounts with pods
+
+### Where is documentation for manage pods with service accounts
+
+<details>
+<summary>show</summary>
+<p>
+
+[Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+
+Taks > Configure Pods and Containers > Configure Service Accounts for Pods
+
+
+</p>
+</details>
+
+### How to find the token mounted into a pod
+
+<details>
+<summary>show</summary>
+<p>
+
+Run `mount | grep service` describe the pod specification.
+
+</p>
+</details>
+
+### How to connect to the k8s api with token inside a pod
+
+<details>
+<summary>show</summary>
+<p>
+
+Run `printenv | grep KUBER` to the the k8s api url.
+
+THEN
+
+run `curl https://X.X.X.X -k -H "Authorization Bearer $(cat token)"`
+
+</p>
+</details>
+
+### Disable service account mouting in pod specification
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  serviceAccountName: build-robot
+  automountServiceAccountToken: false
+  ...
+```
+
+</p>
+</details>
+
+### Disable service account mouting in service account specification
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-robot
+automountServiceAccountToken: false
+...
+```
+
+</p>
+</details>
+

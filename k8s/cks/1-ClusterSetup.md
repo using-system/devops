@@ -204,3 +204,57 @@ Getting started > Best practices > PKI certificates and requirements
 
 </p>
 </details>
+
+### Execute manual request to k8s api with curl and certificates
+
+
+<details>
+<summary>show</summary>
+<p>
+
+`curl https://X.X.X.X -k --cacert ca --cert crt --key key`
+
+where ca, crt, key are files extracted with command `echo DATA | base64 --decode` (get the data in the kube config file or with `k config view --raw`)
+
+</p>
+</details>
+
+### On a worker node, access to the api as worker (kubelet)
+
+
+<details>
+<summary>show</summary>
+<p>
+
+`ssh YOUR_WORKER_NODE`
+`export KUBECONFIG=/etc/kubernetes/kubelet.conf`
+
+</p>
+</details>
+
+# Server configuration
+
+### Allow k8s api to be access by external
+
+
+<details>
+<summary>show</summary>
+<p>
+
+`k edit service kubernetes` and `type: ClusterIP` by `type: NodePort`
+
+</p>
+</details>
+
+### Enable Node restriction
+
+<details>
+<summary>show</summary>
+<p>
+
+Add `--enable-admission-plugins=NodeRestriction` in kube-apiserver arguments on the manifest file
+
+wihich deny worker to add label started with key `node-restriction.kubernetes.io` (sample : `k label node node01 node-restriction.kubernetes.io/two=123`)
+
+</p>
+</details>

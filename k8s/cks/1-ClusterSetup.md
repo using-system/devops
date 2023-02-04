@@ -227,6 +227,7 @@ where ca, crt, key are files extracted with command `echo DATA | base64 --decode
 <p>
 
 `ssh YOUR_WORKER_NODE`
+
 `export KUBECONFIG=/etc/kubernetes/kubelet.conf`
 
 </p>

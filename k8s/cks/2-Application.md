@@ -205,3 +205,150 @@ automountServiceAccountToken: false
 </p>
 </details>
 
+# Manage Secrets
+
+## Secrets and Pods
+
+### Where is documentation for manage secrets for pods ?
+
+<details>
+<summary>show</summary>
+<p>
+
+[Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+
+Concepts > Configuration > Secrets
+
+
+</p>
+</details>
+
+### Using secrets a Files from a Pod
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: redis
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+      optional: false # default setting; "mysecret" must exist
+```
+
+</p>
+</details>
+
+### Hack a pod secret (env variable)
+
+<details>
+<summary>show</summary>
+<p>
+
+ - run `crictl ps | grep [PODNAME]` to get the container id
+ - then run `crictl inspect [CONTAINERID]` and search for env section
+
+</p>
+</details>
+
+### Hack a pod secret (from file)
+
+<details>
+<summary>show</summary>
+<p>
+
+ - run `crictl ps | grep [PODNAME]` to get the container id
+ - then run `crictl inspect [CONTAINERID]` and search for pid element
+ - finally run `cat /proc/[PID]/root/[MOUNTPATH]/[SECRETKEY]`
+
+</p>
+</details>
+
+### Hack a pod secret with edcd client
+
+<details>
+<summary>show</summary>
+<p>
+
+`ETCDCTL_API=3 etcdctl ... endpoint and cert infos ... get /registry/secrets/[NAMESPACE]/[SECRETNAME]`
+
+</p>
+</details>
+
+## Secrets and Etcd
+
+### Where is documentation for encrypting secrets ?
+
+<details>
+<summary>show</summary>
+<p>
+
+[Encrypting Secret Data at Rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
+
+Tasks > Administer a Cluster > Encrypting Secret Data at Rest
+
+
+</p>
+</details>
+
+### Create a etc encryption configuration for aescbc and add the capacity to read uncrypted secrets
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+  - resources:
+      - secrets
+    providers:
+      - aescbc:
+          keys:
+            - name: key1
+              secret: <BASE 64 ENCODED SECRET>
+      - identity: {}
+```
+
+Save that file in etc/kubernetes/etcd/ec.yaml
+and generate password with command `echo -n 'password' | base64`
+
+</p>
+</details>
+
+### Activate encryption for apiserver etcd
+
+<details>
+<summary>show</summary>
+<p>
+
+ - Add the `--encryption-provider-config=/etc/kubernetes/etcd/ec.yaml` argument kube-apiserver manifest file (add volume and volumeMount too)
+ - Check the logs in /var/log/pods
+
+</p>
+</details>
+
+### Replace all secrets to encode existing secret
+
+<details>
+<summary>show</summary>
+<p>
+
+`k get secret -A -o yaml | k replace -f -`
+
+</p>
+</details>

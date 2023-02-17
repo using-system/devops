@@ -125,6 +125,175 @@ CMD ["ping", "google.com"]
 </p>
 </details>
 
+## Sandbox
+
+### What is container sandbox
+
+<details>
+<summary>show</summary>
+<p>
+
+An additional security layer to reduce attack surface. Container sandbox mitigates system calls between the container and kernel.
+
+More resources needed.
+
+</p>
+</details>
+
+### Get the kernel linux name inside container
+
+<details>
+<summary>show</summary>
+<p>
+
+Run the command `uname -r` or `strace uname -r`
+
+The commands inside container or directly in the node produce same result.
+
+</p>
+</details>
+
+### What is OCI
+
+<details>
+<summary>show</summary>
+<p>
+
+Open Container Initiative.
+
+It's a linux foundation project to design specifications for containers and a runtime implementation (implements the specification)
+
+</p>
+</details>
+
+### What is CRI
+
+<details>
+<summary>show</summary>
+<p>
+
+Container Runtime interface.
+
+Allows to communicate with different container runtime.
+
+</p>
+</details>
+
+### How to specify the cri in kubelet
+
+<details>
+<summary>show</summary>
+<p>
+
+`--container-runtime` and `--container-runtime-endpoint` parameters 
+
+</p>
+</details>
+
+### How katacontainers sandbox works
+
+<details>
+<summary>show</summary>
+<p>
+
+Additional isolation with a lightweight VM and individual kernels.
+
+Warning : strong isolation. Runs every container in its own private VM.
+
+</p>
+</details>
+
+### How gVisor sandbox works
+
+<details>
+<summary>show</summary>
+<p>
+
+Provides by Google. 
+
+Additional layer of separation (not vm based like katacontainers) and simulates kernel syscalls with limited features.
+
+The runtime called runsc
+
+</p>
+</details>
+
+## Runtime class
+
+### What is a runtime class
+
+<details>
+<summary>show</summary>
+<p>
+
+It's used by pod to specify witch container runtime is used by the pod.
+
+</p>
+</details>
+
+### Where is doc for runtime class
+
+<details>
+<summary>show</summary>
+<p>
+
+[Runtime Class](https://kubernetes.io/docs/concepts/containers/runtime-class/)
+
+Concepts > Containers > Runtime Class
+
+
+</p>
+</details>
+
+### Create runtime class for gVisor
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: gVisor 
+handler: runsc 
+```
+
+</p>
+</details>
+
+### Get the list of runtime classes
+
+<details>
+<summary>show</summary>
+<p>
+
+`k get runtimeclass`
+
+</p>
+</details>
+
+### Specify runtime class for a pod
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  runtimeClassName: myclass
+  # ...
+
+```
+
+</p>
+</details>
+
+
 # Use service accounts with pods
 
 ### Where is documentation for manage pods with service accounts

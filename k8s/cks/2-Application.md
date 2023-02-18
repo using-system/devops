@@ -521,3 +521,106 @@ and generate password with command `echo -n 'password' | base64`
 
 </p>
 </details>
+
+# Security context
+
+### Where is documentation for security context
+
+<details>
+<summary>show</summary>
+<p>
+
+[Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+
+Tasks > Configure Pods and Containers > Configure a Security Context for a Pod or Container
+
+
+</p>
+</details>
+
+### Get the id of user, group, and fsgroup
+
+<details>
+<summary>show</summary>
+<p>
+
+`id`
+
+</p>
+</details>
+
+### Run container as non root
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-2
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: sec-ctx-demo-2
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      runAsNonRoot: false
+```
+
+</p>
+</details>
+
+### What means privileged container and how activate it
+
+<details>
+<summary>show</summary>
+<p>
+
+Privileged container means the container user is directory mapped to host user
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-2
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: sec-ctx-demo-2
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      privileged: true
+```
+
+</p>
+</details>
+
+### What means privilege escalation and how activate it
+
+<details>
+<summary>show</summary>
+<p>
+
+Privilege escalation controls a process can gain mire privileges than parent (activated by default)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-2
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: sec-ctx-demo-2
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      allowPrivilegeEscalation: true
+```
+
+</p>
+</details>

@@ -190,13 +190,22 @@ kind: Pod
 metadata:
   name: security-context-demo-2
 spec:
-  securityContext:
-    runAsUser: 1000
   containers:
-  - name: sec-ctx-demo-2
-    image: gcr.io/google-samples/node-hello:1.0
+  - name: app
+    image: bash
+    command:
+    - sh
+    - -c
+    - 'ping google.com'
+  - name: proxy
+    image: ubuntu
+    command:
+    - sh
+    - -c
+    - 'apt-get update && apt-get install iptables -y && iptables -L && sleep 10d'
     securityContext:
-      privileged: true
+      capabilities:
+        add: ["NET_ADMIN"]
 ```
 
 

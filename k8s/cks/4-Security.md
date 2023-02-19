@@ -163,3 +163,42 @@ kube-bench can check automaticly CIS rules. Follows the instruction in the kube-
 </p>
 </details>
 
+# mTLS
+
+### What is mTLS
+
+<details>
+<summary>show</summary>
+<p>
+
+mTLS allows you to have a two-way authentication for internal pod secure communication.
+
+</p>
+</details>
+
+### How to implements mTLS for a pod
+
+<details>
+<summary>show</summary>
+<p>
+
+Create a container proxy in the pod that intercepts secure communication.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-2
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: sec-ctx-demo-2
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      privileged: true
+```
+
+
+</p>
+</details>

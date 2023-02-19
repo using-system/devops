@@ -188,7 +188,7 @@ Create a container proxy in the pod that intercepts secure communication.
 apiVersion: v1
 kind: Pod
 metadata:
-  name: security-context-demo-2
+  name: mtlsdemo
 spec:
   containers:
   - name: app

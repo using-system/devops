@@ -259,3 +259,138 @@ wihich deny worker to add label started with key `node-restriction.kubernetes.io
 
 </p>
 </details>
+
+# OPA
+
+### What is OPA
+
+<details>
+<summary>show</summary>
+<p>
+
+OPA : Open Policy Agent
+
+OPA is an extension (non specific for kuberntes) which allows us to write custom policies.
+
+Rego language is used to write policy implementation.
+
+</p>
+</details>
+
+### What is OPA Gatekeeper
+
+<details>
+<summary>show</summary>
+<p>
+
+OPA Gatekeeper make OPA easier to use in kuberntes.
+
+Rego language is used to write policy implementation.
+
+</p>
+</details>
+
+### What is  Admission Webhook
+
+<details>
+<summary>show</summary>
+<p>
+
+It's called on resource creation after authorization checks die validating admission webbook.
+
+or resource change for mutating admission webbook.
+
+</p>
+</details>
+
+### Requirements for OPA
+
+<details>
+<summary>show</summary>
+<p>
+
+Check the parameter `enable-admission-plugins` of kube-api manifest file. Value must equal to `NodeRestriction`
+
+</p>
+</details>
+
+### How to create a OPA policy template
+
+<details>
+<summary>show</summary>
+<p>
+
+Apply the ConstraintTemplate yaml file (example below) : 		
+
+
+```yaml
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8salwaysdeny
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sAlwaysDeny
+      validation:
+        # Schema for the `parameters` field
+        openAPIV3Schema:
+          properties:
+            message:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8salwaysdeny
+        violation[{"msg": msg}] {
+          1 > 0
+          msg := input.parameters.message
+        }
+```
+
+Then check the creation of the custom resource definition with `k get [.METADATA.NAME]` (replace with K8sAlwaysDeny in the example)
+
+</p>
+</details>
+
+### How to create a OPA policy
+
+<details>
+<summary>show</summary>
+<p>
+
+Apply the custom resource definition yaml file (example below) : 		
+
+
+```yaml
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAlwaysDeny
+metadata:
+  name: pod-always-deny
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+  parameters:
+    message: "ACCESS DENIED!"
+```
+
+Then check the creation with `k get K8sAlwaysDeny`
+
+</p>
+</details>
+
+### How to check policy violiation
+
+<details>
+<summary>show</summary>
+<p>
+
+Run `k describe [TEMPLATE_METADATA_NAME] [POLICY_METADATA_NAME]`
+
+and checks for the violiations section.
+
+</p>
+</details>

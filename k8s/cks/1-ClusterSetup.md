@@ -382,7 +382,7 @@ Then check the creation with `k get K8sAlwaysDeny`
 </p>
 </details>
 
-### How to check policy violiation
+### How to check policy violation
 
 <details>
 <summary>show</summary>
@@ -390,7 +390,7 @@ Then check the creation with `k get K8sAlwaysDeny`
 
 Run `k describe [TEMPLATE_METADATA_NAME] [POLICY_METADATA_NAME]`
 
-and checks for the violiations section.
+and checks for the violations section.
 
 </p>
 </details>

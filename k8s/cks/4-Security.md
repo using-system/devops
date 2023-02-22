@@ -214,8 +214,6 @@ spec:
 
 # SecOps
 
-## Static Analysis
-
 ### Performs static analysis of k8s yaml files
 
 <details>
@@ -229,6 +227,23 @@ Use [kubesec](https://kubesec.io/) tool
 OR
 
 `docker run -i kubesec/kubesec:512c5e0 scan /dev/stdin < podyaml`
+
+</p>
+</details>
+
+### Performs a image vulnerability scanning
+
+<details>
+<summary>show</summary>
+<p>
+
+Use [trivy](https://github.com/aquasecurity/trivy) tool
+
+`trivy image python:3.4-alpine`
+
+OR
+
+`docker run aquasec/trivy image python:3.4-alpine`
 
 </p>
 </details>

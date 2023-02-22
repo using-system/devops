@@ -172,6 +172,17 @@ CMD ["./app"]
 </p>
 </details>
 
+### Get the processes/user of a docker container
+
+<details>
+<summary>show</summary>
+<p>
+
+`docker exec container_name ps`
+
+</p>
+</details>
+
 ### How to secure a docker image 
 
 <details>

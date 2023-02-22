@@ -211,3 +211,24 @@ spec:
 
 </p>
 </details>
+
+# SecOps
+
+## Static Analysis
+
+### Performs static analysis of k8s yaml files
+
+<details>
+<summary>show</summary>
+<p>
+
+Use [kubesec](https://kubesec.io/) tool
+
+`kubesec scan pod.yaml`
+
+OR
+
+`docker run -i kubesec/kubesec:512c5e0 scan /dev/stdin < podyaml`
+
+</p>
+</details>

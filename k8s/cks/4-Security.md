@@ -532,6 +532,9 @@ spec:
       allowPrivilegeEscalation: false
 ```
 
+</p>
+</details>
+
 # SecOps
 
 ## Scanning

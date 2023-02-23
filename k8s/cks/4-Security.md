@@ -461,7 +461,7 @@ Tutorials > Security > Restrict a Container's Access to Resources with AppArmor
 <summary>show</summary>
 <p>
 
-`apparmor_parser -q /etc/apparmor.d/myprofile`
+`apparmor_parser /etc/apparmor.d/myprofile`
 
 </p>
 </details>

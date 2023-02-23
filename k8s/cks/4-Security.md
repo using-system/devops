@@ -573,6 +573,17 @@ OR
 </p>
 </details>
 
+### Performs a image vulnerability scanning (only critical)
+
+<details>
+<summary>show</summary>
+<p>
+
+`trivy image python:3.4-alpine --severity CRITICAL`
+
+</p>
+</details>
+
 ## Registry
 
 ### Update a service account with a image pull secret

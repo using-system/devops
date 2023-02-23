@@ -383,6 +383,155 @@ Falco analyse, assert and make action for any violations specified in the rules.
 </p>
 </details>
 
+# Kernel protection tools
+
+## AppArmor
+
+### Where is doc for apparmor
+
+<details>
+<summary>show</summary>
+<p>
+
+[Restrict a Container's Access to Resources with AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
+
+Tutorials > Security > Restrict a Container's Access to Resources with AppArmor
+
+</p>
+</details>
+
+### Get the profiles status
+
+<details>
+<summary>show</summary>
+<p>
+
+`aa-status`
+
+</p>
+</details>
+
+### Install app armor utils
+
+<details>
+<summary>show</summary>
+<p>
+
+`apt-get install apparmor-utils`
+
+</p>
+</details>
+
+### Generate profile for curl
+
+<details>
+<summary>show</summary>
+<p>
+
+`aa-genprof curl`
+
+</p>
+</details>
+
+### Where is profiles
+
+<details>
+<summary>show</summary>
+<p>
+
+`/etc/apparmor.d/`
+
+</p>
+</details>
+
+### Update profile with logs
+
+<details>
+<summary>show</summary>
+<p>
+
+`aa-logprof`
+
+</p>
+</details>
+
+### Load a profile
+
+<details>
+<summary>show</summary>
+<p>
+
+`apparmor_parser -q /etc/apparmor.d/myprofile`
+
+</p>
+</details>
+
+### Associate a profile to a pod
+
+<details>
+<summary>show</summary>
+<p>
+
+Add the annotation in the pod definition yaml file : 
+
+`container.apparmor.security.beta.kubernetes.io/<container_name>: <profile_ref>`
+
+</p>
+</details>
+
+## Seccomp
+
+### Where is doc for seccomp
+
+<details>
+<summary>show</summary>
+<p>
+
+[Restrict a Container's Syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
+
+Tutorials > Security > Restrict a Container's Syscalls with seccomp
+
+</p>
+</details>
+
+### Default profile directory
+
+<details>
+<summary>show</summary>
+<p>
+
+`/var/lib/kubelet/seccomp`
+
+</p>
+</details>
+
+### Configure a pod to use a seccomp profile
+
+<details>
+<summary>show</summary>
+<p>
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: audit-pod
+  labels:
+    app: audit-pod
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      localhostProfile: profiles/audit.json
+  containers:
+  - name: test-container
+    image: hashicorp/http-echo:0.2.3
+    args:
+    - "-text=just made some syscalls!"
+    securityContext:
+      allowPrivilegeEscalation: false
+```
+
 # SecOps
 
 ## Scanning

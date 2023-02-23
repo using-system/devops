@@ -212,6 +212,179 @@ spec:
 </p>
 </details>
 
+# Runtime security
+
+## Processes analysis
+
+### Get the PID of a container
+
+<details>
+<summary>show</summary>
+<p>
+
+On the node who host the pod :
+
+`ps -aux | grep httpd` and  `crictl ps | grep httpd` (or nginx... depends of the image used)
+
+</p>
+</details>
+
+### Path of a PID root filesystem
+
+<details>
+<summary>show</summary>
+<p>
+
+`/proc/PID`
+
+</p>
+</details>
+
+### Annalyse the path of the exe used by a PID
+
+<details>
+<summary>show</summary>
+<p>
+
+`ls -lh /proc/PID/exe`
+
+</p>
+</details>
+
+### Get all open files opened by a PID
+
+<details>
+<summary>show</summary>
+<p>
+
+`ls -lha /proc/PID/fd`
+
+</p>
+</details>
+
+### Get env variables of a PID
+
+<details>
+<summary>show</summary>
+<p>
+
+`cat /proc/PID/environ`
+
+</p>
+</details>
+
+### Hack a secret with etcd process file system
+
+<details>
+<summary>show</summary>
+<p>
+
+ - `ps -aux | grep etcd` to get the PID
+ - `ls -lha /proc/PID/fd` and search for the db file
+ - `cat dbfile | strings | grep secretname`
+
+</p>
+</details>
+
+## Syscalls
+
+### Get all syscalls of the command ls
+
+<details>
+<summary>show</summary>
+<p>
+
+`strace ls`
+
+</p>
+</details>
+
+### Get all syscalls of a PID
+
+<details>
+<summary>show</summary>
+<p>
+
+`strace -p PID`
+
+</p>
+</details>
+
+### Get syscall stats of a PID
+
+<details>
+<summary>show</summary>
+<p>
+
+`strace -p PID -f -cw`
+
+</p>
+</details>
+
+
+## Falco
+
+### What is falco
+
+<details>
+<summary>show</summary>
+<p>
+
+Falco is a cloud-native runtime security (CNCF).
+Falco analyse, assert and make action for any violations specified in the rules.
+
+</p>
+</details>
+
+### Check falco status (service)
+
+<details>
+<summary>show</summary>
+<p>
+
+`service falco status`
+
+</p>
+</details>
+
+### Default falco directory
+
+<details>
+<summary>show</summary>
+<p>
+
+`/etc/falco`
+
+</p>
+</details>
+
+### Display falco output
+
+<details>
+<summary>show</summary>
+<p>
+
+`tail -f /var/log/syslog | grep falco` (service mode) OR just run `falco` binary.
+
+</p>
+</details>
+
+### Update a falco rule
+
+<details>
+<summary>show</summary>
+<p>
+
+ - `cd /etc/falco`
+ - `grep -r "acutal_output" .` to get the correct rule file
+ - Open the rule file with VI and search for the rule (type / followed by the string you want to search for)
+ - Copy the entire rule and paste into the file `falco_rules.local.yaml` file and update the rule. 
+
+`tail -f /var/log/syslog | grep falco` (service mode) OR just run `falco` binary.
+
+</p>
+</details>
+
 # SecOps
 
 ## Scanning
@@ -284,7 +457,7 @@ Then check for the section `status.containerStatuses.imageID`
 
 In kubeapi manifest file add the ImagePolicyWebhook
 
-`--enable-admission-plugins=NodeRestriction,ImagePolicyWebHook`
+`--enable-admission-plugins=NodeRestriction,ImagePolicyWebhook`
 
 and the configuration file for admission control
 

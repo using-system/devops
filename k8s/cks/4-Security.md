@@ -214,6 +214,8 @@ spec:
 
 # SecOps
 
+## Scanning
+
 ### Performs static analysis of k8s yaml files
 
 <details>
@@ -244,6 +246,49 @@ Use [trivy](https://github.com/aquasecurity/trivy) tool
 OR
 
 `docker run aquasec/trivy image python:3.4-alpine`
+
+</p>
+</details>
+
+## Registry
+
+### Update a service account with a image pull secret
+
+<details>
+<summary>show</summary>
+<p>
+
+`k patch serviceaccount default -p '{"imagePullSecrets": [{"name": "my-registry"}] }'`
+
+</p>
+</details>
+
+### Check the image digest of a pod
+
+<details>
+<summary>show</summary>
+<p>
+
+`k get pod mypod -o yaml`
+
+Then check for the section `status.containerStatuses.imageID`                
+
+</p>
+</details>
+
+### How to activate ImagePolicyWebhook
+
+<details>
+<summary>show</summary>
+<p>
+
+In kubeapi manifest file add the ImagePolicyWebhook
+
+`--enable-admission-plugins=NodeRestriction,ImagePolicyWebHook`
+
+and the configuration file for admission control
+
+`--admission-control-config-file=/etc/kubernetes/admission/config.yaml` (add volume and volumeMount for /etc/kubernetes/admission)             
 
 </p>
 </details>

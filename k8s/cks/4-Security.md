@@ -376,11 +376,9 @@ Falco analyse, assert and make action for any violations specified in the rules.
 <p>
 
  - `cd /etc/falco`
- - `grep -r "acutal_output" .` to get the correct rule file
+ - `grep -r "actual_output" .` to get the correct rule file
  - Open the rule file with VI and search for the rule (type / followed by the string you want to search for)
  - Copy the entire rule and paste into the file `falco_rules.local.yaml` file and update the rule. 
-
-`tail -f /var/log/syslog | grep falco` (service mode) OR just run `falco` binary.
 
 </p>
 </details>

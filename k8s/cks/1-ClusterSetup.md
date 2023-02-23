@@ -453,3 +453,52 @@ volumeMounts:
 </p>
 </details>
 
+# Cluster Maintenance
+
+### Disable a service
+
+<details>
+<summary>show</summary>
+<p>
+
+`systemctl stop ftpd`
+
+`systemctl disable ftpd`
+
+</p>
+</details>
+
+### List all services
+
+<details>
+<summary>show</summary>
+<p>
+
+`systemctl list-units --type=service`
+
+`systemctl disable ftpd`
+
+</p>
+</details>
+
+### Get the application listenning on port 445
+
+<details>
+<summary>show</summary>
+<p>
+
+`netstats -plnt | grep 445`
+
+</p>
+</details>
+
+### Launch a bash with the user myuser
+
+<details>
+<summary>show</summary>
+<p>
+
+`su myuser`
+
+</p>
+</details>

@@ -394,3 +394,62 @@ and checks for the violations section.
 
 </p>
 </details>
+
+# Auditing
+
+### Where is doc for auditing
+
+<details>
+<summary>show</summary>
+<p>
+
+[Auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+
+Tasks > Monitoring, Logging, and Debugging > Troubleshooting Clusters > Auditing
+
+</p>
+</details>
+
+### Activate auditing
+
+<details>
+<summary>show</summary>
+<p>
+
+ - Create a folder `etc/kubernetes/audit/`
+ - Create a default audit policy file  `etc/kubernetes/audit/policy.yaml`
+ - Add in the kube apio manfiest file the parameters : `--audit-policy-file=/etc/kubernetes/audit/policy.yaml`, `--audit-log-path=/etc/kubernetes/audit/logs/audit.log`, `--audit-log-maxsize=500`, `--audit-log-maxbackup=5`
+
+
+Add the volume and volumeMount : 
+
+```yaml
+volumes:
+- name: audit
+  hostPath:
+    path: /etc/kubernetes/audit
+    type: File
+```
+
+```yaml
+volumeMounts:
+  - mountPath: /etc/kubernetes/audit
+    name: audit
+```
+
+</p>
+</details>
+
+### Update a auditing rule auditing
+
+<details>
+<summary>show</summary>
+<p>
+
+ - Desactiving auditing by comment parameter `--audit-policy-file` in the kube api manifest file
+ - Update policy file
+ - Uncomment parameter
+
+</p>
+</details>
+

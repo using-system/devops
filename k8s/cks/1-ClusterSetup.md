@@ -502,3 +502,25 @@ volumeMounts:
 
 </p>
 </details>
+
+### Display package information
+
+<details>
+<summary>show</summary>
+<p>
+
+`apt show kube-bench`
+
+</p>
+</details>
+
+### Remove package
+
+<details>
+<summary>show</summary>
+<p>
+
+`apt remove kube-bench`
+
+</p>
+</details>

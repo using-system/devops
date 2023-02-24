@@ -505,6 +505,28 @@ Tutorials > Security > Restrict a Container's Syscalls with seccomp
 </p>
 </details>
 
+### Activate seccomp
+
+<details>
+<summary>show</summary>
+<p>
+
+Add 'seccompDefault: true' to /var/lib/kubelet/config.yaml
+
+```yaml
+streamingConnectionIdleTimeout: 0s
+syncFrequency: 0s
+volumeStatsAggPeriod: 0s
+seccompDefault: true
+```
+
+Then restart kubelet : 
+
+`sudo systemctl restart kubelet`
+
+</p>
+</details>
+
 ### Configure a pod to use a seccomp profile
 
 <details>

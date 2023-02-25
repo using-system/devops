@@ -476,8 +476,6 @@ volumeMounts:
 
 `systemctl list-units --type=service`
 
-`systemctl disable ftpd`
-
 </p>
 </details>
 

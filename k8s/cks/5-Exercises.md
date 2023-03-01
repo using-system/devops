@@ -95,3 +95,16 @@ On the node who host the pod :
 
 </p>
 </details>
+
+### Count all audit Secret log entries which referer service account 'myserviceaccount' and display as a json output
+
+<details>
+<summary>show</summary>
+<p>
+
+`cat myaudit.log | grep 'myserviceaccount' | grep Secret | wc -l`
+
+`cat myaudit.log | grep 'myserviceaccount' | grep Secret | jq`
+
+</p>
+</details>

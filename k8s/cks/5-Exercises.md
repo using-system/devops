@@ -108,3 +108,25 @@ On the node who host the pod :
 
 </p>
 </details>
+
+### The pod is not created. How to get log why ?
+
+<details>
+<summary>show</summary>
+<p>
+
+`k -n team-red describe rs myreplicaset`
+
+</p>
+</details>
+
+### The pod is not created. How to get log why ?
+
+<details>
+<summary>show</summary>
+<p>
+
+`k describe rs myreplicaset`
+
+</p>
+</details>

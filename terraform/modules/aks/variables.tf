@@ -39,7 +39,7 @@ variable log_analytics_id {
 }
 
 variable subnet_id {
-  description = "Id of the Cluster to attach aks nodes"
+  description = "Id of the subnet to attach aks nodes"
 }
 
 variable tags {

@@ -90,3 +90,22 @@ module "aks" {
 
   tags                    = var.tags
 }
+
+/*
+#------------------------------------------------------------------------------
+# Bastion
+#------------------------------------------------------------------------------
+
+module "bastion" {
+  source                  = "../modules/bastion"
+
+  depends_on = [ module.networking, module.aks ]
+
+  naming                  = var.naming
+  location                = var.location
+
+  subnet_id               = module.networking.subnet_ids[var.network_configuration.bastion_sbunet_name]
+
+  tags                    = var.tags
+}
+*/

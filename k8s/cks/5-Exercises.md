@@ -119,3 +119,16 @@ On the node who host the pod :
 
 </p>
 </details>
+
+### Where is documentation for arguments options for k8s component
+
+<details>
+<summary>show</summary>
+<p>
+
+[Component tools](https://kubernetes.io/docs/reference/command-line-tools-reference/)
+
+Reference > Component tools
+
+</p>
+</details>

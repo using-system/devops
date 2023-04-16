@@ -5,8 +5,13 @@ on:
     inputs:
       dotnet-version:
         type: string
-        description: 'Version of .NET Core SDK to use for building the project.'
+        description: 'Version of .NET SDK to use for building the project.'
         default: '6.0.x'
+        required: true
+      dotnet-configuration:
+        type: string
+        description: '.NET project configuration'
+        default: Release'
         required: true
       package-path:
         type: string
@@ -37,10 +42,13 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration ${{ inputs.dotnet-configuration }}
+    
+    - name: Set VERSION variable from tag
+      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
     - name: Pack
-      run: dotnet pack --configuration Release
+      run: dotnet pack --configuration Release /p:Version=${VERSION}
 
     - name: Publish
       run: nuget push ${{ inputs.package-path }} -Source ${{ inputs.nuget-source }} -ApiKey ${{ secrets.nuget-api-key }}

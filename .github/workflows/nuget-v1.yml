@@ -43,9 +43,9 @@ jobs:
 
     - name: Build
       run: dotnet build --configuration ${{ inputs.dotnet-configuration }}
-      
+
     - name: Pack
       run: dotnet pack --configuration Release
 
     - name: Publish
-      run: nuget push ${{ inputs.package-path }} -Source ${{ inputs.nuget-source }} -ApiKey ${{ secrets.nuget-api-key }}
+      run: nuget push ${{ inputs.package-path }} -Source ${{ inputs.nuget-source }} -ApiKey ${{ secrets.nuget-api-key }} --skip-duplicate

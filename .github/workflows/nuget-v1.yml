@@ -11,7 +11,7 @@ on:
       dotnet-configuration:
         type: string
         description: '.NET project configuration'
-        default: Release'
+        default: 'Release'
         required: false
       package-path:
         type: string
@@ -42,7 +42,7 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --configuration '${{ inputs.dotnet-configuration }}'
+      run: dotnet build --configuration ${{ inputs.dotnet-configuration }}
     
     - name: Set VERSION variable from tag
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV

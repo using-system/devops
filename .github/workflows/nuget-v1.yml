@@ -43,12 +43,9 @@ jobs:
 
     - name: Build
       run: dotnet build --configuration ${{ inputs.dotnet-configuration }}
-    
-    - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
-
+      
     - name: Pack
-      run: dotnet pack --configuration Release /p:Version=${VERSION}
+      run: dotnet pack --configuration Release
 
     - name: Publish
       run: nuget push ${{ inputs.package-path }} -Source ${{ inputs.nuget-source }} -ApiKey ${{ secrets.nuget-api-key }}

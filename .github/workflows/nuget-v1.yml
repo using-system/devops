@@ -3,20 +3,24 @@ name: Build and Publish NuGet packages
 on:
   workflow_call:
     inputs:
-        dotnet-version:
-            type: string
-            description: 'Version of .NET Core SDK to use for building the project.'
-            default: '6.0.x'
-            required: true
-        package-path:
-            type: string
-            description: 'Path to the NuGet package(s) to publish.'
-            default: '**/*.nupkg'
-            required: true
-        nuget-source:
-            type: string
-            description: 'URL of the NuGet package source to publish the package(s).'
-            required: true
+      dotnet-version:
+        type: string
+        description: 'Version of .NET Core SDK to use for building the project.'
+        default: '6.0.x'
+        required: true
+      package-path:
+        type: string
+        description: 'Path to the NuGet package(s) to publish.'
+        default: '**/*.nupkg'
+        required: true
+      nuget-source:
+        type: string
+        description: 'URL of the NuGet package source to publish the package(s).'
+        required: true
+    secrets:
+      nuget-api-key:
+        required: true
+
 
 jobs:
   build-and-publish:
@@ -39,4 +43,4 @@ jobs:
       run: dotnet pack --configuration Release
 
     - name: Publish
-      run: nuget push ${{ inputs.package-path }} -Source ${{ inputs.nuget-source }} -ApiKey ${{ secrets.NUGET_API_KEY }}
+      run: nuget push ${{ inputs.package-path }} -Source ${{ inputs.nuget-source }} -ApiKey ${{ secrets.nuget-api-key }}

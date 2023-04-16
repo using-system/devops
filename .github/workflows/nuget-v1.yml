@@ -7,17 +7,17 @@ on:
         type: string
         description: 'Version of .NET SDK to use for building the project.'
         default: '6.0.x'
-        required: true
+        required: false
       dotnet-configuration:
         type: string
         description: '.NET project configuration'
         default: Release'
-        required: true
+        required: false
       package-path:
         type: string
         description: 'Path to the NuGet package(s) to publish.'
         default: '**/*.nupkg'
-        required: true
+        required: false
       nuget-source:
         type: string
         description: 'URL of the NuGet package source to publish the package(s).'

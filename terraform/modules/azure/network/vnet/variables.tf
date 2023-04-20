@@ -2,8 +2,18 @@ variable location {
   description = "Azure Region Location"
 }
 
-variable naming {
-  description = "Naming for prefix for resources"
+variable name {
+  description = "Name of the vnet to create"
+}
+
+variable resource_group_name {
+  description = "Resource group name of the vnet"
+}
+
+variable create_resource_group_name {
+  description = "Resource group name of the vnet"
+  type        = bool
+  default     = true
 }
 
 variable configuration {

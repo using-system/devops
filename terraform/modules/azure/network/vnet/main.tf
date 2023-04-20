@@ -1,5 +1,7 @@
 resource "azurerm_resource_group" "network" {
-  name                      =  "${var.naming}-network-rg"
+  count = var.create_resource_group_name ? 1 : 0
+
+  name                      =  var.resource_group_name
   location                  =  var.location
   tags                      =  var.tags
 }
@@ -8,9 +10,9 @@ resource "azurerm_virtual_network" "network" {
 
   depends_on = [ azurerm_resource_group.network ] 
 
-  name                          = "${var.naming}-network"
+  name                          = var.name
   location                      = var.location
-  resource_group_name           = azurerm_resource_group.network.name
+  resource_group_name           = var.resource_group_name
 
   address_space                 = var.configuration.address_spaces
 

@@ -10,7 +10,7 @@ variable resource_group_name {
   description = "Resource group name of the vnet"
 }
 
-variable create_resource_group_name {
+variable create_resource_group {
   description = "Resource group name of the vnet"
   type        = bool
   default     = true

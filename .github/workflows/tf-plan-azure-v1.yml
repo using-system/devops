@@ -19,6 +19,9 @@ on:
       backend-state-key:
         required: true
         type: string
+      variables-file:
+        required: true
+        type: string
     secrets:
       storage-access-key:
         required: true
@@ -56,7 +59,7 @@ jobs:
       working-directory: ${{ inputs.working-dir }}
 
     - name: Terraform Plan
-      run: terraform plan -out=tfplan -var "client_id=${{ secrets.arm-client-id }}" -var "client_secret=${{ secrets.arm-client-secret }}"
+      run: terraform plan -var-file="${{ inputs.variables-file }}" -out=tfplan -var "client_id=${{ secrets.arm-client-id }}" -var "client_secret=${{ secrets.arm-client-secret }}"
       working-directory: ${{ inputs.working-dir }}
 
     - name: Upload tfplan as artifact

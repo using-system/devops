@@ -23,6 +23,9 @@ on:
         required: false
         type: string
         default: 'tfplan'
+      environment:
+        required: false
+        type: string
     secrets:
       storage-access-key:
         required: true
@@ -34,6 +37,7 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     steps:
     - name: Checkout repository
@@ -49,7 +53,7 @@ jobs:
     - name: Copy devops tf modules
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
-      
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:

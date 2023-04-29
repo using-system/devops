@@ -20,6 +20,8 @@ on:
         required: true
         type: string
     secrets:
+      storage-access-key:
+        required: true
       arm-client-id:
         required: true
       arm-client-secret:
@@ -50,7 +52,7 @@ jobs:
         terraform_version:  ${{ inputs.terraform-version }}
 
     - name: Terraform Init
-      run: terraform init -backend-config="access_key=${{ secrets.arm-client-secret }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
+      run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
       working-directory: ${{ inputs.working-dir }}
 
     - name: Terraform Plan

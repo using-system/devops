@@ -39,6 +39,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Checkout devops tf modules
+      uses: actions/checkout@v2
+      with:
+        repository: using-system/devops
+        ref: master
+        path: devopsrepo
+        
+    - name: Copy devops tf modules
+      run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
+      working-directory: ${{ inputs.working-dir }}
+      
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:

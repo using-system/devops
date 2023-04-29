@@ -41,7 +41,7 @@ jobs:
         path: devopsrepo
         
     - name: Copy files to local directory
-      run: cp -R devopsrepo/terraform/modules/* modules/
+      run: cp -R /devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
       
     - name: Set up Terraform

@@ -19,6 +19,10 @@ on:
       backend-state-key:
         required: true
         type: string
+      tfplan-artifact:
+        required: false
+        type: string
+        default: 'tfplan'
     secrets:
       arm-client-id:
         required: true
@@ -42,9 +46,11 @@ jobs:
       run: terraform init -backend-config="access_key=${{ secrets.arm-client-secret }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
       working-directory: ${{ inputs.working-dir }}
 
-    - name: Terraform Plan
-      run: terraform plan -out=tfplan -var "client_id=${{ secrets.arm-client-id }}" -var "client_secret=${{ secrets.arm-client-secret }}"
-      working-directory: ${{ inputs.working-dir }}
+    - name: Download tfplan artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ inputs.tfplan-artifact }}
+        path: ${{ inputs.working-dir }}
 
     - name: Terraform Apply
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'

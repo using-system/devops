@@ -1,0 +1,56 @@
+name: Terraform Plan and Apply
+
+on:
+  workflow_call:
+    inputs:
+      working-dir:
+        required: true
+        type: string
+      terraform-version:
+        required: false
+        type: string
+        default: "1.4.5"
+      backend-storage-name:
+        required: true
+        type: string
+      backend-container-name:
+        required: true
+        type: string
+      backend-state-key:
+        required: true
+        type: string
+    secrets:
+      arm-client-id:
+        required: true
+      arm-client-secret:
+        required: true
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version:  ${{ inputs.terraform-version }}
+
+    - name: Terraform Init
+      run: terraform init -backend-config="access_key=${{ secrets.arm-client-secret }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
+      working-directory: ${{ inputs.working-dir }}
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan -var "client_id=${{ secrets.arm-client-id }}" -var "client_secret=${{ secrets.arm-client-secret }}"
+      working-directory: ${{ inputs.working-dir }}
+
+    - name: Upload tfplan as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: tfplan
+        path: ${{ inputs.working-dir }}/tfplan
+
+    outputs:
+      tfplan_artifact: 'tfplan'

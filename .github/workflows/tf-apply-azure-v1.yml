@@ -19,10 +19,6 @@ on:
       backend-state-key:
         required: true
         type: string
-      tfplan-artifact:
-        required: false
-        type: string
-        default: 'tfplan'
       environment:
         required: false
         type: string
@@ -71,5 +67,5 @@ jobs:
 
     - name: Terraform Apply
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      run: terraform apply '${{ inputs.tfplan-artifact }}/tfplan'
+      run: terraform apply 'tfplan/tfplan'
       working-directory: ${{ inputs.working-dir }}

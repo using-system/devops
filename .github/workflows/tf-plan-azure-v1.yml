@@ -53,6 +53,12 @@ jobs:
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
 
+    - name: Install Az CLI
+      uses: azure/cli@v1
+      with:
+        inlineScript: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          
     - name: Azure Login
       uses: azure/login@v1
       with:

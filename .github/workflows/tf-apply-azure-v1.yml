@@ -54,13 +54,19 @@ jobs:
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
  
+    - name: Install Az CLI
+      uses: azure/cli@v1
+      with:
+        inlineScript: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
     - name: Azure Login
       uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-                  
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:

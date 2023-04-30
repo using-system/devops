@@ -52,22 +52,13 @@ jobs:
     - name: Copy devops tf modules
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
-    
-    - name: Install Azure cli
-      run: |
-          sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
-          curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
-          AZ_REPO=$(lsb_release -cs)
-          echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
-          sudo apt-get update
-          sudo apt-get install azure-cli
 
     - name: Azure Login
       uses: azure/login@v1
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        client-id: 'd4fa10a6-defc-4f13-a5cf-f13996efc6d5'
+        tenant-id: '10e9935f-0517-492f-883d-ec2bb613410a'
+        subscription-id: '53c9e6f7-6e9c-40d8-8916-1bb24f4bb140'
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1

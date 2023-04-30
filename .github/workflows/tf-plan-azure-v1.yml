@@ -68,7 +68,7 @@ jobs:
       working-directory: ${{ inputs.working-dir }}
 
     - name: Terraform Plan
-      run: terraform plan -var-file="${{ inputs.variables-file }}" -out=tfplan"
+      run: terraform plan -var-file="${{ inputs.variables-file }}" -out=tfplan
       working-directory: ${{ inputs.working-dir }}
 
     - name: Upload tfplan as artifact

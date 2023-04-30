@@ -34,9 +34,6 @@ on:
       azure-tenant-id:
         required: true
 
-permissions:
-  id-token: write
-  
 jobs:
   terraform:
     runs-on: ubuntu-latest

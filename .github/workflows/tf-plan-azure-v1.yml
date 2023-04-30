@@ -52,17 +52,12 @@ jobs:
     - name: Copy devops tf modules
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
-
-    - name: Install sudo
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y sudo
     
     - name: Install Az CLI
       uses: azure/cli@v1
       with:
         inlineScript: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
     - name: Azure Login
       uses: azure/login@v1

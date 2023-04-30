@@ -25,13 +25,13 @@ on:
     secrets:
       storage-access-key:
         required: true
-      arm-client-id:
+      azure-client-id:
         required: true
-      arm-client-secret:
+      azure-client-secret:
         required: true
-      arm-subscription-id:
+      azure-subscription-id:
         required: true
-      arm-tenant-id:
+      azure-tenant-id:
         required: true
 
 jobs:
@@ -59,10 +59,10 @@ jobs:
         enable-AzPSSession: true
         creds: |
           {
-            "clientId": "${{ secrets.arm-client-id }}",
-            "clientSecret": "${{ secrets.arm-client-secret }}",
-            "subscriptionId": "${{ secrets.arm-subscription-id }}",
-            "tenantId": "${{ secrets.arm-tenant-id }}"
+            "clientId": "${{ secrets.azure-client-id }}",
+            "clientSecret": "${{ secrets.azure-client-secret }}",
+            "subscriptionId": "${{ secrets.azure-subscription-id }}",
+            "tenantId": "${{ secrets.azure-tenant-id }}"
           }
 
     - name: Set up Terraform

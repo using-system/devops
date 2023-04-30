@@ -29,6 +29,10 @@ on:
         required: true
       arm-client-secret:
         required: true
+      arm-subscription-id:
+        required: true
+      arm-tenant-id:
+        required: true
 
 jobs:
   terraform:
@@ -48,7 +52,19 @@ jobs:
     - name: Copy devops tf modules
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
-      
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        enable-AzPSSession: true
+        creds: |
+          {
+            "clientId": "${{ secrets.arm-client-id }}",
+            "clientSecret": "${{ secrets.arm-client-secret }}",
+            "subscriptionId": "${{ secrets.arm-subscription-id }}",
+            "tenantId": "${{ secrets.arm-tenant-id }}"
+          }
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -59,7 +75,7 @@ jobs:
       working-directory: ${{ inputs.working-dir }}
 
     - name: Terraform Plan
-      run: terraform plan -var-file="${{ inputs.variables-file }}" -out=tfplan -var "client_id=${{ secrets.arm-client-id }}" -var "client_secret=${{ secrets.arm-client-secret }}"
+      run: terraform plan -var-file="${{ inputs.variables-file }}" -out=tfplan"
       working-directory: ${{ inputs.working-dir }}
 
     - name: Upload tfplan as artifact

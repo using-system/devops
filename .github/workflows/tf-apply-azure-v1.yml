@@ -71,5 +71,5 @@ jobs:
 
     - name: Terraform Apply
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      run: terraform apply tfplan/tfplan
+      run: terraform apply ${{ inputs.tfplan-artifact }}/tfplan
       working-directory: ${{ inputs.working-dir }}

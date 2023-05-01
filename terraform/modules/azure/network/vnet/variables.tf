@@ -20,7 +20,6 @@ variable configuration {
   description     = "VNET configuration"
   type            = object({
     address_spaces            = list(string)
-    k8s_sbunet_name           = string
     subnets                   = list(object({
           name                                              = string
           address_prefixes                                  = list(string)

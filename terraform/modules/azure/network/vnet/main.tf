@@ -21,6 +21,8 @@ resource "azurerm_virtual_network" "network" {
 
 resource "azurerm_network_security_group" "network" {
 
+  depends_on = [ azurerm_resource_group.network ] 
+
   for_each = { for subnet in var.configuration.subnets : subnet.name => subnet }
 
     name                                          = "${each.key}-nsg"
@@ -29,6 +31,8 @@ resource "azurerm_network_security_group" "network" {
 }
 
 resource "azurerm_route_table" "network" {
+
+  depends_on = [ azurerm_resource_group.network ] 
 
   for_each = { for subnet in var.configuration.subnets : subnet.name => subnet }
 

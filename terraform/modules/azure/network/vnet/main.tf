@@ -3,7 +3,7 @@ locals {
     for subnet in var.configuration.subnets : [
       for nsg in var.configuration.network_security_groups :
       {
-        id                      = subnet.id
+        vnet                    = subnet.name
         network_security_group  = subnet.network_security_group
       } if subnet.network_security_group != null && subnet.network_security_group != ""
     ]
@@ -79,8 +79,8 @@ resource "azurerm_subnet_network_security_group_association" "network" {
 
    for_each = { for subnet in local.subnets_with_nsg : subnet.name => subnet } 
    
-    subnet_id                 = each.value.id
-    network_security_group_id = each.value.network_security_group
+    subnet_id                 = azurerm_subnet.network[each.value.name].id 
+    network_security_group_id = azurerm_network_security_group.network[each.value.network_security_group].id
 }
 
 

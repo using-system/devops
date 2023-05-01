@@ -1,5 +1,5 @@
 locals {
-  subnets_with_nsg = compact(flatten([
+  subnets_with_nsg = flatten([
     for subnet in var.configuration.subnets : [
       for nsg in var.configuration.network_security_groups :
       {
@@ -7,7 +7,7 @@ locals {
         network_security_group  = subnet.network_security_group
       } if subnet.network_security_group != null && subnet.network_security_group != ""
     ]
-  ]))
+  ])
 }
 
 resource "azurerm_resource_group" "network" {

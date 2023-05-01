@@ -23,15 +23,15 @@ variable configuration {
     network_security_groups   = list(object({
         name                                              = string
         rules                                             = list(object({
-          priority                                          = list(string)
-          direction                                         = list(string)
-          access                                            = bool
-          protocol                                          = bool
+          name                                              = string
+          priority                                          = string
+          direction                                         = string
+          access                                            = string
+          protocol                                          = string
           source_address_prefix                             = string
-          source_port_range                                 = list(string)
-          destination_address_prefix                        = list(string)
-          destination_port_range                            = bool
-          protocol                                          = bool
+          source_port_range                                 = string
+          destination_address_prefix                        = string
+          destination_port_range                            = string
           }))
     }))
     subnets                   = list(object({

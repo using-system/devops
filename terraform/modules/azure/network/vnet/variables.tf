@@ -51,6 +51,7 @@ variable configuration {
           private_link_service_network_policies_enabled     = bool
           private_endpoint_network_policies_enabled         = bool
           network_security_group                            = string
+          route_table                                       = string
     }))
   })  
 }

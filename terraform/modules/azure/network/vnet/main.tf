@@ -8,6 +8,15 @@ locals {
       } if subnet.network_security_group != null && subnet.network_security_group != ""
     ]
   ])
+  subnets_with_rt = flatten([
+    for subnet in var.configuration.subnets : [
+      for nsg in var.configuration.network_security_groups :
+      {
+        name                    = subnet.name
+        route_table             = subnet.route_table
+      } if subnet.route_table != null && subnet.route_table != ""
+    ]
+  ])
 }
 
 resource "azurerm_resource_group" "network" {
@@ -105,17 +114,12 @@ resource "azurerm_route_table" "network" {
     }
 }
 
-
-/*
-
 resource "azurerm_subnet_route_table_association" "network" {
 
   depends_on = [ azurerm_subnet.network, azurerm_route_table.network ]
 
-  for_each = { for subnet in var.configuration.subnets : subnet.name => subnet }    
+  for_each = { for subnet in local.subnets_with_rt : subnet.name => subnet }    
 
-    subnet_id      = azurerm_subnet.network[each.key].id
-    route_table_id = azurerm_route_table.network[each.key].id
+    subnet_id                                      = azurerm_subnet.network[each.value.name].id
+    route_table_id                                 = azurerm_route_table.network[each.value.route_table].id
 }
-
-*/

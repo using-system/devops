@@ -60,15 +60,15 @@ resource "azurerm_network_security_group" "network" {
     dynamic "security_rule" {
       for_each = each.value.rules
       content {
-        name                      = security_rule.value.name
-        priority                  = security_rule.value.priority
-        direction                 = security_rule.value.direction
-        access                    = security_rule.value.access
-        protocol                  = security_rule.value.protocol
-        source_address_prefix     = security_rule.value.source_address_prefix
-        source_port_range         = security_rule.value.source_port_range
-        destination_address_prefix= security_rule.value.destination_address_prefix
-        destination_port_range    = security_rule.value.destination_port_range
+        name                                      = security_rule.value.name
+        priority                                  = security_rule.value.priority
+        direction                                 = security_rule.value.direction
+        access                                    = security_rule.value.access
+        protocol                                  = security_rule.value.protocol
+        source_address_prefix                     = security_rule.value.source_address_prefix
+        source_port_range                         = security_rule.value.source_port_range
+        destination_address_prefix                = security_rule.value.destination_address_prefix
+        destination_port_range                    = security_rule.value.destination_port_range
       }
     }
 }
@@ -83,30 +83,30 @@ resource "azurerm_subnet_network_security_group_association" "network" {
     network_security_group_id = azurerm_network_security_group.network[each.value.network_security_group].id
 }
 
-
-/*
-
-Route table to be supported later....
 resource "azurerm_route_table" "network" {
 
   depends_on = [ azurerm_resource_group.network ] 
 
-  for_each = { for subnet in var.configuration.subnets : subnet.name => subnet }
+  for_each = { for table in var.configuration.route_tables : table.name => table }
 
-  name                = "${each.key}-routetable"
+  name                = "${each.key}-rt"
   location            = var.location
   resource_group_name = var.resource_group_name
+  disable_bgp_route_propagation =  each.value.disable_bgp_route_propagation
+
+  dynamic "route" {
+      for_each = each.value.routes
+      content {
+        name                                        = route.value.name
+        address_prefix                              = route.value.address_prefix
+        next_hop_type                               = route.value.next_hop_type
+        next_hop_in_ip_address                      = route.value.next_hop_in_ip_address
+      }
+    }
 }
 
-resource "azurerm_subnet_network_security_group_association" "network" {
 
-   depends_on = [ azurerm_subnet.network, azurerm_network_security_group.network ]
-
-   for_each = { for subnet in var.configuration.subnets : subnet.name => subnet } 
-   
-    subnet_id                 = azurerm_subnet.network[each.key].id
-    network_security_group_id = azurerm_network_security_group.network[each.key].id
-}
+/*
 
 resource "azurerm_subnet_route_table_association" "network" {
 

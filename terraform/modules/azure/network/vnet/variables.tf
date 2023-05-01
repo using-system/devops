@@ -34,6 +34,16 @@ variable configuration {
           destination_port_range                            = string
           }))
     }))
+    route_tables              = list(object({
+        name                                              = string
+        disable_bgp_route_propagation                     = bool
+        routes                                              = list(object({
+          name                                              = string
+          address_prefix                                    = string
+          next_hop_type                                     = string
+          next_hop_in_ip_address                            = string
+          }))
+    }))
     subnets                   = list(object({
           name                                              = string
           address_prefixes                                  = list(string)

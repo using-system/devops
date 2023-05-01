@@ -3,7 +3,7 @@ locals {
     for subnet in var.configuration.subnets : [
       for nsg in var.configuration.network_security_groups :
       {
-        vnet                    = subnet.name
+        name                    = subnet.name
         network_security_group  = subnet.network_security_group
       } if subnet.network_security_group != null && subnet.network_security_group != ""
     ]

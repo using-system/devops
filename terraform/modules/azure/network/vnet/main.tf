@@ -24,8 +24,8 @@ resource "azurerm_network_security_group" "network" {
   for_each = { for subnet in var.configuration.subnets : subnet.name => subnet }
 
     name                                          = "${each.key}-nsg"
-    location                                      = azurerm_resource_group.network.location
-    resource_group_name                           = azurerm_resource_group.network.name
+    location                                      = var.location
+    resource_group_name                           = var.resource_group_name
 }
 
 resource "azurerm_route_table" "network" {
@@ -33,8 +33,8 @@ resource "azurerm_route_table" "network" {
   for_each = { for subnet in var.configuration.subnets : subnet.name => subnet }
 
   name                = "${each.key}-routetable"
-  location            = azurerm_resource_group.network.location
-  resource_group_name = azurerm_resource_group.network.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
 }
 
 resource "azurerm_subnet" "network" {
@@ -44,7 +44,7 @@ resource "azurerm_subnet" "network" {
   for_each = { for subnet in var.configuration.subnets : subnet.name => subnet }
     
     name                                              = each.key
-    resource_group_name                               = azurerm_resource_group.network.name
+    resource_group_name                               = var.resource_group_name
     virtual_network_name                              = azurerm_virtual_network.network.name
     address_prefixes                                  = each.value.address_prefixes
     service_endpoints                                 = each.value.service_endpoints

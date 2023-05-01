@@ -78,6 +78,7 @@ resource "azurerm_subnet_network_security_group_association" "network" {
    
     subnet_id                 = each.value.id
     network_security_group_id = each.value.network_security_group
+}
 
 
 /*

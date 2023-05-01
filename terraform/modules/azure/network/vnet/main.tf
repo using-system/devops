@@ -1,3 +1,12 @@
+locals {
+  subnets_with_nsg = compact(flatten([
+    for subnet in var.configuration.subnets : [
+      for nsg in var.configuration.network_security_groups :
+        subnet if nsg.name == subnet.network_security_group
+    ]
+  ]))
+}
+
 resource "azurerm_resource_group" "network" {
   count = var.create_resource_group ? 1 : 0
 
@@ -60,6 +69,15 @@ resource "azurerm_network_security_group" "network" {
       }
     }
 }
+
+resource "azurerm_subnet_network_security_group_association" "network" {
+
+   depends_on = [ azurerm_subnet.network, azurerm_network_security_group.network ]
+
+   for_each = { for subnet in local.subnets_with_nsg : subnet.name => subnet } 
+   
+    subnet_id                 = each.value.id
+    network_security_group_id = each.value.network_security_group
 
 
 /*

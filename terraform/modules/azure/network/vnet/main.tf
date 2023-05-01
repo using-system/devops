@@ -4,7 +4,7 @@ locals {
       for nsg in var.configuration.network_security_groups :
       {
         id                      = subnet.id
-        network_security_group  = network_security_group
+        network_security_group  = subnet.network_security_group
       } if subnet.network_security_group != null && subnet.network_security_group != ""
     ]
   ]))

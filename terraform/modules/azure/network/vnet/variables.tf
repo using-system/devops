@@ -20,6 +20,20 @@ variable configuration {
   description     = "VNET configuration"
   type            = object({
     address_spaces            = list(string)
+    network_security_groups   = list(object({
+        name                                              = string
+        rules                                             = list(object({
+          priority                                          = list(string)
+          direction                                         = list(string)
+          access                                            = bool
+          protocol                                          = bool
+          source_address_prefix                             = string
+          source_port_range                                 = list(string)
+          destination_address_prefix                        = list(string)
+          destination_port_range                            = bool
+          protocol                                          = bool
+          }))
+    }))
     subnets                   = list(object({
           name                                              = string
           address_prefixes                                  = list(string)

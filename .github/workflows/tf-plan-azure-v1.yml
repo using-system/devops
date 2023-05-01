@@ -52,16 +52,17 @@ jobs:
     - name: Copy devops tf modules
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
-
-    - name: Azure Login
-      run: |
-        az login --service-principal -u ${{ secrets.azure-client-id }} -p ${{ secrets.azure-client-secret }} --tenant ${{ secrets.azure-tenant-id }}
-        az account set --subscription="${{ secrets.azure-subscription-id }}"
-
+      
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version:  ${{ inputs.terraform-version }}
+      env:
+        ARM_CLIENT_ID: ${{ secrets.azure-client-id  }}
+        ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
+        ARM_TENANT_ID: ${{ secrets.azure-tenant-id }}
+
     - name: Terraform Init
       run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
       working-directory: ${{ inputs.working-dir }}

@@ -53,20 +53,6 @@ jobs:
     - name: Copy devops tf modules
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
       working-directory: ${{ inputs.working-dir }}
-      
-    - name: Install Az CLI
-      uses: azure/cli@v1
-      with:
-        inlineScript: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo
-
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        client-id: ${{ secrets.azure-client-id }}
-        tenant-id: ${{ secrets.azure-tenant-id }}
-        subscription-id: ${{ secrets.azure-subscription-id }}
-
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
@@ -77,7 +63,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
         ARM_TENANT_ID: ${{ secrets.azure-tenant-id }} 
-        
+
     - name: Terraform Init
       run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
       working-directory: ${{ inputs.working-dir }}

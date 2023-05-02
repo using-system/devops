@@ -8,16 +8,20 @@ variable resource_group_name {
 
 variable network_security_groups {
   description     = "Network security groups to create"
-  type            = object({
-    name                                              = string
-    disable_bgp_route_propagation                     = bool
-    routes                                            = list(object({
-        name                                          = string
-        address_prefix                                = string
-        next_hop_type                                 = string
-        next_hop_in_ip_address                        = string
+  type            = list(object({
+      name                                              = string
+      rules                                             = list(object({
+        name                                              = string
+        priority                                          = string
+        direction                                         = string
+        access                                            = string
+        protocol                                          = string
+        source_address_prefix                             = string
+        source_port_range                                 = string
+        destination_address_prefix                        = string
+        destination_port_range                            = string
           }))
-    })
+    }))
 }
 
 variable tags {

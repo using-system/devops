@@ -1,5 +1,5 @@
 locals {
-  nsgs             = distinct(flatten([
+  nsgs    = distinct(flatten([
     for subnet in var.configuration.subnets : [
       subnet.network_security_group
     ]

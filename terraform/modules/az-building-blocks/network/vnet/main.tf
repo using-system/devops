@@ -1,19 +1,17 @@
 locals {
-  nsgs    = distinct(flatten([
-    for subnet in var.configuration.subnets : [
-      subnet.network_security_group
-    ]
-  ]))
+  nsgs = distinct([
+    for subnet in var.configuration.subnets :
+      subnet.network_security_group if subnet.network_security_group != null && subnet.network_security_group != ""
+  ])
   subnets_with_nsg = [
     for subnet in var.configuration.subnets :
     subnet
     if try(length(subnet.network_security_group), 0) > 0
   ]
-  route_tables    = distinct(flatten([
-    for subnet in var.configuration.subnets : [
-      subnet.route_table
-    ]
-  ]))
+  route_tables = distinct([
+    for subnet in var.configuration.subnets :
+      subnet.route_table if subnet.route_table != null && subnet.route_table != ""
+  ])
   subnets_with_rt  = [
     for subnet in var.configuration.subnets :
     subnet

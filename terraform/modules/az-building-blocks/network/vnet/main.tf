@@ -7,7 +7,7 @@ locals {
   subnets_with_nsg = [
     for subnet in var.configuration.subnets :
     subnet
-    if length(subnet.network_security_group) > 0
+    if subnet.network_security_group != null && length(subnet.network_security_group) > 0
   ]
   route_tables    = distinct(flatten([
     for subnet in var.configuration.subnets : [
@@ -17,7 +17,7 @@ locals {
   subnets_with_rt  = [
     for subnet in var.configuration.subnets :
     subnet
-    if length(subnet.route_table) > 0
+    if subnet.route_table != null && length(subnet.route_table) > 0
   ]
   
 }

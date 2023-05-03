@@ -23,9 +23,7 @@ locals {
 }
 
 resource "azurerm_virtual_network" "network" {
-
-  depends_on = [ azurerm_resource_group.network ] 
-
+  
   name                          = var.name
   location                      = var.location
   resource_group_name           = var.resource_group_name

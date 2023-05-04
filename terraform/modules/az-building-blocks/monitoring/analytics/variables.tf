@@ -2,9 +2,10 @@ variable location {
   description = "Azure Region Location"
 }
 
-variable naming {
-  description = "Naming for prefix for resources"
+variable resource_group_name {
+  description = "Resource group name of the analytics"
 }
+
 
 variable configuration {
   description   = "Azure Monitor configuration"

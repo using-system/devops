@@ -1,3 +1,3 @@
-output log_analytics_id {
+output id {
   value = azurerm_log_analytics_workspace.monitor.id
 }

@@ -1,6 +1,6 @@
 resource "azurerm_log_analytics_workspace" "monitoring" {
 
-  name                            = var.configuration.name
+  name                            = var.name
   location                        = var.location
   resource_group_name             = var.resource_group_name
 

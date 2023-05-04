@@ -8,4 +8,6 @@ resource "azurerm_log_analytics_workspace" "monitor" {
 
   sku                       = var.configuration.sku
   retention_in_days         = var.configuration.retention_in_days  
+
+  tags                      = var.tags
 }

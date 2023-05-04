@@ -10,6 +10,7 @@ variable resource_group_name {
 variable configuration {
   description   = "Azure Monitor configuration"
   type          = object({
+    name                        = string
     sku                         = string
     retention_in_days           = number
     internet_ingestion_enabled  = bool

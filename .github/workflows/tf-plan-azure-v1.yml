@@ -81,11 +81,14 @@ jobs:
       run: |
         terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color
         if [ $? -eq 0 ]; then
-          changes=false
+          echo "changes=false" >> $GITHUB_OUTPUT
+        elif [ $? -eq 2 ]; then
+          echo "changes=true" >> $GITHUB_OUTPUT
+          exit 0
         else
-          changes=true
+          exit 1
         fi
-        echo "changes=$changes" >> $GITHUB_OUTPUT
+
       working-directory: ${{ inputs.working-dir }}
 
     - name: Upload tfplan as artifact

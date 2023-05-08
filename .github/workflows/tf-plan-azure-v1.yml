@@ -79,9 +79,11 @@ jobs:
     - name: Terraform Plan
       id: get_plan
       run: |
-        terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color
+        set -eo pipefail
+        plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color)
         if [ $? -eq 0 ]; then
           echo "changes=false" >> $GITHUB_OUTPUT
+          exit 0
         elif [ $? -eq 2 ]; then
           echo "changes=true" >> $GITHUB_OUTPUT
           exit 0

@@ -66,6 +66,7 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version:  ${{ inputs.terraform-version }}
+        terraform_wrapper: false
       env:
         ARM_CLIENT_ID: ${{ secrets.azure-client-id  }}
         ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}

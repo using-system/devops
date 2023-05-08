@@ -97,6 +97,9 @@ jobs:
           exit 1
         fi
       working-directory: ${{ inputs.working-dir }}
+    
+    - name: debug
+      run: printf '${{ steps.get_plan.outputs.changes }}'
 
     - name: Upload tfplan as artifact
       uses: actions/upload-artifact@v2

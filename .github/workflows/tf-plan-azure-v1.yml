@@ -81,7 +81,7 @@ jobs:
       run: |
         plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color > tfplan.log)
         plan=$(cat tfplan.log)
-        echo "plan=$plan" >> $GITHUB_ENV
+        printf "plan=%q\n" "$plan" >> $GITHUB_ENV
         cat tfplan.log
       working-directory: ${{ inputs.working-dir }}
 

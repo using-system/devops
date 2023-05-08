@@ -33,6 +33,8 @@ on:
         required: true
       azure-tenant-id:
         required: true
+    outputs:
+      changes: ${{ jobs.terraform.changes }}
 
 jobs:
   terraform:
@@ -75,6 +77,17 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -var-file="${{ inputs.variables-file }}" -out=tfplan
       working-directory: ${{ inputs.working-dir }}
+
+    - name: Get Terraform Plan
+      id: get_plan
+      run: echo "plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color)" >> $GITHUB_ENV
+      working-directory: ${{ inputs.working-dir }}
+
+    - name: Check for changes
+      id: check_changes
+      run: echo "changes=$(echo ${plan} | grep -q 'No changes.' && echo false || echo true)" >> $GITHUB_ENV
+      env:
+        plan: ${{ steps.get_plan.outputs.plan }}
 
     - name: Upload tfplan as artifact
       uses: actions/upload-artifact@v2

@@ -79,9 +79,10 @@ jobs:
     - name: Terraform Plan
       id: get_plan
       run: |
-        plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color >/dev/null)
-        echo $plan
+        plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color > tfplan.log)
+        plan=$(cat tfplan.log)
         echo "plan=$plan" >> $GITHUB_ENV
+        cat tfplan.log
       working-directory: ${{ inputs.working-dir }}
 
     - name: Check for changes

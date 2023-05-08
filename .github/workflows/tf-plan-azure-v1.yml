@@ -85,21 +85,15 @@ jobs:
         exit_code=$?
         printf "terraform_exit_code=$exit_code"
         if [ "$exit_code" -eq "0" ]; then
-          printf "no changes detected"
           echo "changes=false" >> "$GITHUB_OUTPUT"
           exit 0
         elif [ "$exit_code" -eq "2" ]; then
-          printf "changes detected"
           echo "changes=true" >> "$GITHUB_OUTPUT"
           exit 0
         else
-          printf "error !"
           exit 1
         fi
       working-directory: ${{ inputs.working-dir }}
-    
-    - name: debug
-      run: printf '${{ steps.get_plan.outputs.changes }}'
 
     - name: Upload tfplan as artifact
       uses: actions/upload-artifact@v2
@@ -108,11 +102,3 @@ jobs:
         path: ${{ inputs.working-dir }}/tfplan
     outputs:
       changes: ${{ steps.get_plan.outputs.changes }}
-
-  debug:
-    needs: [terraform]
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: debug
-      run: printf '${{ needs.terraform.outputs.changes }}'

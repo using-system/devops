@@ -20,4 +20,7 @@ resource "azurerm_key_vault" "keyvault" {
 
   tags                            = var.tags
 
+  lifecycle {
+       ignore_changes = [ network_acls.ip_rules ]
+  }  
 }

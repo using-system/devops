@@ -82,14 +82,14 @@ jobs:
         set +e
         terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color
         exit_code=$?
-        if [ exit_code -eq 0 ]; then
+        if  [[ $exit_code -eq 0 ]]; then
           echo "changes=false" >> $GITHUB_OUTPUT
           exit 0
-        elif [ exit_code -eq 2 ]; then
+        elif  [[ $exit_code -eq 2 ]]; then
           echo "changes=true" >> $GITHUB_OUTPUT
           exit 0
         else
-          exit 0
+          exit $exit_code
         fi
       working-directory: ${{ inputs.working-dir }}
 

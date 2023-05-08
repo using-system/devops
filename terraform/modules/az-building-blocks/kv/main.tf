@@ -18,4 +18,6 @@ resource "azurerm_key_vault" "keyvault" {
       virtual_network_subnet_ids    = var.network_subnet_ids
   }
 
+  tags                            = var.tags
+
 }

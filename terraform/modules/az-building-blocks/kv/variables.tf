@@ -43,7 +43,7 @@ variable purge_protection_enabled {
   default     = false
 }
 
-variable network_rules_bypass{
+variable network_rules_bypass {
   description = "Specifies which traffic can bypass the network rules. Possible values are AzureServices and None."
   type        = string
   default     = "AzureServices"
@@ -59,4 +59,9 @@ variable network_subnet_ids {
   description = "One or more Subnet IDs which should be able to access this Key Vault."
   type        = string
   default     = null
+}
+
+variable tags {
+  description = "Tags to associate with resources."
+  type        = map(string)
 }

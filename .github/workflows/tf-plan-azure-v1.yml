@@ -79,17 +79,14 @@ jobs:
     - name: Terraform Plan
       id: get_plan
       run: |
-        plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color > tfplan.log)
-        plan=$(cat tfplan.log)
-        printf "plan=%q\n" "$plan" >> $GITHUB_ENV
-        cat tfplan.log
+        terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color
+        if [ $? -eq 0 ]; then
+          changes=false
+        else
+          changes=true
+        fi
+        echo "changes=$changes" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.working-dir }}
-
-    - name: Check for changes
-      id: check_changes
-      run: echo "changes=$(echo ${plan} | grep -q 'No changes.' && echo false || echo true)" >> $GITHUB_ENV
-      env:
-        plan: ${{ steps.get_plan.outputs.plan }}
 
     - name: Upload tfplan as artifact
       uses: actions/upload-artifact@v2

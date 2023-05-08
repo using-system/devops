@@ -34,7 +34,9 @@ on:
       azure-tenant-id:
         required: true
     outputs:
-      changes: ${{ jobs.terraform.changes }}
+      changes:
+        description: "Dtermines if there is any changes on the plan"
+        value: ${{ jobs.terraform.changes }}
 
 jobs:
   terraform:

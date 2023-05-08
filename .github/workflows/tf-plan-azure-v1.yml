@@ -81,10 +81,12 @@ jobs:
       run: |
         set -eo pipefail
         plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color)
-        if [ $? -eq 0 ]; then
+        exit_code=$?
+        echo "terrform_exit_code=$exit_code"
+        if [ exit_code -eq 0 ]; then
           echo "changes=false" >> $GITHUB_OUTPUT
           exit 0
-        elif [ $? -eq 2 ]; then
+        elif [ exit_code -eq 2 ]; then
           echo "changes=true" >> $GITHUB_OUTPUT
           exit 0
         else

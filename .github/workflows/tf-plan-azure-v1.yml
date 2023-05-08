@@ -80,6 +80,7 @@ jobs:
       id: get_plan
       run: |
         plan=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color >/dev/null)
+        echo $plan
         echo "plan=$plan" >> $GITHUB_ENV
       working-directory: ${{ inputs.working-dir }}
 

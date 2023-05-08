@@ -86,11 +86,11 @@ jobs:
         printf "terraform_exit_code=$exit_code"
         if [ "$exit_code" -eq "0" ]; then
           printf "no changes detected"
-          echo "changes='false'" >> $GITHUB_OUTPUT
+          echo "changes=false" >> $GITHUB_OUTPUT
           exit 0
         elif [ "$exit_code" -eq "2" ]; then
           printf "changes detected"
-          echo "changes='true'" >> $GITHUB_OUTPUT
+          echo "changes=true" >> $GITHUB_OUTPUT
           exit 0
         else
           printf "error !"

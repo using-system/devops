@@ -57,7 +57,7 @@ variable network_rules_default_action {
 
 variable network_subnet_ids {
   description = "One or more Subnet IDs which should be able to access this Key Vault."
-  type        = string
+  type        = list(string)
   default     = null
 }
 

@@ -36,7 +36,7 @@ on:
     outputs:
       changes:
         description: "Determines if there is any changes on the plan"
-        value: ${{ jobs.terraform.changes }}
+        value: ${{ jobs.terraform.outputs.changes }}
 
 jobs:
   terraform:
@@ -108,3 +108,11 @@ jobs:
         path: ${{ inputs.working-dir }}/tfplan
     outputs:
       changes: ${{ steps.get_plan.outputs.changes }}
+
+  debug:
+    needs: [terraform]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: debug
+      run: printf '${{ needs.terraform.outputs.changes }}'

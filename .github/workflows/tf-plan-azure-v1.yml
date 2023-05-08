@@ -103,3 +103,5 @@ jobs:
       with:
         name: tfplan
         path: ${{ inputs.working-dir }}/tfplan
+    outputs:
+      changes: ${{ steps.get_plan.outputs.changes }}

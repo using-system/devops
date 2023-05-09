@@ -80,16 +80,17 @@ jobs:
     - name: Install Terrascan
       run: |
         curl -L https://github.com/accurics/terrascan/releases/latest/download/terrascan_linux_amd64 > terrascan
-        mv terrascan /usr/local/bin/terrascan
-        chmod +x /usr/local/bin/terrascan
-      shell: bash
+        echo "Downloaded Terrascan"
+        sudo mv terrascan /usr/local/bin/terrascan
+        echo "Moved Terrascan to /usr/local/bin"
+        sudo chmod +x /usr/local/bin/terrascan
+        echo "Changed Terrascan permissions"
 
     - name: Terrascan
       id: terrascan
       run: |
          terrascan scan -i terraform -d . --severity high --show-skipped
       working-directory: ${{ inputs.working-dir }}
-      continue-on-error: true
 
     - name: Dispay Terrascan Results
       run: |

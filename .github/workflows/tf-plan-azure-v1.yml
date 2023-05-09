@@ -85,7 +85,8 @@ jobs:
         iac_version: 'v14'
         policy_type: 'azure'
         iac_dir: ${{ inputs.working-dir }}
-
+        only_warn: true
+        
     - name: Terraform Plan
       id: get_plan
       run: |

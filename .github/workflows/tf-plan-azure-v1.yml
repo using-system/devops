@@ -77,6 +77,25 @@ jobs:
       run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
       working-directory: ${{ inputs.working-dir }}
 
+    - name: Install Terrascan
+      run: |
+        curl -L https://github.com/accurics/terrascan/releases/latest/download/terrascan_linux_amd64 > terrascan
+        sudo mv terrascan /usr/local/bin/terrascan
+        sudo chmod +x /usr/local/bin/terrascan
+      shell: bash
+
+    - name: Terrascan
+      id: terrascan
+      run: |
+         terrascan scan -i terraform -d . --severity high --show-skipped
+      working-directory: ${{ inputs.working-dir }}
+      continue-on-error: true
+
+    - name: Dispay Terrascan Results
+      run: |
+        printf "${{ steps.terrascan.outputs.result }}"
+      shell: bash
+
     - name: Terraform Plan
       id: get_plan
       run: |

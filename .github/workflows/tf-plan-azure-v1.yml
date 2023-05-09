@@ -89,7 +89,7 @@ jobs:
     - name: Terrascan
       id: terrascan
       run: |
-         terrascan scan -i terraform -d . --severity high --show-skipped
+          /usr/local/bin/terrascan scan -i terraform -d . --severity high --show-skipped
       working-directory: ${{ inputs.working-dir }}
 
     - name: Dispay Terrascan Results

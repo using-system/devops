@@ -86,7 +86,7 @@ jobs:
 
     - name: Run TerraScan
       run: |
-        terrascan scan --iac-type terraform -t azure -v v14 -d ${{ inputs.working-dir }} --severity HIGH
+        terrascan scan --iac-type terraform -t azure -v v14 -d ${{ inputs.working-dir }} --no-recursive
       continue-on-error: true
 
     - name: Terraform Plan

@@ -77,12 +77,12 @@ jobs:
       run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
       working-directory: ${{ inputs.working-dir }}
 
-    - name: Install TerraScan
+    - name: Run TerraScan
       run: |
-        wget https://github.com/accurics/terrascan/releases/latest/download/terrascan_${{ runner.os }}_amd64 && \
-        chmod +x terrascan_${{ runner.os }}_amd64 && \
-        terrascan_${{ runner.os }}_amd64 scan -t terraform -v v14 -p azure -d ${{ inputs.working-dir }} --severity HIGH
-        
+        wget -O /usr/local/bin/terrascan https://github.com/accurics/terrascan/releases/latest/download/terrascan_Linux_amd64
+        chmod +x /usr/local/bin/terrascan
+        /usr/local/bin/terrascan scan -t terraform -v v14 -p azure -d ${{ inputs.working-dir }} --severity HIGH
+
     - name: Terraform Plan
       id: get_plan
       run: |

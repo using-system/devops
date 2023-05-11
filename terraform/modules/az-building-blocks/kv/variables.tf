@@ -61,6 +61,12 @@ variable network_subnet_ids {
   default     = null
 }
 
+variable log_analytics_workspace_id {
+  description = "Log analytics workspace id where to save diag audit event"
+  type        = string
+  default     = null
+}
+
 variable tags {
   description = "Tags to associate with resources."
   type        = map(string)

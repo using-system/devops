@@ -24,3 +24,15 @@ resource "azurerm_key_vault" "keyvault" {
        ignore_changes = [ network_acls[0].ip_rules ]
   }  
 }
+
+resource "azurerm_diagnostic_setting" "keyvault" {
+  name                          = "keyvault-logging"
+  target_resource_id            = azurerm_key_vault.keyvault.id
+
+  log_analytics_workspace_id    = var.log_analytics_workspace_id
+
+  log {
+    category                    = "AuditEvent"
+    enabled                     = true
+  }
+}

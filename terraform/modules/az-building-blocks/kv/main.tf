@@ -39,4 +39,14 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
       days = 30
     }
   }
+
+  metric {
+    category = "AllMetrics"
+    enabled  = false
+
+    retention_policy {
+      days    = 0
+      enabled = false
+    }
+  }
 }

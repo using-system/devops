@@ -25,16 +25,15 @@ resource "azurerm_key_vault" "keyvault" {
   }  
 }
 
-resource "azurerm_diagnostic_setting" "keyvault" {
+resource "azurerm_monitor_diagnostic_setting" "keyvault" {
   name                          = "keyvault-logging"
   target_resource_id            = azurerm_key_vault.keyvault.id
 
   log_analytics_workspace_id    = var.log_analytics_workspace_id
 
-  log {
+  enabled_log {
     category                    = "AuditEvent"
-    enabled                     = true
-
+    
     retention_policy {
       enabled = true
       days = 30

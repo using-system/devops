@@ -83,7 +83,7 @@ jobs:
         tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
         install terrascan /usr/local/bin && rm terrascan
         chmod +x /usr/local/bin/terrascan
-        terrascan scan -t terraform -v v14 -p azure -d ${{ inputs.working-dir }} --severity HIGH
+        terrascan scan -t azure -v v14 -d ${{ inputs.working-dir }} --severity HIGH
 
     - name: Terraform Plan
       id: get_plan

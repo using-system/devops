@@ -79,10 +79,10 @@ jobs:
 
     - name: Run TerraScan
       run: |
-        LATEST_VERSION=$(curl -s "https://api.github.com/repos/accurics/terrascan/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-        wget -O /usr/local/bin/terrascan "https://github.com/accurics/terrascan/releases/latest/download/terrascan_${{ runner.os }}_amd64"
-        chmod +x /usr/local/bin/terrascan
-        /usr/local/bin/terrascan scan -t terraform -v v14 -p azure -d ${{ inputs.working-dir }} --severity HIGH
+        curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Darwin_x86_64.tar.gz")" > terrascan.tar.gz
+        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
+        install terrascan /usr/local/bin && rm terrascan
+        terrascan scan -t terraform -v v14 -p azure -d ${{ inputs.working-dir }} --severity HIGH
 
     - name: Terraform Plan
       id: get_plan

@@ -79,7 +79,8 @@ jobs:
 
     - name: Run TerraScan
       run: |
-        wget -O /usr/local/bin/terrascan https://github.com/accurics/terrascan/releases/latest/download/terrascan_Linux_amd64
+        LATEST_VERSION=$(curl -s "https://api.github.com/repos/accurics/terrascan/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+        wget -O /usr/local/bin/terrascan "https://github.com/accurics/terrascan/releases/latest/download/terrascan_${{ runner.os }}_amd64"
         chmod +x /usr/local/bin/terrascan
         /usr/local/bin/terrascan scan -t terraform -v v14 -p azure -d ${{ inputs.working-dir }} --severity HIGH
 

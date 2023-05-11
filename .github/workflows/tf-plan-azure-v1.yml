@@ -86,8 +86,8 @@ jobs:
 
     - name: Run TerraScan
       run: |
-        output=$(terrascan scan --iac-type terraform -t azure -v v14 -d ${{ inputs.working-dir }} --severity HIGH)
-        echo "::warning::$output"
+        terrascan scan --iac-type terraform -t azure -v v14 -d ${{ inputs.working-dir }} --severity HIGH
+        echo "::warning::titi"
 
     - name: Terraform Plan
       id: get_plan

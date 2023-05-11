@@ -18,15 +18,26 @@ resource "azurerm_key_vault" "keyvault" {
       virtual_network_subnet_ids    = var.network_subnet_ids
   }
 
-  diagnostics {
-    category = "AuditEvent"
-    logs     = ["KeyVault"]
-    workspace_id = var.log_analytics_workspace_id
-  }
-
   tags                            = var.tags
 
   lifecycle {
        ignore_changes = [ network_acls[0].ip_rules ]
   }  
+}
+
+resource "azurerm_diagnostic_setting" "keyvault" {
+  name                          = "keyvault-logging"
+  target_resource_id            = azurerm_key_vault.keyvault.id
+
+  log_analytics_workspace_id    = var.log_analytics_workspace_id
+
+  log {
+    category                    = "AuditEvent"
+    enabled                     = true
+
+    retention_policy {
+      enabled = true
+      days = 30
+    }
+  }
 }

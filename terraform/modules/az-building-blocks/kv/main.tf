@@ -32,7 +32,11 @@ resource "azurerm_diagnostic_setting" "keyvault" {
   log_analytics_workspace_id    = var.log_analytics_workspace_id
 
   log {
-    category                    = "AuditEvent"
     enabled                     = true
+
+    retention_policy {
+      enabled = true
+      days = 30
+    }
   }
 }

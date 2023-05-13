@@ -115,7 +115,7 @@ jobs:
         working-directory: ${{ inputs.working-dir }}
 
       - name: Upload tfplan as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: tfplan
           path: ${{ inputs.working-dir }}/tfplan

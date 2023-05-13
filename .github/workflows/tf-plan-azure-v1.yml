@@ -77,6 +77,11 @@ jobs:
       run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
       working-directory: ${{ inputs.working-dir }}
 
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate
+      working-directory: ${{ inputs.working-dir }}
+
     - name: Install TerraScan
       run: |
         curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz

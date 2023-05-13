@@ -183,4 +183,4 @@ jobs:
 
       - name: Generate Infracost breakdown
         run: infracost breakdown --path plan.json --format json
-        working-directory: ${{ inputs.working-dir }}/tfplan
+        working-directory: ${{ inputs.working-dir }}

@@ -33,13 +33,15 @@ on:
         required: true
       azure-tenant-id:
         required: true
+      infracost-api-key:
+        required: true
     outputs:
       changes:
         description: "Determines if there is any changes on the plan"
         value: ${{ jobs.terraform.outputs.changes }}
 
 jobs:
-  terraform:
+  plan:
     runs-on: ubuntu-latest
 
     steps:
@@ -121,3 +123,23 @@ jobs:
           path: ${{ inputs.working-dir }}/tfplan
     outputs:
       changes: ${{ steps.get_plan.outputs.changes }}
+
+  infracost:
+    needs: plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download tfplan artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tfplan
+          path: ${{ inputs.working-dir }}
+
+      - name: Setup Infracost
+        uses: infracost/setup-infracost@v1
+        with:
+          api_key: ${{ secrets.infracost-api-key }}
+          currency: "EUR"
+
+      - name: Generate Infracost breakdown
+        run: infracost breakdown --path . --terraform-plan-flags "-out=tfplan/tfplan" --format json

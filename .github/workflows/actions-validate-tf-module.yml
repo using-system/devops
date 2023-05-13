@@ -26,13 +26,13 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Format
-        run: terraform fmt
+        run: terraform fmt -check
 
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Validate
-        run: terraform validate -check
+        run: terraform validate
 
       - name: Install TerraScan
         run: |

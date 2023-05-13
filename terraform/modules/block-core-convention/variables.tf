@@ -1,20 +1,20 @@
-variable team {
+variable "team" {
   description = "Team name"
 }
 
-variable project {
+variable "project" {
   description = "Project name"
 }
 
-variable environment {
+variable "environment" {
   description = "Envrionment name"
 }
 
-variable region {
+variable "region" {
   description = "Region name"
 }
 
-variable delimiter {
+variable "delimiter" {
   description = "Delimiter"
   default     = "-"
 }

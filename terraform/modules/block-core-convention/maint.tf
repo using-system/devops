@@ -5,7 +5,7 @@ locals {
     var.environment,
     var.region
   ])
-  
+
   resource_name_without_delimiter = join("", [
     var.team,
     var.project,

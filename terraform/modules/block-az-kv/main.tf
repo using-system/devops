@@ -1,10 +1,10 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "keyvault" {
-  name                            = var.name
-  location                        = var.location
-  resource_group_name             = var.resource_group_name
-  tenant_id                       = data.azurerm_client_config.current.tenant_id
+  name                = var.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
 
   sku_name                        = var.sku
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
@@ -13,30 +13,30 @@ resource "azurerm_key_vault" "keyvault" {
   purge_protection_enabled        = var.purge_protection_enabled
 
   network_acls {
-      bypass                        = var.network_rules_bypass
-      default_action                = var.network_rules_default_action
-      virtual_network_subnet_ids    = var.network_subnet_ids
+    bypass                     = var.network_rules_bypass
+    default_action             = var.network_rules_default_action
+    virtual_network_subnet_ids = var.network_subnet_ids
   }
 
-  tags                            = var.tags
+  tags = var.tags
 
   lifecycle {
-       ignore_changes = [ network_acls[0].ip_rules ]
-  }  
+    ignore_changes = [network_acls[0].ip_rules]
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "keyvault" {
-  name                          = "keyvault-logging"
-  target_resource_id            = azurerm_key_vault.keyvault.id
+  name               = "keyvault-logging"
+  target_resource_id = azurerm_key_vault.keyvault.id
 
-  log_analytics_workspace_id    = var.log_analytics_workspace_id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
 
   enabled_log {
-    category                    = "AuditEvent"
-    
+    category = "AuditEvent"
+
     retention_policy {
       enabled = true
-      days = 30
+      days    = 30
     }
   }
 
@@ -49,4 +49,4 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
       enabled = false
     }
   }
-}
+} 

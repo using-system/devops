@@ -176,4 +176,4 @@ jobs:
           currency: "EUR"
 
       - name: Generate Infracost breakdown
-        run: infracost breakdown --path . --terraform-plan-flags "-out=tfplan/tfplan" --format json
+        run: infracost breakdown --path tfplan/tfplan --format json

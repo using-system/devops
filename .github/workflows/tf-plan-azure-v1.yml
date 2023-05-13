@@ -136,9 +136,9 @@ jobs:
           path: ${{ inputs.working-dir }}
 
       - name: Setup Infracost
-        uses: infracost/setup-infracost@v1
+        uses: infracost/actions/setup@v2
         with:
-          api_key: ${{ secrets.infracost-api-key }}
+          api-key: ${{ secrets.infracost-api-key }}
           currency: "EUR"
 
       - name: Generate Infracost breakdown

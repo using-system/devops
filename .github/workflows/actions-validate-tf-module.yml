@@ -1,0 +1,46 @@
+name: Validate terraform module
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "terraform/modules/**"
+      - ".github/workflows/actions-validate-tf-module.yml"
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: ["terraform/modules/block-az-analytics"]
+    defaults:
+      run:
+        working-directory: ${{ matrix.directory }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Format
+        run: terraform fmt
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate -check
+
+      - name: Install TerraScan
+        run: |
+          curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz
+          tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
+          install terrascan /usr/local/bin && rm terrascan
+          chmod +x /usr/local/bin/terrascan
+
+      - name: Run TerraScan
+        run: |
+          terrascan scan --iac-type terraform --severity HIGH

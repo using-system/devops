@@ -24,7 +24,7 @@ resource "azurerm_key_vault" "keyvault" {
        ignore_changes = [ network_acls[0].ip_rules ]
   }  
 }
-/*
+
 resource "azurerm_monitor_diagnostic_setting" "keyvault" {
   name                          = "keyvault-logging"
   target_resource_id            = azurerm_key_vault.keyvault.id
@@ -49,4 +49,4 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
       enabled = false
     }
   }
-}*/
+}

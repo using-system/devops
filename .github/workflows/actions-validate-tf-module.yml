@@ -34,7 +34,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_wrapper: true
+          terraform_wrapper: false
 
       - name: Terraform Format
         run: terraform fmt -check

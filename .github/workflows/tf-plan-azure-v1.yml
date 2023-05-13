@@ -38,10 +38,10 @@ on:
     outputs:
       changes:
         description: "Determines if there is any changes on the plan"
-        value: ${{ jobs.terraform.outputs.changes }}
+        value: ${{ jobs.getplan.outputs.changes }}
 
 jobs:
-  plan:
+  analyze:
     runs-on: ubuntu-latest
 
     steps:
@@ -74,6 +74,44 @@ jobs:
         run: |
           terrascan scan --iac-type terraform -t azure -v v14 -d ${{ inputs.working-dir }} --severity HIGH --non-recursive
 
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ inputs.terraform-version }}
+          terraform_wrapper: false
+        env:
+          ARM_CLIENT_ID: ${{ secrets.azure-client-id  }}
+          ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
+          ARM_TENANT_ID: ${{ secrets.azure-tenant-id }}
+
+      - name: Terraform Init
+        run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
+        working-directory: ${{ inputs.working-dir }}
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ${{ inputs.working-dir }}
+
+  getplan:
+    needs: analyze
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Checkout devops tf modules
+        uses: actions/checkout@v3
+        with:
+          repository: using-system/devops
+          ref: master
+          path: devopsrepo
+
+      - name: Copy devops tf modules
+        run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
+        working-directory: ${{ inputs.working-dir }}
+
       - name: Azure Login
         run: |
           az login --service-principal -u ${{ secrets.azure-client-id }} -p ${{ secrets.azure-client-secret }} --tenant ${{ secrets.azure-tenant-id }}
@@ -92,10 +130,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
-        working-directory: ${{ inputs.working-dir }}
-
-      - name: Terraform Validate
-        run: terraform validate
         working-directory: ${{ inputs.working-dir }}
 
       - name: Terraform Plan
@@ -125,7 +159,7 @@ jobs:
       changes: ${{ steps.get_plan.outputs.changes }}
 
   infracost:
-    needs: plan
+    needs: getplan
     runs-on: ubuntu-latest
 
     steps:

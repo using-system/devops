@@ -182,5 +182,5 @@ jobs:
           currency: "EUR"
 
       - name: Generate Infracost breakdown
-        run: infracost breakdown --path plan.json --format json
+        run: infracost breakdown --path plan.json --format table
         working-directory: ${{ inputs.working-dir }}

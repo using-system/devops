@@ -151,7 +151,6 @@ jobs:
         working-directory: ${{ inputs.working-dir }}
 
       - name: Get Json plan
-        id: get_plan
         run: terraform show -json tfplan > plan.json
         working-directory: ${{ inputs.working-dir }}
 

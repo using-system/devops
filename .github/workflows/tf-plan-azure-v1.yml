@@ -61,10 +61,6 @@ jobs:
         run: terraform fmt -recursive -check
         working-directory: ${{ inputs.working-dir }}
 
-      - name: Terraform Validate
-        run: terraform validate
-        working-directory: ${{ inputs.working-dir }}
-
       - name: Install TerraScan
         run: |
           curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz
@@ -112,6 +108,10 @@ jobs:
           else
             exit 1
           fi
+        working-directory: ${{ inputs.working-dir }}
+
+      - name: Terraform Validate
+        run: terraform validate
         working-directory: ${{ inputs.working-dir }}
 
       - name: Upload tfplan as artifact

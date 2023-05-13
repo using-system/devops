@@ -150,11 +150,18 @@ jobs:
           fi
         working-directory: ${{ inputs.working-dir }}
 
+      - name: Get Json plan
+        id: get_plan
+        run: terraform show -json tfplan > plan.json
+        working-directory: ${{ inputs.working-dir }}
+
       - name: Upload tfplan as artifact
         uses: actions/upload-artifact@v3
         with:
           name: tfplan
-          path: ${{ inputs.working-dir }}/tfplan
+          path: |
+            ${{ inputs.working-dir }}/tfplan
+            ${{ inputs.working-dir }}/plan.json
     outputs:
       changes: ${{ steps.get_plan.outputs.changes }}
 
@@ -176,5 +183,5 @@ jobs:
           currency: "EUR"
 
       - name: Generate Infracost breakdown
-        run: infracost breakdown --path tfplan/tfplan --format json
+        run: infracost breakdown --path tfplan/plan.json --format json
         working-directory: ${{ inputs.working-dir }}

@@ -5,31 +5,31 @@ on:
     inputs:
       image:
         type: string
-        description: 'Image name'
+        description: "Image name"
         required: true
       dockerfile-path:
         type: string
-        description: 'Dockerfile path'
-        default: './Dockerfile'
+        description: "Dockerfile path"
+        default: "./Dockerfile"
         required: false
       tag:
         type: string
-        description: 'Image tag to push'
-        default: 'latest'
+        description: "Image tag to push"
+        default: "latest"
         required: false
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout source code
-      uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: ${{ inputs.dockerfile-path }}
-        push: false
-        tags: |
-          ${{ inputs.image }}:${{ inputs.tag }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ${{ inputs.dockerfile-path }}
+          push: false
+          tags: |
+            ${{ inputs.image }}:${{ inputs.tag }}

@@ -14,7 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: ["terraform/modules/block-az-analytics"]
+        directory:
+          [
+            "terraform/modules/block-az-analytics",
+            "terraform/modules/block-az-kv",
+            "terraform/modules/block-az-nsg",
+            "terraform/modules/block-az-rg",
+            "terraform/modules/block-az-routetable",
+            "terraform/modules/block-az-vnet",
+            "terraform/modules/block-core-convention",
+          ]
     defaults:
       run:
         working-directory: ${{ matrix.directory }}

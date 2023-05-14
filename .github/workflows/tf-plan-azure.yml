@@ -187,6 +187,7 @@ jobs:
           currency: "EUR"
 
       - name: Generate Infracost breakdown
+        id: infracost
         run: |
           infracost breakdown --path plan.json --project-name ${{ inputs.infracost-project-name }} --format json > infracost.json
           infracost output --path infracost.json --format table
@@ -197,3 +198,9 @@ jobs:
         run: |
           infracost comment github --path infracost.json --github-token ${{ secrets.github-token }}  --repo ${{ github.repository }} --pull-request ${{github.event.pull_request.number}} --behavior=new
         working-directory: ${{ inputs.working-dir }}
+
+      - name: Add comment on action
+        uses: /.github/actions/add-comment@main
+        with:
+          title: Infracost for  ${{ inputs.infracost-project-name }}
+          body: ${{ steps.infracost.outputs.breakdown }}

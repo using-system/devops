@@ -20,7 +20,7 @@ runs:
         github-token: ${{ inputs.github-token }}
         script: |
           // get all comments
-          const comments = await github.issues.listComments({
+          const comments = await github.rest.issues.listComments({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo
@@ -38,7 +38,7 @@ runs:
 
           if (comment) {
             // update the comment
-            await github.issues.updateComment({
+            await github.rest.issues.updateComment({
               comment_id: comment.id,
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -46,7 +46,7 @@ runs:
             });
           } else {
             // create a new comment if no matching comment was found
-            await github.issues.createComment({
+            await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,

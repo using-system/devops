@@ -141,9 +141,9 @@ jobs:
         id: get_plan
         run: |
           set +e
-          terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color
+          terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode
           exit_code=$?
-          plan_output=$(terraform show tfplan)
+          plan_output=$(terraform show tfplan -no-color)
           plan_output=${plan_output//\"/\'}
           printf "terraform_exit_code=$exit_code"
           if [ "$exit_code" -eq "0" ]; then

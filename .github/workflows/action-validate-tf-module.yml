@@ -3,7 +3,11 @@ name: Validate terraform modules
 on:
   push:
     branches:
-      - master
+      - main
+    paths:
+      - "terraform/modules/**"
+      - ".github/workflows/action-validate-tf-module.yml"
+  pull_request:
     paths:
       - "terraform/modules/**"
       - ".github/workflows/action-validate-tf-module.yml"

@@ -1,0 +1,54 @@
+name: "GitHub comment"
+description: "Add or update GitHub comment"
+author: "Using-System"
+inputs:
+  title:
+    required: true
+    type: string
+  body:
+    required: true
+    type: string
+  github-token:
+    required: true
+    type: string
+runs:
+  using: composite
+  steps:
+    - name: Comment
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          // get all comments
+          const comments = await github.issues.listComments({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          });
+
+          // find the comment that contains the identifier
+          const comment = comments.data.find(comment => comment.body.includes(${{ inputs.title }}));
+
+          const output = `
+          <details><summary> ${{ inputs.title }}</summary>
+          \n
+          ${{ inputs.body }}
+          `;
+
+          if (comment) {
+            // update the comment
+            await github.issues.updateComment({
+              comment_id: comment.id,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });
+          } else {
+            // create a new comment if no matching comment was found
+            await github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });
+          }

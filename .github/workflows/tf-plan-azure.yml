@@ -200,7 +200,8 @@ jobs:
         working-directory: ${{ inputs.working-dir }}
 
       - name: Add comment on action
-        uses: using-system/devops/.github/workflows/github-comment.yml@master
+        uses: using-system/devops/github/actions/github-comment.yml@master
         with:
           title: Infracost for  ${{ inputs.infracost-project-name }}
           body: ${{ steps.infracost.outputs.breakdown }}
+          github-token: ${{ secrets.github-token }}

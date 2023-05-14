@@ -3,6 +3,9 @@ name: Terraform Plan and Apply
 on:
   workflow_call:
     inputs:
+      project-name:
+        required: true
+        type: string
       working-dir:
         required: true
         type: string
@@ -20,9 +23,6 @@ on:
         required: true
         type: string
       variables-file:
-        required: true
-        type: string
-      infracost-project-name:
         required: true
         type: string
     secrets:
@@ -141,14 +141,16 @@ jobs:
         id: get_plan
         run: |
           set +e
-          terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color
+          plan_output=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color)
           exit_code=$?
           printf "terraform_exit_code=$exit_code"
           if [ "$exit_code" -eq "0" ]; then
             echo "changes=false" >> "$GITHUB_OUTPUT"
+            echo "plan=$plan_output" >> "$GITHUB_OUTPUT"
             exit 0
           elif [ "$exit_code" -eq "2" ]; then
             echo "changes=true" >> "$GITHUB_OUTPUT"
+            echo "plan=$plan_output" >> "$GITHUB_OUTPUT"
             exit 0
           else
             exit 1
@@ -158,6 +160,14 @@ jobs:
       - name: Get Json plan
         run: terraform show -json tfplan > plan.json
         working-directory: ${{ inputs.working-dir }}
+
+      - name: Add plan on the issue
+        if: github.event_name == 'pull_request'
+        uses: using-system/devops/github/actions/github-comment-issue@main
+        with:
+          title: Plan for  ${{ inputs.project-name }}
+          body: ${{ steps.get_plan.outputs.plan }}
+          github-token: ${{ secrets.github-token }}
 
       - name: Upload tfplan as artifact
         uses: actions/upload-artifact@v3
@@ -189,19 +199,12 @@ jobs:
       - name: Generate Infracost breakdown
         id: infracost
         run: |
-          infracost breakdown --path plan.json --project-name ${{ inputs.infracost-project-name }} --format json > infracost.json
+          infracost breakdown --path plan.json --project-name ${{ inputs.project-name }} --format json > infracost.json
           infracost output --path infracost.json --format table
         working-directory: ${{ inputs.working-dir }}
 
       - name: Generate Infracost pr comment
         if: github.event_name == 'pull_request'
         run: |
-          infracost comment github --path infracost.json --github-token ${{ secrets.github-token }}  --repo ${{ github.repository }} --pull-request ${{github.event.pull_request.number}} --behavior=new
+          infracost comment github --path infracost.json --github-token ${{ secrets.github-token }}  --repo ${{ github.repository }} --pull-request ${{github.event.pull_request.number}} --behavior=delete-and-new
         working-directory: ${{ inputs.working-dir }}
-
-      - name: Add comment on action
-        uses: using-system/devops/github/actions/github-comment-issue@main
-        with:
-          title: Infracost for  ${{ inputs.infracost-project-name }}
-          body: ${{ steps.infracost.outputs.breakdown }}
-          github-token: ${{ secrets.github-token }}

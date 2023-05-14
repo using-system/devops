@@ -3,14 +3,14 @@ description: "Add or update GitHub comment"
 author: "Using-System"
 inputs:
   title:
+    description: "Comment title"
     required: true
-    type: string
   body:
+    description: "Comment body"
     required: true
-    type: string
   github-token:
+    description: "GitHub token"
     required: true
-    type: string
 runs:
   using: composite
   steps:

@@ -195,5 +195,5 @@ jobs:
       - name: Generate Infracost pr comment
         if: github.event_name == 'pull_request'
         run: |
-          infracost comment github --path infracost.json --github-token ${{ secrets.github-token }}  --repo ${{ github.repository }} --pull-request ${{github.event.pull_request.number}} --behavior=delete-and-new
+          infracost comment github --path infracost.json --github-token ${{ secrets.github-token }}  --repo ${{ github.repository }} --pull-request ${{github.event.pull_request.number}} --behavior=new
         working-directory: ${{ inputs.working-dir }}

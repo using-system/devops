@@ -19,11 +19,20 @@ runs:
       with:
         github-token: ${{ inputs.github-token }}
         script: |
+          const issue_number = context.issue.number;
+          const owner = context.repo.owner;
+          const repo = context.repo.repo;
+
+          if (!issue_number) {
+            console.log('No issue or pull request number available. Skipping comment creation.');
+            return;
+          }
+
           // get all comments
           const comments = await github.rest.issues.listComments({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo
+            issue_number: issue_number,
+            owner: owner,
+            repo: repo
           });
 
           // find the comment that contains the identifier
@@ -40,16 +49,16 @@ runs:
             // update the comment
             await github.rest.issues.updateComment({
               comment_id: comment.id,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner: owner,
+              repo: repo,
               body: output
             });
           } else {
             // create a new comment if no matching comment was found
             await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              issue_number: issue_number,
+              owner: owner,
+              repo: repo,
               body: output
             });
           }

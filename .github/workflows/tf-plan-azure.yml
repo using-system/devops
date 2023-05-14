@@ -165,7 +165,7 @@ jobs:
 
       - name: Add plan on the issue
         if: github.event_name == 'pull_request'
-        uses: using-system/devops/github/actions/github-comment-issue@main
+        uses: using-system/devops/github/actions/gh-comment-current-issue@main
         with:
           title: Plan for  ${{ inputs.project-name }}
           body: ${{ steps.get_plan.outputs.plan }}

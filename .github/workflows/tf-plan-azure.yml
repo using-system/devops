@@ -163,8 +163,7 @@ jobs:
         run: terraform show -json tfplan > plan.json
         working-directory: ${{ inputs.working-dir }}
 
-      - name: Add plan on the issue
-        if: github.event_name == 'pull_request'
+      - name: Comment plan on the issue
         uses: using-system/devops/github/actions/gh-comment-current-issue@main
         with:
           title: Plan for  ${{ inputs.project-name }}

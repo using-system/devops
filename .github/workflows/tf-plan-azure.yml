@@ -143,7 +143,7 @@ jobs:
           set +e
           plan_output=$(terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode -no-color)
           exit_code=$?
-          printf "$plan_output"
+          printf $plan_output
           printf "terraform_exit_code=$exit_code"
           if [ "$exit_code" -eq "0" ]; then
             echo "changes=false" >> "$GITHUB_OUTPUT"

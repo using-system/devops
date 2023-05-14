@@ -22,6 +22,9 @@ on:
       variables-file:
         required: true
         type: string
+      infracost-project-name:
+        required: true
+        type: string
     secrets:
       storage-access-key:
         required: true
@@ -185,7 +188,7 @@ jobs:
 
       - name: Generate Infracost breakdown
         run: |
-          infracost breakdown --path plan.json --format json > infracost.json
+          infracost breakdown --path plan.json --project-name ${{ inputs.infracost-project-name }} --format json > infracost.json
           infracost output --path infracost.json --format table
         working-directory: ${{ inputs.working-dir }}
 

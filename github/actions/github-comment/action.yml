@@ -27,7 +27,8 @@ runs:
           });
 
           // find the comment that contains the identifier
-          const comment = comments.data.find(comment => comment.body.includes(${{ inputs.title }}));
+          const title = "${{ inputs.title }}";
+          const comment = comments.data.find(comment => comment.body.includes(title));
 
           const output = `
           <details><summary> ${{ inputs.title }}</summary>

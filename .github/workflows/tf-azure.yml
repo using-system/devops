@@ -64,7 +64,7 @@ jobs:
         working-directory: ${{ inputs.working-dir }}
 
       - name: Terrascan
-        uses: ./github/actions/terrascan
+        uses: using-system/devops/github/actions/terrascan@main
         with:
           working-directory: ${{ inputs.working-dir }}
           scan-type: "terraform"
@@ -159,7 +159,7 @@ jobs:
         working-directory: ${{ inputs.working-dir }}
 
       - name: Comment plan on the issue
-        uses: ./github/actions/gh-comment-current-issue@main
+        uses: using-system/devops/github/actions/gh-comment-current-issue@main
         with:
           title: Plan for  ${{ inputs.project-name }}
           body: ${{ steps.get_plan.outputs.plan }}

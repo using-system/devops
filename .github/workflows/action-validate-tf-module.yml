@@ -36,6 +36,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Terrascan
+        uses: ./github/actions/terrascan
+        with:
+          working-directory: ${{ matrix.directory }}
+          scan-type: "terraform"
+          severity: "HIGH"
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -49,14 +56,3 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
-
-      - name: Install TerraScan
-        run: |
-          curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz
-          tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
-          install terrascan /usr/local/bin && rm terrascan
-          chmod +x /usr/local/bin/terrascan
-
-      - name: Run TerraScan
-        run: |
-          terrascan scan --iac-type terraform --severity HIGH

@@ -1,0 +1,29 @@
+name: "Terrascan"
+description: "Run Terrascan checks"
+inputs:
+  working-directory:
+    description: "Directory to scan"
+    required: false
+    default: "."
+  scan-type:
+    description: "Type of IaC provider to scan"
+    required: true
+  severity:
+    description: "Severity level to apply for the scan"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Install TerraScan
+      run: |
+        curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz
+        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
+        install terrascan /usr/local/bin && rm terrascan
+        chmod +x /usr/local/bin/terrascan
+      shell: bash
+
+    - name: Run TerraScan
+      run: |
+        terrascan scan --iac-type ${{ inputs.scan-type }} --severity ${{ inputs.severity }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}

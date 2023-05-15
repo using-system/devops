@@ -24,6 +24,6 @@ runs:
 
     - name: Run TerraScan
       run: |
-        terrascan scan --iac-type ${{ inputs.scan-type }} --severity ${{ inputs.severity }}
+        terrascan scan --iac-type ${{ inputs.scan-type }} --severity ${{ inputs.severity }} --non-recursive
       shell: bash
       working-directory: ${{ inputs.working-directory }}

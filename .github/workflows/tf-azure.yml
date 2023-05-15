@@ -25,6 +25,9 @@ on:
       variables-file:
         required: true
         type: string
+      environment:
+        required: false
+        type: string
     secrets:
       storage-access-key:
         required: true
@@ -40,10 +43,6 @@ on:
         required: true
       github-token:
         required: true
-    outputs:
-      changes:
-        description: "Determines if there is any changes on the plan"
-        value: ${{ jobs.getplan.outputs.changes }}
 
 jobs:
   analyze:
@@ -208,4 +207,55 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           infracost comment github --path infracost.json --github-token ${{ secrets.github-token }}  --repo ${{ github.repository }} --pull-request ${{github.event.pull_request.number}} --behavior=delete-and-new
+        working-directory: ${{ inputs.working-dir }}
+
+  apply-plan:
+    needs: [infracost, getplan]
+    if: needs.getplan.outputs.changes == 'true' && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Checkout devops tf modules
+        uses: actions/checkout@v3
+        with:
+          repository: using-system/devops
+          ref: main
+          path: devopsrepo
+
+      - name: Copy devops tf modules
+        run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
+        working-directory: ${{ inputs.working-dir }}
+
+      - name: Azure Login
+        run: |
+          az login --service-principal -u ${{ secrets.azure-client-id }} -p ${{ secrets.azure-client-secret }} --tenant ${{ secrets.azure-tenant-id }}
+          az account set --subscription="${{ secrets.azure-subscription-id }}"
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ inputs.terraform-version }}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.azure-client-id  }}
+          ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
+          ARM_TENANT_ID: ${{ secrets.azure-tenant-id }}
+
+      - name: Terraform Init
+        run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
+        working-directory: ${{ inputs.working-dir }}
+
+      - name: Download tfplan artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.tfplan-artifact }}
+          path: ${{ inputs.working-dir }}
+
+      - name: Terraform Apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply 'tfplan/tfplan'
         working-directory: ${{ inputs.working-dir }}

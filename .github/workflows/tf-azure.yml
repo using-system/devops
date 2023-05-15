@@ -172,7 +172,7 @@ jobs:
       - name: Upload tfplan as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: tfplan
+          name: "tfplan-${{ inputs.environment }}"
           path: |
             ${{ inputs.working-dir }}/tfplan
             ${{ inputs.working-dir }}/plan.json
@@ -187,7 +187,7 @@ jobs:
       - name: Download tfplan artifact
         uses: actions/download-artifact@v3
         with:
-          name: tfplan
+          name: "tfplan-${{ inputs.environment }}"
           path: ${{ inputs.working-dir }}
 
       - name: Setup Infracost
@@ -252,10 +252,9 @@ jobs:
       - name: Download tfplan artifact
         uses: actions/download-artifact@v3
         with:
-          name: ${{ inputs.tfplan-artifact }}
+          name: "tfplan-${{ inputs.environment }}"
           path: ${{ inputs.working-dir }}
 
       - name: Terraform Apply
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: terraform apply 'tfplan/tfplan'
+        run: terraform apply 'tfplan'
         working-directory: ${{ inputs.working-dir }}

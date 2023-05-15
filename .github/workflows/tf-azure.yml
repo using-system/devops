@@ -63,20 +63,16 @@ jobs:
         run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
         working-directory: ${{ inputs.working-dir }}
 
+      - name: Terrascan
+        uses: ./github/actions/terrascan
+        with:
+          working-directory: ${{ inputs.working-dir }}
+          scan-type: "terraform"
+          severity: "HIGH"
+
       - name: Terraform Fmt
         run: terraform fmt -recursive -check
         working-directory: ${{ inputs.working-dir }}
-
-      - name: Install TerraScan
-        run: |
-          curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz
-          tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
-          install terrascan /usr/local/bin && rm terrascan
-          chmod +x /usr/local/bin/terrascan
-
-      - name: Run TerraScan
-        run: |
-          terrascan scan --iac-type terraform -t azure -v v14 -d ${{ inputs.working-dir }} --severity HIGH --non-recursive
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
@@ -163,7 +159,7 @@ jobs:
         working-directory: ${{ inputs.working-dir }}
 
       - name: Comment plan on the issue
-        uses: using-system/devops/github/actions/gh-comment-current-issue@main
+        uses: ./github/actions/gh-comment-current-issue@main
         with:
           title: Plan for  ${{ inputs.project-name }}
           body: ${{ steps.get_plan.outputs.plan }}

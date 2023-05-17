@@ -21,19 +21,19 @@ jobs:
       matrix:
         modules:
           [
-            "block-az-analytics",
-            "block-az-kv",
-            "block-az-nsg",
-            "block-az-rg",
-            "block-az-routetable",
-            "block-az-vnet",
-            "block-core-convention",
-            "block-az-ad-security-group",
-            "block-az-ad-security-group-members",
+            "az-analytics",
+            "az-kv",
+            "az-nsg",
+            "az-rg",
+            "az-routetable",
+            "az-vnet",
+            "core-convention",
+            "az-ad-security-group",
+            "az-ad-security-group-members",
           ]
     defaults:
       run:
-        working-directory: "terraform/modules/${{ matrix.modules }}"
+        working-directory: "terraform/modules/block-${{ matrix.modules }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
       - name: Terrascan
         uses: ./github/actions/terrascan
         with:
-          working-directory: "terraform/modules/${{ matrix.modules }}"
+          working-directory: "terraform/modules/block-${{ matrix.modules }}"
           scan-type: "terraform"
           severity: "HIGH"
 

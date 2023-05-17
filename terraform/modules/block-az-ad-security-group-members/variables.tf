@@ -4,6 +4,6 @@ variable "group_object_id" {
 }
 
 variable "members" {
-  description = "Principals names to add to the group"
+  description = "Objects ids to add to the group"
   type        = list(string)
 }

@@ -19,6 +19,12 @@ variable "sku" {
   default     = "standard"
 }
 
+variable "enable_rbac_authorization" {
+  description = "value to enable RBAC authorization for the Key Vault."
+  type        = bool
+  default     = true
+}
+
 variable "enabled_for_disk_encryption" {
   description = "Specifies if Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys."
   type        = bool

@@ -30,6 +30,7 @@ jobs:
             "core-convention",
             "az-ad-security-group",
             "az-ad-security-group-members",
+            "az-iam",
           ]
     defaults:
       run:

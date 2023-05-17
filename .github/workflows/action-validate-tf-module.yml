@@ -28,6 +28,7 @@ jobs:
             "block-az-routetable",
             "block-az-vnet",
             "block-core-convention",
+            "block-az-ad-security-group",
           ]
     defaults:
       run:

@@ -19,19 +19,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        directory:
+        modules:
           [
-            "terraform/modules/block-az-analytics",
-            "terraform/modules/block-az-kv",
-            "terraform/modules/block-az-nsg",
-            "terraform/modules/block-az-rg",
-            "terraform/modules/block-az-routetable",
-            "terraform/modules/block-az-vnet",
-            "terraform/modules/block-core-convention",
+            "block-az-analytics",
+            "block-az-kv",
+            "block-az-nsg",
+            "block-az-rg",
+            "block-az-routetable",
+            "block-az-vnet",
+            "block-core-convention",
           ]
     defaults:
       run:
-        working-directory: ${{ matrix.directory }}
+        working-directory: "terraform/modules/${{ matrix.modules }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v3

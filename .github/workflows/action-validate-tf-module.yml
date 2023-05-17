@@ -39,7 +39,7 @@ jobs:
       - name: Terrascan
         uses: ./github/actions/terrascan
         with:
-          working-directory: ${{ matrix.modules }}
+          working-directory: "terraform/modules/${{ matrix.modules }}"
           scan-type: "terraform"
           severity: "HIGH"
 

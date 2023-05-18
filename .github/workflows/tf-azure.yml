@@ -109,6 +109,17 @@ jobs:
           az login --service-principal -u ${{ secrets.azure-client-id }} -p ${{ secrets.azure-client-secret }} --tenant ${{ secrets.azure-tenant-id }}
           az account set --subscription="${{ secrets.azure-subscription-id }}"
 
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ inputs.terraform-version }}
+          terraform_wrapper: false
+        env:
+          ARM_CLIENT_ID: ${{ secrets.azure-client-id  }}
+          ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
+          ARM_TENANT_ID: ${{ secrets.azure-tenant-id }}
+
       - name: Set secret environment variables
         run: |
           for secret_var in $(echo $SECRET_VARS | tr "," "\n"); do
@@ -121,17 +132,6 @@ jobs:
         env:
           SECRET_VARS: ${{  inputs.secret-vars }}
           SECRETS: ${{ toJSON(secrets) }}
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: ${{ inputs.terraform-version }}
-          terraform_wrapper: false
-        env:
-          ARM_CLIENT_ID: ${{ secrets.azure-client-id  }}
-          ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
-          ARM_TENANT_ID: ${{ secrets.azure-tenant-id }}
 
       - name: Terraform Init
         run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"

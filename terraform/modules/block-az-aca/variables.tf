@@ -57,6 +57,15 @@ variable "environment_variables" {
   default = []
 }
 
+variable "secrets" {
+  description = "Secrets of the container app"
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  default = []
+}
+
 variable "identity_type" {
   description = "Identity type of the container app"
   type        = string

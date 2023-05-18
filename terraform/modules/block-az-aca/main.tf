@@ -26,6 +26,14 @@ resource "azurerm_container_app" "aca" {
     }
   }
 
+  dynamic "secret" {
+    for_each = var.secrets
+    content {
+      name  = secret.value.name
+      value = secret.value.value
+    }
+  }
+
   identity {
     type         = var.identity_type
     identity_ids = var.identity_ids

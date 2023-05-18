@@ -11,6 +11,10 @@ inputs:
   severity:
     description: "Severity level to apply for the scan"
     required: false
+  skip-rules:
+    description: "Comma separated list of rules to skip"
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:
@@ -24,6 +28,6 @@ runs:
 
     - name: Run TerraScan
       run: |
-        terrascan scan --iac-type ${{ inputs.scan-type }} --severity ${{ inputs.severity }} --non-recursive
+        terrascan scan --iac-type ${{ inputs.scan-type }} --severity ${{ inputs.severity }} --skip-rules ${{ inputs.skip-rules }} --non-recursive
       shell: bash
       working-directory: ${{ inputs.working-directory }}

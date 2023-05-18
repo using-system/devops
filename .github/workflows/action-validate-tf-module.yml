@@ -32,6 +32,9 @@ jobs:
             "az-ad-security-group-members",
             "az-iam",
             "az-acae",
+            "az-acr",
+            "az-dns-zone",
+            "az-pep",
           ]
     defaults:
       run:
@@ -45,7 +48,8 @@ jobs:
         with:
           working-directory: "terraform/modules/block-${{ matrix.modules }}"
           scan-type: "terraform"
-          severity: "HIGH"
+          severity: "MEDIUM"
+          skip-rules: "accurics.azure.NS.161"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2

@@ -116,6 +116,7 @@ jobs:
             echo "Setting $var"
             value=`jq -r ".${var}" <<< $SECRETS`
             echo "TF_VAR_${var}=${value}" >> $GITHUB_ENV
+            echo "${var}=${value}" >> $GITHUB_ENV
           done
         env:
           SECRET_VARS: ${{  inputs.secret-vars }}

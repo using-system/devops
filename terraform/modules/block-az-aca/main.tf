@@ -32,7 +32,7 @@ resource "azurerm_container_app" "aca" {
   }
 
   dynamic "ingress" {
-    count = var.enable_ingress ? 1 : 0
+    for_each = var.enable_ingress ? [1] : []
     content {
       allow_insecure_connections = var.allow_insecure_connections
       external_enabled           = var.external_enabled

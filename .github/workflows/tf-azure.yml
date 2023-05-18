@@ -131,7 +131,7 @@ jobs:
       - name: Set secret environment variables
         run: |
           IFS=$'\n'
-          for secret_var in ${{ inputs.secret-vars.split('\n') }}; do
+          for secret_var in $(echo "${{ inputs.secret-vars }}" | tr -d '\r' | sed 's/^ *//;s/ *$//' | tr '\n' ' '); do
             value=$(echo "${{ secrets[secret_var] }}")
             echo "TF_VAR_$secret_var=$value" >> $GITHUB_ENV
            done

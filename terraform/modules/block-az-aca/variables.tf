@@ -52,7 +52,7 @@ variable "environment_variables" {
   type = list(object({
     name        = string
     value       = string
-    secret_name = string
+    secret_name = optional(string)
   }))
   default = []
 }

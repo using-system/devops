@@ -111,7 +111,6 @@ jobs:
 
       - name: Set secret environment variables
         run: |
-          IFS=$'\n'
           for secret_var in $(echo $SECRET_VARS | tr "," "\n"); do
             echo "Setting $secret_var"
             var=`echo $secret_var | tr '[:lower:]' '[:upper:]'`

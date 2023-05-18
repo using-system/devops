@@ -134,7 +134,7 @@ jobs:
           for secret_var in $(echo "${{ inputs.secret-vars }}" | tr -d '\r' | sed 's/^ *//;s/ *$//' | tr '\n' ' '); do
             value=$(echo "${{ secrets[secret_var] }}")
             echo "TF_VAR_$secret_var=$value" >> $GITHUB_ENV
-           done
+          done
 
       - name: Terraform Init
         run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"

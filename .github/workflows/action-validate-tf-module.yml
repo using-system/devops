@@ -34,6 +34,7 @@ jobs:
             "az-acae",
             "az-acr",
             "az-dns-zone",
+            "az-pep",
           ]
     defaults:
       run:

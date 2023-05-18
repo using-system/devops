@@ -52,16 +52,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Checkout devops tf modules
-        uses: actions/checkout@v3
+      - name: Get using system modules
+        uses: using-system/devops/github/actions/tf-get-usingsystem-modules@main
         with:
-          repository: using-system/devops
-          ref: main
-          path: devopsrepo
-
-      - name: Copy devops tf modules
-        run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
-        working-directory: ${{ inputs.working-dir }}
+          working-directory: ${{ inputs.working-dir }}
 
       - name: Terrascan
         uses: using-system/devops/github/actions/terrascan@main
@@ -101,16 +95,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Checkout devops tf modules
-        uses: actions/checkout@v3
+      - name: Get using system modules
+        uses: using-system/devops/github/actions/tf-get-usingsystem-modules@main
         with:
-          repository: using-system/devops
-          ref: main
-          path: devopsrepo
-
-      - name: Copy devops tf modules
-        run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
-        working-directory: ${{ inputs.working-dir }}
+          working-directory: ${{ inputs.working-dir }}
 
       - name: Azure Login
         run: |
@@ -215,16 +203,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Checkout devops tf modules
-        uses: actions/checkout@v3
+      - name: Get using system modules
+        uses: using-system/devops/github/actions/tf-get-usingsystem-modules@main
         with:
-          repository: using-system/devops
-          ref: main
-          path: devopsrepo
-
-      - name: Copy devops tf modules
-        run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
-        working-directory: ${{ inputs.working-dir }}
+          working-directory: ${{ inputs.working-dir }}
 
       - name: Azure Login
         run: |

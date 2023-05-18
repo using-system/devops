@@ -1,7 +1,7 @@
 name: "GetUsingSystemModules"
 description: "Get Using-System Terraform Modules"
 inputs:
-  working-directory:
+  tf-project-directory:
     description: "Path of the terraform project"
     required: false
     default: "."
@@ -17,5 +17,5 @@ runs:
 
     - name: Copy devops tf modules
       run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
-      working-directory: ${{ inputs.working-directory }}
+      working-directory: ${{ inputs.tf-project-directory }}
       shell: bash

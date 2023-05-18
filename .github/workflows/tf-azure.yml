@@ -55,7 +55,7 @@ jobs:
       - name: Get using system modules
         uses: using-system/devops/github/actions/tf-get-usingsystem-modules@main
         with:
-          working-directory: ${{ inputs.working-dir }}
+          tf-project-directory: ${{ inputs.working-dir }}
 
       - name: Terrascan
         uses: using-system/devops/github/actions/terrascan@main
@@ -98,7 +98,7 @@ jobs:
       - name: Get using system modules
         uses: using-system/devops/github/actions/tf-get-usingsystem-modules@main
         with:
-          working-directory: ${{ inputs.working-dir }}
+          tf-project-directory: ${{ inputs.working-dir }}
 
       - name: Azure Login
         run: |
@@ -206,7 +206,7 @@ jobs:
       - name: Get using system modules
         uses: using-system/devops/github/actions/tf-get-usingsystem-modules@main
         with:
-          working-directory: ${{ inputs.working-dir }}
+          tf-project-directory: ${{ inputs.working-dir }}
 
       - name: Azure Login
         run: |

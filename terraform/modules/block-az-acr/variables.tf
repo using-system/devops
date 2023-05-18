@@ -19,6 +19,16 @@ variable "admin_enabled" {
   type        = bool
 }
 
+variable "public_network_access_enabled" {
+  description = "Determines if the public network access is enabled"
+  type        = bool
+}
+
+variable "network_rule_bypass_option" {
+  description = "Determines if the network rule bypass option is enabled"
+  type        = string
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

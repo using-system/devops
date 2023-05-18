@@ -1,7 +1,5 @@
 resource "azurerm_container_registry" "acr" {
 
-  depends_on = [azurerm_resource_group.acr]
-
   name                          = var.name
   location                      = var.location
   resource_group_name           = var.resource_group_name
@@ -11,4 +9,13 @@ resource "azurerm_container_registry" "acr" {
   network_rule_bypass_option    = var.network_rule_bypass_option
 
   tags = var.tags
+}
+
+resource "azurerm_management_lock" "acr" {
+
+  depends_on = [azurerm_container_registry.acr]
+
+  name       = "${var.name}-lock"
+  scope      = azurerm_container_registry.acr.id
+  lock_level = "CanNotDelete"
 }

@@ -28,10 +28,9 @@ on:
       environment:
         required: false
         type: string
-      tf-additional-params:
+      secret-vars:
         required: false
         type: string
-        default: ""
     secrets:
       storage-access-key:
         required: true
@@ -121,6 +120,16 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
           ARM_TENANT_ID: ${{ secrets.azure-tenant-id }}
 
+      - name: Set secret environment variables
+        run: |
+          IFS=$'\n'
+          for secret_var in $(echo $SECRET_VARS | tr -d '\r' | sed 's/^ *//;s/ *$//' | tr '\n' ' '); do
+            value=$(echo "${{ secrets[secret_var] }}")
+            echo "TF_VAR_$secret_var=$value" >> $GITHUB_ENV
+          done
+        env:
+          SECRET_VARS: ${{  inputs.secret-vars }}
+
       - name: Terraform Init
         run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"
         working-directory: ${{ inputs.working-dir }}
@@ -129,7 +138,7 @@ jobs:
         id: get_plan
         run: |
           set +e
-          terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' ${{ inputs.tf-additional-params }} -detailed-exitcode
+          terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode
           exit_code=$?
           terraform show tfplan -no-color > plan.txt
           plan_output=$(jq -Rs . < ./plan.txt)

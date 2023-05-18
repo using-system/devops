@@ -16,6 +16,5 @@ runs:
         path: devopsrepo
 
     - name: Copy devops tf modules
-      run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* modules/
-      working-directory: ${{ inputs.working-dir }}
+      run: cp -R $GITHUB_WORKSPACE/devopsrepo/terraform/modules/* $GITHUB_WORKSPACE/${{ inputs.working-dir }}/modules/
       shell: bash

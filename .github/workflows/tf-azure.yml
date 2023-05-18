@@ -113,6 +113,7 @@ jobs:
         run: |
           IFS=$'\n'
           for secret_var in $(echo $SECRET_VARS | tr "," "\n"); do
+            echo "Setting $secret_var"
             var=`echo $secret_var | tr '[:lower:]' '[:upper:]'`
             value=`jq -r ".${var}" <<< $SECRETS`
             echo "TF_VAR_$var=$value" >> $GITHUB_ENV

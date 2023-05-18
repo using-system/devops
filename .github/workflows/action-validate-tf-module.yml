@@ -36,6 +36,7 @@ jobs:
             "az-acr",
             "az-dns-zone",
             "az-pep",
+            "az-assigned-identity",
           ]
     defaults:
       run:

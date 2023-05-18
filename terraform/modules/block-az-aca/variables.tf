@@ -95,3 +95,8 @@ variable "external_enabled" {
   type        = bool
   default     = false
 }
+
+variable "tags" {
+  description = "Tags to associate with resources."
+  type        = map(string)
+}

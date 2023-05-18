@@ -1,5 +1,5 @@
 variable "name" {
-  description = "Name of the container app environment."
+  description = "Name of the container app environment"
 }
 
 variable "location" {

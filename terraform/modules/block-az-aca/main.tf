@@ -51,4 +51,6 @@ resource "azurerm_container_app" "aca" {
       }
     }
   }
+
+  tags = var.tags
 }

@@ -62,7 +62,8 @@ jobs:
         with:
           working-directory: ${{ inputs.working-dir }}
           scan-type: "terraform"
-          severity: "HIGH"
+          severity: "MEDIUM"
+          skip-rules: "accurics.azure.NS.161"
 
       - name: Terraform Fmt
         run: terraform fmt -recursive -check

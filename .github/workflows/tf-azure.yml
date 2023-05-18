@@ -139,7 +139,7 @@ jobs:
         id: get_plan
         run: |
           set +e
-          terraform plan -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode
+          terraform plan -input=false -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode
           exit_code=$?
           terraform show tfplan -no-color > plan.txt
           plan_output=$(jq -Rs . < ./plan.txt)

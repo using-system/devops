@@ -120,6 +120,7 @@ jobs:
           done
         env:
           SECRET_VARS: ${{  inputs.secret-vars }}
+          SECRETS: ${{ toJSON(secrets) }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2

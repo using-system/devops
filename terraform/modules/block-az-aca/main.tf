@@ -14,29 +14,29 @@ resource "azurerm_container_app" "aca" {
       cpu    = var.cpu
       memory = var.memory
 
-    }
-
-    dynamic "environment_variable" {
-      for_each = var.environment_variables
-      content {
-        name        = environment_variable.value.name
-        value       = environment_variable.value.value
-        secret_name = environment_variable.value.secret_name
+      dynamic "env" {
+        for_each = var.environment_variables
+        content {
+          name        = environment_variable.value.name
+          value       = environment_variable.value.value
+          secret_name = environment_variable.value.secret_name
+        }
       }
-    }
 
-    identity {
-      type         = var.identity_type
-      identity_ids = var.identity_ids
     }
+  }
 
-    dynamic "ingress" {
-      count = var.enable_ingress ? 1 : 0
-      content {
-        allow_insecure_connections = var.allow_insecure_connections
-        external_enabled           = var.external_enabled
-        target_port                = var.target_port
-      }
+  identity {
+    type         = var.identity_type
+    identity_ids = var.identity_ids
+  }
+
+  dynamic "ingress" {
+    count = var.enable_ingress ? 1 : 0
+    content {
+      allow_insecure_connections = var.allow_insecure_connections
+      external_enabled           = var.external_enabled
+      target_port                = var.target_port
     }
   }
 }

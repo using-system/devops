@@ -1,5 +1,5 @@
 variable "name" {
-  description = "Name of the container app environment."
+  description = "Name of the acr"
 }
 
 variable "location" {
@@ -7,7 +7,7 @@ variable "location" {
 }
 
 variable "resource_group_name" {
-  description = "Resource group name of the acae"
+  description = "Resource group name of the acr"
 }
 
 variable "sku" {

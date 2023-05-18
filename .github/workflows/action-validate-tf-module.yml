@@ -32,9 +32,11 @@ jobs:
             "az-ad-security-group-members",
             "az-iam",
             "az-acae",
+            "az-aca",
             "az-acr",
             "az-dns-zone",
             "az-pep",
+            "az-assigned-identity",
           ]
     defaults:
       run:

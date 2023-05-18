@@ -39,7 +39,7 @@ resource "azurerm_container_app" "aca" {
       target_port                = var.target_port
 
       traffic_weight {
-        weight = 100
+        percentage = 100
       }
     }
   }

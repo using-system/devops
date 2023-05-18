@@ -28,9 +28,6 @@ on:
       environment:
         required: false
         type: string
-      secret-vars:
-        required: false
-        type: string
     secrets:
       storage-access-key:
         required: true
@@ -45,6 +42,8 @@ on:
       infracost-api-key:
         required: true
       github-token:
+        required: true
+      github-pat-token:
         required: true
 
 jobs:
@@ -119,19 +118,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.azure-client-secret }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.azure-subscription-id }}
           ARM_TENANT_ID: ${{ secrets.azure-tenant-id }}
-
-      - name: Set secret environment variables
-        run: |
-          for secret_var in $(echo $SECRET_VARS | tr "," "\n"); do
-            var=`echo $secret_var | tr '[:lower:]' '[:upper:]'`
-            echo "Setting $var"
-            value=`jq -r ".${var}" <<< $SECRETS`
-            echo "TF_VAR_${var}=${value}" >> $GITHUB_ENV
-            echo "${var}=${value}" >> $GITHUB_ENV
-          done
-        env:
-          SECRET_VARS: ${{  inputs.secret-vars }}
-          SECRETS: ${{ toJSON(secrets) }}
+          TF_VAR_GH_PAT: ${{ secrets.github-pat-token }}
 
       - name: Terraform Init
         run: terraform init -backend-config="access_key=${{ secrets.storage-access-key }}" -backend-config="storage_account_name=${{ inputs.backend-storage-name }}" -backend-config="container_name=${{ inputs.backend-container-name }}" -backend-config="key=${{ inputs.backend-state-key }}"

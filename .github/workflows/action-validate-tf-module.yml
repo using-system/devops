@@ -33,6 +33,7 @@ jobs:
             "az-iam",
             "az-acae",
             "az-acr",
+            "az-dns-zone",
           ]
     defaults:
       run:

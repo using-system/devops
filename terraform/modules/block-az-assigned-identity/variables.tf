@@ -10,3 +10,8 @@ variable "location" {
 variable "resource_group_name" {
   description = "Resource group name of the identiy"
 }
+
+variable "tags" {
+  description = "Tags to associate with resources."
+  type        = map(string)
+}

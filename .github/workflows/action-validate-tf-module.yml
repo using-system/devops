@@ -48,7 +48,7 @@ jobs:
         with:
           working-directory: "terraform/modules/block-${{ matrix.modules }}"
           scan-type: "terraform"
-          severity: "HIGH"
+          severity: "MEDIUM"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2

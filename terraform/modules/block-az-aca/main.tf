@@ -37,6 +37,10 @@ resource "azurerm_container_app" "aca" {
       allow_insecure_connections = var.allow_insecure_connections
       external_enabled           = var.external_enabled
       target_port                = var.target_port
+
+      traffic_weight {
+        weight = 100
+      }
     }
   }
 }

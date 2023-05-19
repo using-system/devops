@@ -127,7 +127,7 @@ jobs:
         id: get_plan
         run: |
           set +e
-          terraform plan -input=false -out=tfplan -var-file='${{ inputs.variables-file }}' -var 'GH_PAT=${{ secrets.github-pat-token }}' -detailed-exitcode
+          terraform plan -input=false -out=tfplan -var-file='${{ inputs.variables-file }}' -var 'gh_pat=${{ secrets.github-pat-token }}' -detailed-exitcode
           exit_code=$?
           terraform show tfplan -no-color > plan.txt
           plan_output=$(jq -Rs . < ./plan.txt)

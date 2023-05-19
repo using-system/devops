@@ -70,7 +70,7 @@ jobs:
       - name: Replace token in var file
         uses: cschleiden/replace-tokens@v1
         with:
-          files: "${{ inputs.variables-file }}"
+          files: " ${{ inputs.working-dir }}/${{ inputs.variables-file }}"
         env:
           GH_PAT: ${{ secrets.github-pat-token }}
 
@@ -118,7 +118,7 @@ jobs:
       - name: Replace token in var file
         uses: cschleiden/replace-tokens@v1
         with:
-          files: "${{ inputs.variables-file }}"
+          files: " ${{ inputs.working-dir }}/${{ inputs.variables-file }}"
         env:
           GH_PAT: ${{ secrets.github-pat-token }}
 

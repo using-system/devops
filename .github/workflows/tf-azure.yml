@@ -67,6 +67,13 @@ jobs:
           severity: "MEDIUM"
           skip-rules: "accurics.azure.NS.161"
 
+      - name: Replace token in var file
+        uses: cschleiden/replace-tokens@v1
+        with:
+          files: "${{ inputs.variables-file }}"
+        env:
+          GH_PAT: ${{ secrets.github-pat-token }}
+
       - name: Terraform Fmt
         run: terraform fmt -recursive -check
         working-directory: ${{ inputs.working-dir }}
@@ -108,7 +115,8 @@ jobs:
           az login --service-principal -u ${{ secrets.azure-client-id }} -p ${{ secrets.azure-client-secret }} --tenant ${{ secrets.azure-tenant-id }}
           az account set --subscription="${{ secrets.azure-subscription-id }}"
 
-      - uses: cschleiden/replace-tokens@v1
+      - name: Replace token in var file
+        uses: cschleiden/replace-tokens@v1
         with:
           files: "${{ inputs.variables-file }}"
         env:

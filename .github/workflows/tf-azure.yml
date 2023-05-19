@@ -67,13 +67,6 @@ jobs:
           severity: "MEDIUM"
           skip-rules: "accurics.azure.NS.161"
 
-      - name: Replace token in var file
-        uses: cschleiden/replace-tokens@v1
-        with:
-          files: " ${{ inputs.working-dir }}/${{ inputs.variables-file }}"
-        env:
-          GH_PAT: ${{ secrets.github-pat-token }}
-
       - name: Terraform Fmt
         run: terraform fmt -recursive -check
         working-directory: ${{ inputs.working-dir }}
@@ -115,13 +108,6 @@ jobs:
           az login --service-principal -u ${{ secrets.azure-client-id }} -p ${{ secrets.azure-client-secret }} --tenant ${{ secrets.azure-tenant-id }}
           az account set --subscription="${{ secrets.azure-subscription-id }}"
 
-      - name: Replace token in var file
-        uses: cschleiden/replace-tokens@v1
-        with:
-          files: " ${{ inputs.working-dir }}/${{ inputs.variables-file }}"
-        env:
-          GH_PAT: ${{ secrets.github-pat-token }}
-
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -141,7 +127,7 @@ jobs:
         id: get_plan
         run: |
           set +e
-          terraform plan -input=false -out=tfplan -var-file='${{ inputs.variables-file }}' -detailed-exitcode
+          terraform plan -input=false -out=tfplan -var-file='${{ inputs.variables-file }}' -var 'GH_PAT=${{ secrets.github-pat-token }}' -detailed-exitcode
           exit_code=$?
           terraform show tfplan -no-color > plan.txt
           plan_output=$(jq -Rs . < ./plan.txt)

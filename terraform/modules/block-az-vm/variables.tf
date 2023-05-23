@@ -46,6 +46,12 @@ variable "image_sku" {
 variable "image_version" {
   description = "Version for the VM image"
 }
+
+variable "identity_ids" {
+  description = "List of identity ids to assign to the vm"
+  type        = list(string)
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

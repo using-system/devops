@@ -44,6 +44,15 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
+variable "disk_encryption_kv_id" {
+  description = "Key Vault Key Id for disk encryption"
+}
+
+variable "identity_ids" {
+  description = "List of identity ids to assign to the disk encryption set"
+  type        = list(string)
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

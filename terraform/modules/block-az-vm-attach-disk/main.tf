@@ -1,3 +1,17 @@
+resource "azurerm_disk_encryption_set" "vm" {
+  name                = "${var.name}-des"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  key_vault_key_id    = var.disk_encryption_kv_id
+
+  identity {
+    type         = "UserAssigned"
+    identity_ids = var.identity_ids
+  }
+
+  tags = var.tags
+}
+
 resource "azurerm_managed_disk" "vm" {
 
   name                 = var.name
@@ -8,6 +22,7 @@ resource "azurerm_managed_disk" "vm" {
   disk_size_gb         = var.disk_size_gb
 
   public_network_access_enabled = var.public_network_access_enabled
+  disk_encryption_set_id        = azurerm_disk_encryption_set.vm.id
 
   tags = var.tags
 }

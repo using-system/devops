@@ -49,7 +49,8 @@ resource "azurerm_windows_virtual_machine" "vm" {
   }
 
   identity {
-    type = "SystemAssigned"
+    type         = "UserAssigned"
+    identity_ids = var.identity_ids
   }
 
   tags = var.tags

@@ -37,6 +37,7 @@ jobs:
             "az-dns-zone",
             "az-pep",
             "az-assigned-identity",
+            "az-vm",
           ]
     defaults:
       run:

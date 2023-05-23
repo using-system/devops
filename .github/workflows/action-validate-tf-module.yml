@@ -50,7 +50,7 @@ jobs:
         with:
           working-directory: "terraform/modules/block-${{ matrix.modules }}"
           scan-type: "terraform"
-          severity: "MEDIUM"
+          severity: "LOW"
           skip-rules: "accurics.azure.NS.161"
 
       - name: Setup Terraform

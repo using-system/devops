@@ -1,8 +1,25 @@
+
+resource "azurerm_key_vault_key" "vm" {
+  name         = "${var.name}-key-des"
+  key_vault_id = var.disk_encryption_kv_id
+  key_type     = "RSA"
+  key_size     = 2048
+
+  key_opts = [
+    "decrypt",
+    "encrypt",
+    "sign",
+    "unwrapKey",
+    "verify",
+    "wrapKey",
+  ]
+}
+
 resource "azurerm_disk_encryption_set" "vm" {
   name                = "${var.name}-des"
   resource_group_name = var.resource_group_name
   location            = var.location
-  key_vault_key_id    = var.disk_encryption_kv_key_id
+  key_vault_key_id    = azurerm_key_vault_key.vm.id
 
   identity {
     type         = "UserAssigned"

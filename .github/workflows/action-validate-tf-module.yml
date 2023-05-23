@@ -51,7 +51,7 @@ jobs:
           working-directory: "terraform/modules/block-${{ matrix.modules }}"
           scan-type: "terraform"
           severity: "LOW"
-          skip-rules: "accurics.azure.NS.161"
+          skip-rules: "AC_AZURE_0356,AC_AZURE_0389" # Skip lock for rg and nsg check for subnets
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2

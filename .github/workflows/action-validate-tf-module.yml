@@ -37,6 +37,9 @@ jobs:
             "az-dns-zone",
             "az-pep",
             "az-assigned-identity",
+            "az-vm",
+            "az-vm-attach-disk",
+            "az-vm-shutdown",
           ]
     defaults:
       run:
@@ -50,8 +53,8 @@ jobs:
         with:
           working-directory: "terraform/modules/block-${{ matrix.modules }}"
           scan-type: "terraform"
-          severity: "MEDIUM"
-          skip-rules: "accurics.azure.NS.161"
+          severity: "LOW"
+          skip-rules: "AC_AZURE_0356,AC_AZURE_0389" # Skip lock for rg and nsg check for subnets
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2

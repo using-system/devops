@@ -38,6 +38,7 @@ jobs:
             "az-pep",
             "az-assigned-identity",
             "az-vm",
+            "az-vm-shutdown",
           ]
     defaults:
       run:

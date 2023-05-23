@@ -39,6 +39,11 @@ variable "caching" {
   default     = "ReadWrite"
 }
 
+variable "public_network_access_enabled" {
+  description = "Whether public network access is allowed for this disk"
+  default     = false
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

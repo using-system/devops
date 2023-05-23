@@ -48,5 +48,9 @@ resource "azurerm_windows_virtual_machine" "vm" {
     version   = var.image_version
   }
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   tags = var.tags
 }

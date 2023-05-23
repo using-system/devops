@@ -7,6 +7,8 @@ resource "azurerm_managed_disk" "vm" {
   create_option        = var.create_option
   disk_size_gb         = var.disk_size_gb
 
+  public_network_access_enabled = var.public_network_access_enabled
+
   tags = var.tags
 }
 

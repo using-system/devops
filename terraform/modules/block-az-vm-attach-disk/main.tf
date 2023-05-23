@@ -2,7 +2,7 @@ resource "azurerm_disk_encryption_set" "vm" {
   name                = "${var.name}-des"
   resource_group_name = var.resource_group_name
   location            = var.location
-  key_vault_key_id    = var.disk_encryption_kv_id
+  key_vault_key_id    = var.disk_encryption_kv_key_id
 
   identity {
     type         = "UserAssigned"

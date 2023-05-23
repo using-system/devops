@@ -44,7 +44,7 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
-variable "disk_encryption_kv_id" {
+variable "disk_encryption_kv_key_id" {
   description = "Key Vault Key Id for disk encryption"
 }
 

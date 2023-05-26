@@ -40,6 +40,7 @@ jobs:
             "az-vm",
             "az-vm-attach-disk",
             "az-vm-shutdown",
+            "az-bastion",
           ]
     defaults:
       run:

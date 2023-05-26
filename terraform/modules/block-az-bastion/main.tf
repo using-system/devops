@@ -17,6 +17,7 @@ resource "azurerm_bastion_host" "bastion" {
     public_ip_address_id = azurerm_public_ip.bastion.id
   }
 
+  sku                = var.sku
   copy_paste_enabled = var.copy_paste_enabled
   file_copy_enabled  = var.file_copy_enabled
   scale_units        = var.scale_units

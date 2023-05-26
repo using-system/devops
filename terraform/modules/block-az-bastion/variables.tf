@@ -14,6 +14,11 @@ variable "subnet_id" {
   description = "Id of the subnet to deploy the bastion host"
 }
 
+variable "sku" {
+  description = "Bastion host SKU"
+  default     = "Basic"
+}
+
 variable "copy_paste_enabled" {
   description = "Enable copy/paste"
   default     = true

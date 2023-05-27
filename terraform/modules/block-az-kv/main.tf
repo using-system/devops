@@ -18,6 +18,7 @@ resource "azurerm_key_vault" "keyvault" {
     default_action             = var.network_rules_default_action
     virtual_network_subnet_ids = var.network_subnet_ids
   }
+  public_network_access_enabled = var.public_network_access_enabled
 
   tags = var.tags
 }

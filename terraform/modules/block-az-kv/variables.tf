@@ -67,6 +67,13 @@ variable "network_subnet_ids" {
   default     = null
 }
 
+variable "public_network_access_enabled" {
+  description = "Whether or not public network access is allowed for the key vault."
+  type        = bool
+  default     = true
+}
+
+
 variable "log_analytics_workspace_id" {
   description = "Log analytics workspace id where to save diag audit event"
   type        = string

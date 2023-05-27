@@ -15,6 +15,8 @@ resource "azurerm_management_lock" "acr" {
 
   depends_on = [azurerm_container_registry.acr]
 
+  count = (var.enable_lock_on_acr == true ? 1 : 0)
+
   name       = "${var.name}-lock"
   scope      = azurerm_container_registry.acr.id
   lock_level = "CanNotDelete"

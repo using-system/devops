@@ -29,6 +29,12 @@ variable "network_rule_bypass_option" {
   type        = string
 }
 
+variable "enable_lock_on_acr" {
+  description = "Determines if the lock on acr is enabled"
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

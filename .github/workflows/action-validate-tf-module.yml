@@ -42,6 +42,7 @@ jobs:
             "az-vm-attach-disk",
             "az-vm-shutdown",
             "az-bastion",
+            "az-dns-zone-vnet-link",
           ]
     defaults:
       run:

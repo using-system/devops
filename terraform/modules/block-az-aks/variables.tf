@@ -22,8 +22,8 @@ variable "configuration" {
     private_cluster           = bool
     user_assigned_identity_id = string
     admin_username            = string
-    admin_public_ssh_key      = string
-    disk_encryption_set_id    = string
+    disk_encryption_set_id    = optional(string)
+    public_ssh_key            = optional(string)
     node_pool = object({
       type               = string
       count              = number

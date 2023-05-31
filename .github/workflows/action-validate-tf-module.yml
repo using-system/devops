@@ -64,6 +64,10 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
+          version: latest
+
+      - name: Terraform Version
+        run: terraform version
 
       - name: Terraform Format
         run: terraform fmt -check

@@ -52,14 +52,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Terrascan
-        uses: ./github/actions/terrascan
-        with:
-          working-directory: "terraform/modules/block-${{ matrix.modules }}"
-          scan-type: "terraform"
-          severity: "LOW"
-          skip-rules: "AC_AZURE_0356,AC_AZURE_0389" # Skip lock for rg and nsg check for subnets
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -77,3 +69,11 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
+
+      - name: Terrascan
+        uses: ./github/actions/terrascan
+        with:
+          working-directory: "terraform/modules/block-${{ matrix.modules }}"
+          scan-type: "terraform"
+          severity: "LOW"
+          skip-rules: "AC_AZURE_0356,AC_AZURE_0389" # Skip lock for rg and nsg check for subnets

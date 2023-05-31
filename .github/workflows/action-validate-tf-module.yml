@@ -43,6 +43,7 @@ jobs:
             "az-vm-shutdown",
             "az-bastion",
             "az-dns-zone-vnet-link",
+            "az-aks",
           ]
     defaults:
       run:

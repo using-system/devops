@@ -31,7 +31,6 @@ variable "configuration" {
       availability_zones = list(number)
       os_disk_type       = string
       os_disk_size       = number
-
     })
     rbac = object({
       enabled                = bool

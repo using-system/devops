@@ -44,6 +44,7 @@ jobs:
             "az-bastion",
             "az-dns-zone-vnet-link",
             "az-aks",
+            "az-disk-encryption-set",
           ]
     defaults:
       run:

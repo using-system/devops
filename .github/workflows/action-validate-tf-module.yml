@@ -80,4 +80,5 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
+          directory: "terraform/modules/block-${{ matrix.modules }}"
           framework: terraform

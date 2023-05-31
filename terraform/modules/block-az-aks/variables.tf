@@ -23,6 +23,7 @@ variable "configuration" {
     user_assigned_identity_id = string
     admin_username            = string
     admin_public_ssh_key      = string
+    disk_encryption_set_id    = string
     node_pool = object({
       type               = string
       count              = number
@@ -30,6 +31,12 @@ variable "configuration" {
       availability_zones = list(number)
       os_disk_type       = string
       os_disk_size       = number
+
+    })
+    rbac = object({
+      enabled                = bool
+      admin_group_object_ids = list(string)
+      tenant_id              = string
     })
     addon = object({
       enable_open_service_mesh = bool
@@ -45,6 +52,11 @@ variable "log_analytics_id" {
 
 variable "subnet_id" {
   description = "Id of the subnet to attach aks nodes"
+}
+
+variable "prevent_destroy" {
+  description = "Prevent destroy of the aks"
+  default     = false
 }
 
 variable "tags" {

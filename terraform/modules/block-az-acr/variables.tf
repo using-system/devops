@@ -35,6 +35,24 @@ variable "enable_lock_on_acr" {
   default     = true
 }
 
+variable "georeplication_locations" {
+  description = "List of locations for the georeplication"
+  type        = list(string)
+  default     = []
+}
+
+variable "retention_policy_enabled" {
+  description = "Determines if the retention policy is enabled"
+  type        = bool
+  default     = true
+}
+
+variable "retention_policy_days" {
+  description = "Number of days to retain an untagged manifest after which it gets purged"
+  type        = number
+  default     = 7
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

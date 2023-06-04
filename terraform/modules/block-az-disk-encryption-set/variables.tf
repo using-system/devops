@@ -25,7 +25,6 @@ variable "identity_ids" {
 
 variable "expiration_date" {
   description = "The expiration date of the Key Vault Key."
-  type        = string
   default     = null
 }
 

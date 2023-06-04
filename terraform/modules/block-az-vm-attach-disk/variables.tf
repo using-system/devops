@@ -53,6 +53,11 @@ variable "identity_ids" {
   type        = list(string)
 }
 
+variable "encryption_key_expiration_date" {
+  description = "Date when the encryption key expires"
+  default     = null
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

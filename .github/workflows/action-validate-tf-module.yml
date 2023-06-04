@@ -76,9 +76,8 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Test with Checkov
+      - name: Check terraform with Checkov
         id: checkov
-        uses: bridgecrewio/checkov-action@master
+        uses: using-system/devops/actions/checkov@master
         with:
-          directory: "terraform/modules/block-${{ matrix.modules }}"
-          framework: terraform
+          working-directory: "terraform/modules/block-${{ matrix.modules }}"

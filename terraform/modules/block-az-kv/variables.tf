@@ -43,12 +43,6 @@ variable "soft_delete_retention_days" {
   default     = 7
 }
 
-variable "purge_protection_enabled" {
-  description = "Specifies if Purge Protection should be enabled for this Key Vault."
-  type        = bool
-  default     = true
-}
-
 variable "network_rules_bypass" {
   description = "Specifies which traffic can bypass the network rules. Possible values are AzureServices and None."
   type        = string

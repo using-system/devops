@@ -1,0 +1,2 @@
+skip-check:
+  - CKV2_AZURE_32 # "Ensure private endpoint is configured to key vault" --> pep configured outside

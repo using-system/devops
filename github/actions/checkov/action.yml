@@ -1,0 +1,15 @@
+name: "checkov"
+description: "Run Checkov to check IaC code"
+
+inputs:
+  working-directory:
+    description: "Working Directory to check"
+    required: true
+    default: "."
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+  args:
+    - ${{ inputs.working-directory }}

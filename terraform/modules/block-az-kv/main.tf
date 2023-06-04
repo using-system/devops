@@ -24,7 +24,7 @@ resource "azurerm_key_vault" "keyvault" {
 
   lifecycle {
     precondition {
-      condition     = soft_delete_retention_days != null && soft_delete_retention_days > 7
+      condition     = var.soft_delete_retention_days != null && var.soft_delete_retention_days > 7
       error_message = "Soft delete retention days must be greater than 7"
     }
   }

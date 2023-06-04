@@ -23,14 +23,15 @@ resource "azurerm_windows_virtual_machine" "vm" {
 
   depends_on = [azurerm_network_interface.vm]
 
-  name                = "${var.name}-vm"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  computer_name       = var.name
-  size                = var.size
-  admin_username      = var.admin_username
-  admin_password      = random_password.vm.result
-  license_type        = var.license_type
+  name                       = "${var.name}-vm"
+  resource_group_name        = var.resource_group_name
+  location                   = var.location
+  computer_name              = var.name
+  size                       = var.size
+  admin_username             = var.admin_username
+  admin_password             = random_password.vm.result
+  license_type               = var.license_type
+  allow_extension_operations = false
 
   network_interface_ids = [
     azurerm_network_interface.vm.id

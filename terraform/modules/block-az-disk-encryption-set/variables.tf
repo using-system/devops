@@ -23,6 +23,12 @@ variable "identity_ids" {
   type        = list(string)
 }
 
+variable "expiration_date" {
+  description = "The expiration date of the Key Vault Key."
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = map(string)

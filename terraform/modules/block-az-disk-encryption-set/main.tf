@@ -1,7 +1,7 @@
 resource "azurerm_key_vault_key" "encryption_set" {
   name         = var.name
   key_vault_id = var.key_vault_id
-  key_type     = "RSA"
+  key_type     = "RSA-HSM"
   key_size     = 2048
 
   key_opts = [
@@ -12,6 +12,8 @@ resource "azurerm_key_vault_key" "encryption_set" {
     "verify",
     "wrapKey",
   ]
+
+  expiration_date = var.expiration_date
 }
 
 resource "azurerm_disk_encryption_set" "encryption_set" {

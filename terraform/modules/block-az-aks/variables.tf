@@ -34,7 +34,6 @@ variable "configuration" {
       availability_zones = list(number)
       os_disk_type       = string
       os_disk_size       = number
-      max_pods           = optional(number, 200)
     })
     rbac = object({
       enabled                = bool

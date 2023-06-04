@@ -29,7 +29,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     os_disk_size_gb = var.configuration.node_pool.os_disk_size
     type            = var.configuration.node_pool.type
     vnet_subnet_id  = var.subnet_id
-    max_pods        = var.configuration.node_pool.max_pods
   }
 
   identity {

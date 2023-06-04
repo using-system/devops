@@ -21,6 +21,13 @@ resource "azurerm_key_vault" "keyvault" {
   public_network_access_enabled = var.public_network_access_enabled
 
   tags = var.tags
+
+  lifecycle {
+    precondition {
+      condition     = (var.purge_protection_enabled && var.soft_delete_retention_days > 7) || var.purge_protection_enabled == false
+      error_message = "Purge protection must be disabled or soft delete retention days must be less than or equal to 7"
+    }
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "keyvault" {

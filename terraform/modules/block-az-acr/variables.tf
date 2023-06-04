@@ -12,6 +12,7 @@ variable "resource_group_name" {
 
 variable "sku" {
   description = "The SKU name of the container registry."
+  default     = "Premium"
 }
 
 variable "admin_enabled" {
@@ -33,6 +34,24 @@ variable "enable_lock_on_acr" {
   description = "Determines if the lock on acr is enabled"
   type        = bool
   default     = true
+}
+
+variable "georeplication_locations" {
+  description = "List of locations for the georeplication"
+  type        = list(string)
+  default     = []
+}
+
+variable "retention_policy_enabled" {
+  description = "Determines if the retention policy is enabled"
+  type        = bool
+  default     = true
+}
+
+variable "retention_policy_days" {
+  description = "Number of days to retain an untagged manifest after which it gets purged"
+  type        = number
+  default     = 7
 }
 
 variable "tags" {

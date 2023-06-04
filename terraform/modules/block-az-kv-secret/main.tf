@@ -4,4 +4,7 @@ resource "azurerm_key_vault_secret" "keyvault" {
 
   name  = var.secret_name
   value = var.secret_value
+
+  content_type    = var.content_type
+  expiration_date = var.expiration_date
 }

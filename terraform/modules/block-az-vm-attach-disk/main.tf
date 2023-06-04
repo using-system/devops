@@ -2,7 +2,7 @@
 resource "azurerm_key_vault_key" "vm" {
   name         = "${var.name}-key-des"
   key_vault_id = var.disk_encryption_kv_id
-  key_type     = "RSA"
+  key_type     = "RSA-HSM"
   key_size     = 2048
 
   key_opts = [
@@ -13,6 +13,8 @@ resource "azurerm_key_vault_key" "vm" {
     "verify",
     "wrapKey",
   ]
+
+  expiration_date = var.encryption_key_expiration_date
 }
 
 resource "azurerm_disk_encryption_set" "vm" {

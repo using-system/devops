@@ -46,7 +46,7 @@ variable "soft_delete_retention_days" {
 variable "purge_protection_enabled" {
   description = "Specifies if Purge Protection should be enabled for this Key Vault."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "network_rules_bypass" {
@@ -70,7 +70,7 @@ variable "network_subnet_ids" {
 variable "public_network_access_enabled" {
   description = "Whether or not public network access is allowed for the key vault."
   type        = bool
-  default     = true
+  default     = false
 }
 
 

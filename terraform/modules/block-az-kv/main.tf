@@ -11,7 +11,7 @@ resource "azurerm_key_vault" "keyvault" {
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
   enabled_for_template_deployment = var.enabled_for_template_deployment
   soft_delete_retention_days      = var.soft_delete_retention_days
-  purge_protection_enabled        = true
+  purge_protection_enabled        = var.purge_protection_enabled
 
   network_acls {
     bypass                     = var.network_rules_bypass
@@ -24,8 +24,8 @@ resource "azurerm_key_vault" "keyvault" {
 
   lifecycle {
     precondition {
-      condition     = var.soft_delete_retention_days != null && var.soft_delete_retention_days > 7
-      error_message = "Soft delete retention days must be greater than 7"
+      condition     = (var.purge_protection_enabled && var.soft_delete_retention_days > 7) || var.purge_protection_enabled == false
+      error_message = "Purge protection must be disabled or soft delete retention days must be less than or equal to 7"
     }
   }
 }

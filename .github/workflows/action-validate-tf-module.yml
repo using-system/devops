@@ -78,6 +78,6 @@ jobs:
 
       - name: Check terraform with Checkov
         id: checkov
-        uses: using-system/devops/actions/checkov@main
+        uses: using-system/devops/github/actions/checkov@main
         with:
           working-directory: "terraform/modules/block-${{ matrix.modules }}"

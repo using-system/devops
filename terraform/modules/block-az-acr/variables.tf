@@ -12,6 +12,7 @@ variable "resource_group_name" {
 
 variable "sku" {
   description = "The SKU name of the container registry."
+  default     = "Premium"
 }
 
 variable "admin_enabled" {

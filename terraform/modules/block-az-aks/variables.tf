@@ -22,8 +22,11 @@ variable "configuration" {
     private_cluster           = bool
     user_assigned_identity_id = string
     admin_username            = string
+    local_account_disabled    = optional(bool, true)
     disk_encryption_set_id    = optional(string)
     public_ssh_key            = optional(string)
+    automatic_channel_upgrade = string
+    kv_id                     = string
     node_pool = object({
       type               = string
       count              = number
@@ -31,6 +34,7 @@ variable "configuration" {
       availability_zones = list(number)
       os_disk_type       = string
       os_disk_size       = number
+      max_pods           = optional(number, 200)
     })
     rbac = object({
       enabled                = bool
@@ -51,11 +55,6 @@ variable "log_analytics_id" {
 
 variable "subnet_id" {
   description = "Id of the subnet to attach aks nodes"
-}
-
-variable "prevent_destroy" {
-  description = "Prevent destroy of the aks"
-  default     = false
 }
 
 variable "tags" {

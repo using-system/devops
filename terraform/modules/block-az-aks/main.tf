@@ -16,7 +16,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
   disk_encryption_set_id = var.configuration.disk_encryption_set_id
 
 
-  private_cluster_enabled = var.configuration.private_cluster
+  private_cluster_enabled   = var.configuration.private_cluster
+  local_account_disabled    = var.configuration.local_account_disabled
+  automatic_channel_upgrade = var.configuration.automatic_channel_upgrade
 
   default_node_pool {
     name            = "defaultpool"
@@ -27,6 +29,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     os_disk_size_gb = var.configuration.node_pool.os_disk_size
     type            = var.configuration.node_pool.type
     vnet_subnet_id  = var.subnet_id
+    max_pods        = var.configuration.node_pool.max_pods
   }
 
   identity {
@@ -38,6 +41,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   open_service_mesh_enabled = var.configuration.addon.enable_open_service_mesh
   oms_agent {
     log_analytics_workspace_id = var.log_analytics_id
+  }
+
+  key_management_service {
+    key_vault_key_id = var.configuration.kv_id
+  }
+  key_vault_secrets_provider {
+    secret_rotation_enabled = true
   }
 
   dynamic "linux_profile" {

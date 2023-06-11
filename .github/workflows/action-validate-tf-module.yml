@@ -47,6 +47,7 @@ jobs:
             "az-aks",
             "az-disk-encryption-set",
             "az-storage",
+            "az-storage-share",
           ]
     defaults:
       run:

@@ -45,6 +45,7 @@ jobs:
             "az-dns-zone-vnet-link",
             "az-aks",
             "az-disk-encryption-set",
+            "az-storage",
           ]
     defaults:
       run:

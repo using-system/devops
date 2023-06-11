@@ -24,6 +24,7 @@ jobs:
             "az-analytics",
             "az-kv",
             "az-kv-secret",
+            "az-kv-cust-key",
             "az-nsg",
             "az-rg",
             "az-routetable",

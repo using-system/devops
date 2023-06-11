@@ -17,7 +17,7 @@ variable "account_tier" {
 variable "account_replication_type" {
   description = "Defines the type of replication to use for this storage account."
   type        = string
-  default     = "LRS"
+  default     = "GRS"
 }
 
 variable "enable_https_traffic_only" {
@@ -44,6 +44,19 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
+variable "allow_nested_items_to_be_public" {
+  description = "Specifies whether or not public access is allowed on the blobs within the container."
+  type        = bool
+  default     = false
+}
+
+variable "blob_delete_retention_days" {
+  description = "Specifies the number of days that the deleted blob should be retained. The value must be greater than or equal to 1 if the account has versioning enabled."
+  type        = number
+  default     = 7
+}
+
+
 variable "network_rules_default_action" {
   description = "The default action of allow or deny when no other rules match."
   type        = string
@@ -53,7 +66,17 @@ variable "network_rules_default_action" {
 variable "network_rules_bypass" {
   description = "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices when network access rules are set."
   type        = list(string)
-  default     = ["None"]
+  default     = ["AzureServices"]
+}
+
+variable "kv_id_cust_managed_key" {
+  description = "The ID of the Key Vault containing the key to be used as the Customer Managed Key for the Storage Account."
+  type        = string
+}
+
+variable "kv_key_id_cust_managed_key" {
+  description = "The ID of the Key Vault Key to be used as the Customer Managed Key for the Storage Account."
+  type        = string
 }
 
 variable "tags" {

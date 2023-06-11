@@ -1,0 +1,3 @@
+skip-check:
+  - CKV_AZURE_36 # "Ensure 'Trusted Microsoft Services' is enabled for Storage Account access" --> Allow deny all !
+  - CKV2_AZURE_33 # "Ensure storage account is configured with private endpoint" -> pep must be configured outside

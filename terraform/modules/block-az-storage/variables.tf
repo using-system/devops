@@ -79,8 +79,8 @@ variable "kv_id_cust_managed_key" {
   type        = string
 }
 
-variable "kv_key_id_cust_managed_key" {
-  description = "The ID of the Key Vault Key to be used as the Customer Managed Key for the Storage Account."
+variable "kv_key_name_cust_managed_key" {
+  description = "The name of the Key Vault Key to be used as the Customer Managed Key for the Storage Account."
   type        = string
 }
 

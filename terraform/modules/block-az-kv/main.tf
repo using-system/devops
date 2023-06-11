@@ -24,8 +24,8 @@ resource "azurerm_key_vault" "keyvault" {
 
   lifecycle {
     precondition {
-      condition     = (var.purge_protection_enabled && var.soft_delete_retention_days > 7) || var.purge_protection_enabled == false
-      error_message = "Purge protection must be disabled or soft delete retention days must be less than or equal to 7"
+      condition     = (var.purge_protection_enabled && var.soft_delete_retention_days >= 7) || var.purge_protection_enabled == false
+      error_message = "Purge protection must be disabled or soft delete retention days must be greater than or equal to 7"
     }
   }
 }

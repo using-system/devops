@@ -24,6 +24,7 @@ jobs:
             "az-analytics",
             "az-kv",
             "az-kv-secret",
+            "az-kv-cust-key",
             "az-nsg",
             "az-rg",
             "az-routetable",
@@ -33,6 +34,7 @@ jobs:
             "az-ad-security-group-members",
             "az-iam",
             "az-acae",
+            "az-acae-storage",
             "az-aca",
             "az-acr",
             "az-dns-zone",
@@ -45,6 +47,8 @@ jobs:
             "az-dns-zone-vnet-link",
             "az-aks",
             "az-disk-encryption-set",
+            "az-storage",
+            "az-storage-share",
           ]
     defaults:
       run:
@@ -70,11 +74,6 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
-
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.8
 
       - name: Check terraform with Checkov
         id: checkov

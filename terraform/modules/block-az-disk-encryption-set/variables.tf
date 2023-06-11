@@ -13,8 +13,8 @@ variable "name" {
   type        = string
 }
 
-variable "key_vault_id" {
-  description = "The ID of the Key Vault in which the Key Vault Key for the Disk Encryption Set should be created."
+variable "kv_key_id_cust_managed_key" {
+  description = "The ID of the Key Vault Key to be used as the Customer Managed Key for the Storage Account."
   type        = string
 }
 

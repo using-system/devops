@@ -33,6 +33,11 @@ resource "azurerm_storage_account" "storage" {
     }
   }
 
+  identity {
+    type         = var.identity_type
+    identity_ids = var.identity_ids
+  }
+
   tags = var.tags
 }
 

@@ -79,6 +79,18 @@ variable "kv_key_id_cust_managed_key" {
   type        = string
 }
 
+variable "identity_type" {
+  description = "The type of identity used for the Storage Account."
+  type        = string
+  default     = "SystemAssigned"
+}
+
+variable "identity_ids" {
+  description = "A list of identities associated with the Storage Account."
+  type        = list(string)
+  default     = []
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = map(string)

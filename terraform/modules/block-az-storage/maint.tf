@@ -41,7 +41,7 @@ resource "azurerm_storage_account" "storage" {
   tags = var.tags
 
   lifecycle {
-    ignore_changes = [customer_managed_key]
+    ignore_changes = [customer_managed_key, network_rules.private_link_access]
   }
 }
 

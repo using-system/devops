@@ -39,6 +39,10 @@ resource "azurerm_storage_account" "storage" {
   }
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = ["customer_managed_key"]
+  }
 }
 
 resource "azurerm_storage_account_customer_managed_key" "storage" {

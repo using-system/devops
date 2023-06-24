@@ -24,7 +24,7 @@ jobs:
         run: |
           modules=$(ls -d */ | sed 's#/##' | jq -R -s -c 'split("\n") | map(select(length > 0))')
           echo "modules=$modules" >> $GITHUB_OUTPUT
-        working-directory: "modules/"
+        working-directory: "terraform/modules/"
     outputs:
       matrix: ${{ steps.get-tf-modules.outputs.modules }}
 

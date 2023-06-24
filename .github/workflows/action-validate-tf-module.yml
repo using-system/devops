@@ -26,7 +26,7 @@ jobs:
           echo "modules=$modules" >> $GITHUB_OUTPUT
         working-directory: "terraform/modules/"
     outputs:
-      matrix: ${{ steps.get-tf-modules.outputs.modules }}
+      modules: ${{ steps.get-tf-modules.outputs.modules }}
 
   validate-tf-modules:
     name: Terraform

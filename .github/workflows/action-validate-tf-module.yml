@@ -13,43 +13,29 @@ on:
       - ".github/workflows/action-validate-tf-module.yml"
 
 jobs:
-  terraform:
+  get-tf-modules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - id: get-tf-modules
+        name: "Build TF modules matrix"
+        run: |
+          modules=$(ls -d */ | sed 's#/##' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "modules=$modules" >> $GITHUB_OUTPUT
+        working-directory: "modules/"
+    outputs:
+      matrix: ${{ steps.get-tf-modules.outputs.modules }}
+
+  validate-tf-modules:
     name: Terraform
+    needs: get-tf-modules
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        modules:
-          [
-            "az-analytics",
-            "az-kv",
-            "az-kv-secret",
-            "az-kv-cust-key",
-            "az-nsg",
-            "az-rg",
-            "az-routetable",
-            "az-vnet",
-            "core-convention",
-            "az-ad-security-group",
-            "az-ad-security-group-members",
-            "az-iam",
-            "az-acae",
-            "az-acae-storage",
-            "az-aca",
-            "az-acr",
-            "az-dns-zone",
-            "az-pep",
-            "az-assigned-identity",
-            "az-vm",
-            "az-vm-attach-disk",
-            "az-vm-shutdown",
-            "az-bastion",
-            "az-dns-zone-vnet-link",
-            "az-aks",
-            "az-disk-encryption-set",
-            "az-storage",
-            "az-storage-share",
-          ]
+        modules: ${{ fromJson(needs.get-tf-modules.outputs.modules) }}
     defaults:
       run:
         working-directory: "terraform/modules/block-${{ matrix.modules }}"

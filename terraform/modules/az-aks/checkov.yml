@@ -1,3 +1,0 @@
-skip-check:
-  - CKV2_AZURE_29 # "Ensure AKS cluster has Azure CNI networking enabled" --> calico is good !
-  - CKV_AZURE_168 # "Ensure Azure Kubernetes Cluster (AKS) nodes should use a minimum number of 50 pods." --> not applicable for calico

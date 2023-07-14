@@ -33,7 +33,8 @@ variable "configuration" {
       vm_size            = string
       availability_zones = list(number)
       os_disk_type       = string
-      os_disk_size       = number
+      os_disk_size       = number,
+      max_pods           = optional(number, 110)
     })
     rbac = object({
       enabled                = bool
@@ -43,6 +44,12 @@ variable "configuration" {
     addon = object({
       enable_open_service_mesh = bool
       enable_azure_policy      = bool
+    })
+    network_profile = object({
+      network_plugin    = optional(string, "azure"),
+      network_policy    = optional(string, "azure"),
+      load_balancer_sku = optional(string, "standard"),
+      outbound_type     = optional(string, "userDefinedRouting"),
     })
 
   })

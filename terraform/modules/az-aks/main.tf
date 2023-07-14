@@ -29,6 +29,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     os_disk_size_gb = var.configuration.node_pool.os_disk_size
     type            = var.configuration.node_pool.type
     vnet_subnet_id  = var.subnet_id
+    max_pods        = var.configuration.node_pool.max_pods
   }
 
   identity {
@@ -62,10 +63,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   network_profile {
-    network_plugin    = "kubenet"
-    network_policy    = "calico"
-    load_balancer_sku = "standard"
-    outbound_type     = "userDefinedRouting"
+    network_plugin    = var.configuration.network_profile.network_plugin
+    network_policy    = var.configuration.network_profile.network_policy
+    load_balancer_sku = var.configuration.network_profile.load_balancer_sku
+    outbound_type     = var.configuration.network_profile.outbound_type
   }
 
   azure_active_directory_role_based_access_control {

@@ -2,7 +2,7 @@ resource "tls_private_key" "aks" {
   count = var.configuration.admin_username == null ? 0 : 1
 
   algorithm = "RSA"
-  rsa_bits  = 2048
+  rsa_bits  = 4096
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
@@ -55,10 +55,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     for_each = var.configuration.admin_username == null ? [] : ["linux_profile"]
 
     content {
-      admin_username = var.admin_username
+      admin_username = var.configuration.admin_username
 
       ssh_key {
-        key_data = replace(coalesce(var.public_ssh_key, tls_private_key.aks[0].public_key_openssh), "\n", "")
+        key_data = replace(coalesce(var.configuration.public_ssh_key, tls_private_key.aks[0].public_key_openssh), "\n", "")
       }
     }
   }

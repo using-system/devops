@@ -10,10 +10,6 @@ variable "name" {
   description = "Naming of the aks"
 }
 
-variable "subscription_id" {
-  description = "Azure Subscription Identifier"
-}
-
 variable "configuration" {
   description = "AKS configuration"
   type = object({

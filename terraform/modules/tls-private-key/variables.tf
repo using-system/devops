@@ -3,9 +3,11 @@ variable "algorithm" {
 }
 
 variable "rsa_bits" {
-  type = optional(string)
+  type    = string
+  default = null
 }
 
 variable "ecdsa_curve" {
-  type = optional(string)
+  type    = string
+  default = null
 }

@@ -21,7 +21,7 @@ variable "configuration" {
     local_account_disabled    = optional(bool, true)
     disk_encryption_set_id    = optional(string)
     public_ssh_key            = optional(string)
-    automatic_channel_upgrade = string
+    automatic_channel_upgrade = optional(string)
     kv_id                     = string
     node_pool = object({
       type                        = string

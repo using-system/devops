@@ -45,7 +45,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   key_management_service {
-    key_vault_key_id = var.configuration.kv_id
+    key_vault_key_id = var.configuration.kv_key_management_service_id
   }
   key_vault_secrets_provider {
     secret_rotation_enabled = true

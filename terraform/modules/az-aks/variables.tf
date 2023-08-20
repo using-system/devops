@@ -13,16 +13,16 @@ variable "name" {
 variable "configuration" {
   description = "AKS configuration"
   type = object({
-    version                   = string
-    sku                       = string
-    private_cluster           = bool
-    user_assigned_identity_id = string
-    admin_username            = optional(string)
-    local_account_disabled    = optional(bool, true)
-    disk_encryption_set_id    = optional(string)
-    public_ssh_key            = optional(string)
-    automatic_channel_upgrade = optional(string)
-    kv_id                     = string
+    version                      = string
+    sku                          = string
+    private_cluster              = bool
+    user_assigned_identity_id    = string
+    admin_username               = optional(string)
+    local_account_disabled       = optional(bool, true)
+    disk_encryption_set_id       = optional(string)
+    public_ssh_key               = optional(string)
+    automatic_channel_upgrade    = optional(string)
+    kv_key_management_service_id = string
     node_pool = object({
       type                        = string
       count                       = number

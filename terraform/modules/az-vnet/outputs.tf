@@ -7,3 +7,8 @@ output "subnet_ids" {
   description = "Subnet ids"
   value       = { for subnet in azurerm_subnet.network : subnet.name => subnet.id }
 }
+
+output "name" {
+  description = "Virtual network name"
+  value       = var.name
+}

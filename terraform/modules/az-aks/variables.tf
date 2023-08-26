@@ -22,7 +22,7 @@ variable "configuration" {
     disk_encryption_set_id       = optional(string)
     public_ssh_key               = optional(string)
     automatic_channel_upgrade    = optional(string)
-    kv_key_management_service_id = string
+    kv_key_management_service_id = optional(string)
     node_pool = object({
       type                        = string
       count                       = number

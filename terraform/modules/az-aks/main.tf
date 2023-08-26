@@ -44,10 +44,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
     log_analytics_workspace_id = var.log_analytics_id
   }
 
-  key_management_service {
-    key_vault_key_id         = var.configuration.kv_key_management_service_id
-    key_vault_network_access = "Private"
+  dynamic "key_management_service" {
+    for_each = var.configuration.kv_key_management_service_id == null ? [] : ["key_management_service"]
+
+    content {
+      key_vault_key_id         = var.configuration.kv_key_management_service_id
+      key_vault_network_access = "Private"
+    }
   }
+
   key_vault_secrets_provider {
     secret_rotation_enabled = true
   }

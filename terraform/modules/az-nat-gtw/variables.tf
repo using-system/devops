@@ -41,9 +41,9 @@ variable "public_ips" {
   description = "List of public IPs to be used by the NAT Gateway"
 }
 
-variable "subnet_id" {
-  type        = string
-  description = "ID of the subnet where the NAT Gateway will be created"
+variable "subnet_ids" {
+  type        = list(string)
+  description = "IDs of the subnets where the NAT Gateway will be associated with"
 }
 
 variable "tags" {

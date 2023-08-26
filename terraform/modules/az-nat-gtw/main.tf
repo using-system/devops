@@ -37,6 +37,9 @@ resource "azurerm_nat_gateway_public_ip_prefix_association" "nat_ips" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "sn_cluster_nat_gw" {
-  subnet_id      = var.subnet_id
+
+  for_each = toset(var.subnet_ids)
+
+  subnet_id      = each.key
   nat_gateway_id = azurerm_nat_gateway.nat_gtw.id
 }

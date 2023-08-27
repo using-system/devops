@@ -11,7 +11,7 @@ resource "azurerm_public_ip_prefix" "nat_prefix" {
   ip_version          = each.value.ip_version
   prefix_length       = each.value.prefix_length
   sku                 = each.value.sku
-  zones               = each.value.abailability_zones
+  zones               = each.value.availability_zones
 
   tags = var.tags
 }
@@ -22,7 +22,7 @@ resource "azurerm_nat_gateway" "nat_gtw" {
   location                = var.location
   sku_name                = var.sku
   idle_timeout_in_minutes = var.idle_timeout_in_minutes
-  zones                   = var.abailability_zones
+  zones                   = var.availability_zones
 
   tags = var.tags
 }

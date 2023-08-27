@@ -25,7 +25,7 @@ variable "idle_timeout_in_minutes" {
   default     = 4
 }
 
-variable "abailability_zones" {
+variable "availability_zones" {
   type        = list(string)
   description = "Availability zones where the NAT Gateway will be created"
   default     = ["1", "2", "3"]
@@ -36,7 +36,7 @@ variable "public_ips" {
     ip_version         = optional(string, "IPv4")
     prefix_length      = optional(number, 31)
     sku                = optional(string, "Standard")
-    abailability_zones = list(string)
+    availability_zones = list(string)
   }))
   description = "List of public IPs to be used by the NAT Gateway"
 }

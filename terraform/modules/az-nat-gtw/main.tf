@@ -12,6 +12,7 @@ resource "azurerm_public_ip" "nat_gtw" {
   ip_version          = each.value.ip_version
   allocation_method   = "Static"
   sku                 = each.value.sku
+  zones               = var.availability_zones
 }
 
 resource "azurerm_nat_gateway" "nat_gtw" {

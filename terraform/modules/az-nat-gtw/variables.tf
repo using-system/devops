@@ -33,10 +33,8 @@ variable "availability_zones" {
 
 variable "public_ips" {
   type = list(object({
-    ip_version         = optional(string, "IPv4")
-    prefix_length      = optional(number, 31)
-    sku                = optional(string, "Standard")
-    availability_zones = list(string)
+    ip_version = optional(string, "IPv4")
+    sku        = optional(string, "Standard")
   }))
   description = "List of public IPs to be used by the NAT Gateway"
 }

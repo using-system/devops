@@ -10,7 +10,7 @@ resource "azurerm_public_ip" "nat_gtw" {
   location            = var.location
   resource_group_name = var.resource_group_name
   ip_version          = each.value.ip_version
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
   sku                 = each.value.sku
 }
 

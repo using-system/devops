@@ -60,6 +60,12 @@ variable "quarantine_policy_enabled" {
   default     = true
 }
 
+variable "trust_policy_enabled" {
+  description = "Determines if the trust policy is enabled"
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

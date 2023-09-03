@@ -17,4 +17,6 @@ resource "azurerm_private_endpoint" "pep" {
     subresource_names              = var.subresource_names
     is_manual_connection           = false
   }
+
+  tags = var.tags
 }

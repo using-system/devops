@@ -13,6 +13,8 @@ resource "azurerm_public_ip" "nat_gtw" {
   allocation_method   = "Static"
   sku                 = each.value.sku
   zones               = var.availability_zones
+
+  tags = var.tags
 }
 
 resource "azurerm_nat_gateway" "nat_gtw" {

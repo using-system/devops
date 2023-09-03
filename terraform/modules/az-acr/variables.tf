@@ -54,6 +54,12 @@ variable "retention_policy_days" {
   default     = 7
 }
 
+variable "quarantine_policy_enabled" {
+  description = "Determines if the quarantine policy is enabled"
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

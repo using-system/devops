@@ -8,7 +8,7 @@ resource "azurerm_container_registry" "acr" {
 
   admin_enabled = var.admin_enabled
 
-  quarantine_policy_enabled = true
+  quarantine_policy_enabled = var.quarantine_policy_enabled
   trust_policy {
     enabled = true
   }

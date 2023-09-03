@@ -41,7 +41,7 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
 
     retention_policy {
       enabled = true
-      days    = 30
+      days    = 0
     }
   }
 

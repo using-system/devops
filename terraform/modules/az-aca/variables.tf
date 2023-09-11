@@ -51,8 +51,8 @@ variable "environment_variables" {
   description = "Environment variables of the container app"
   type = list(object({
     name        = string
-    value       = string
-    secret_name = string
+    value       = optional(string)
+    secret_name = optional(string)
   }))
   default = []
 }

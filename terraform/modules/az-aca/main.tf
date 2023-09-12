@@ -17,9 +17,9 @@ resource "azurerm_container_app" "aca" {
       dynamic "env" {
         for_each = var.environment_variables
         content {
-          name        = environment_variable.value.name
-          value       = environment_variable.value.value
-          secret_name = environment_variable.value.secret_name
+          name        = env.value.name
+          value       = env.value.value
+          secret_name = env.value.secret_name
         }
       }
 

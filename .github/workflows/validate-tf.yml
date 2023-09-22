@@ -6,12 +6,16 @@ on:
       - main
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/action-validate-tf-module.yml"
+      - ".github/workflows/validate-tf.yml"
   pull_request:
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/action-validate-tf-module.yml"
+      - ".github/workflows/validate-tf.yml"
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+  
 jobs:
   get-tf-modules:
     runs-on: ubuntu-latest

@@ -4,7 +4,14 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "terraform/modules/**"
+      - ".github/workflows/release.yml"
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+        
 jobs:
   release:
     runs-on: ubuntu-latest

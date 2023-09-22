@@ -6,11 +6,11 @@ on:
       - main
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/action-validate-tf-module.yml"
+      - ".github/workflows/validate-tf.yml"
   pull_request:
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/action-validate-tf-module.yml"
+      - ".github/workflows/validate-tf.yml"
 
 jobs:
   get-tf-modules:

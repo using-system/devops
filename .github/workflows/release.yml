@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "terraform/modules/**"
+      - ".github/workflows/release.yml"
       
 jobs:
   release:

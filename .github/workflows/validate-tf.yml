@@ -12,6 +12,10 @@ on:
       - "terraform/modules/**"
       - ".github/workflows/validate-tf.yml"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   get-tf-modules:
     runs-on: ubuntu-latest

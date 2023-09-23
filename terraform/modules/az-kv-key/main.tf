@@ -13,5 +13,12 @@ resource "azurerm_key_vault_key" "cust_managed_key" {
     "wrapKey",
   ]
 
-  expiration_date = var.expiration_date
+  rotation_policy {
+    automatic {
+      time_before_expiry = var.rotation.auto_rotatation_time_before_expiry
+    }
+
+    expire_after         = var.rotation.expire_after
+    notify_before_expiry = var.rotation.notify_before_expiry
+  }
 }

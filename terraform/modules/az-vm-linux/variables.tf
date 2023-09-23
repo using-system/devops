@@ -23,6 +23,12 @@ variable "admin_username" {
   type        = string
 }
 
+variable "ssh_key_rsa_bits" {
+  description = "The number of bits of the generated ssh key."
+  type        = number
+  default     = 4096
+}
+
 variable "subnet_id" {
   description = "The subnet id of the linux vm."
   type        = string
@@ -48,3 +54,4 @@ variable "tags" {
   description = "The tags of the linux vm."
   type        = map(string)
 }
+

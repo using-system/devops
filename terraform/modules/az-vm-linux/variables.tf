@@ -36,12 +36,12 @@ variable "storage_account_type" {
 
 variable "image" {
   description = "The image of the linux vm."
-  type = {
+  type = object({
     publisher = string
     offer     = string
     sku       = string
     version   = string
-  }
+  })
 }
 
 variable "tags" {

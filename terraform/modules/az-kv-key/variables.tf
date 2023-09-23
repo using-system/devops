@@ -11,6 +11,7 @@ variable "kv_id" {
 variable "rotation" {
   description = "The rotation policy of the customer managed key"
   type = object({
+    expiration_date                    = optional(string)
     auto_rotatation_time_before_expiry = optional(string, "P30D")
     expire_after                       = optional(string, "P90D")
     notify_before_expiry               = optional(string, "P29D")

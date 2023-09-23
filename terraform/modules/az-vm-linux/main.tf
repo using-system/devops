@@ -13,12 +13,6 @@ resource "azurerm_network_interface" "vm" {
   tags = var.tags
 }
 
-resource "tls_private_key" "vm" {
-  algorithm = "RSA"
-  rsa_bits  = var.ssh_key_rsa_bits
-}
-
-
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = "${var.name}-vm"
   resource_group_name = var.resource_group_name
@@ -31,7 +25,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = tls_private_key.vm.public_key_openssh
+    public_key = var.public_key_openssh
   }
 
   os_disk {

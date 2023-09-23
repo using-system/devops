@@ -23,10 +23,9 @@ variable "admin_username" {
   type        = string
 }
 
-variable "ssh_key_rsa_bits" {
-  description = "The number of bits of the generated ssh key."
-  type        = number
-  default     = 4096
+variable "public_key_openssh" {
+  description = "The public key of the linux vm in OpenSSH format."
+  type        = string
 }
 
 variable "subnet_id" {

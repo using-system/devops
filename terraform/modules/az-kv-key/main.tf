@@ -1,4 +1,4 @@
-resource "azurerm_key_vault_key" "cust_managed_key" {
+resource "azurerm_key_vault_key" "key" {
   name         = var.name
   key_vault_id = var.kv_id
   key_type     = "RSA-HSM"
@@ -13,12 +13,25 @@ resource "azurerm_key_vault_key" "cust_managed_key" {
     "wrapKey",
   ]
 
-  rotation_policy {
-    automatic {
-      time_before_expiry = var.rotation.auto_rotatation_time_before_expiry
-    }
+  dynamic "rotation_policy" {
+    for_each = var.rotation.expiration_date == null ? [] : ["rotation_policy"]
 
-    expire_after         = var.rotation.expire_after
-    notify_before_expiry = var.rotation.notify_before_expiry
+    content {
+      automatic {
+        time_before_expiry = var.rotation.auto_rotatation_time_before_expiry
+      }
+
+      expire_after         = var.rotation.expire_after
+      notify_before_expiry = var.rotation.notify_before_expiry
+    }
+  }
+
+  expiration_date = var.rotation.expiration_date
+
+  lifecycle {
+    precondition {
+      condition     = (var.rotation.expiration_date == null && var.rotation.expire_after != null) || (var.rotation.expiration_date != null && var.rotation.expire_after == null) || (var.rotation.expiration_date == null && var.rotation.expire_after == null)
+      error_message = "Either expiration_date or expire_after must be set"
+    }
   }
 }

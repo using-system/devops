@@ -1,2 +1,0 @@
-skip-check:
-  - CKV_AZURE_40 # "Ensure that the expiration date is set on all keys" --> a rotation for this key is already set

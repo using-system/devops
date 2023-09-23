@@ -50,6 +50,11 @@ variable "image" {
   })
 }
 
+variable "identity_ids" {
+  description = "List of identity ids to assign to the vm"
+  type        = list(string)
+}
+
 variable "allow_extension_operations" {
   description = "Allow extension operations on the linux vm."
   type        = bool

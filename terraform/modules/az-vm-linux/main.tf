@@ -46,5 +46,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = var.image.version
   }
 
+  allow_extension_operations = var.allow_extension_operations
+
   tags = var.tags
 }

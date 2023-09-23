@@ -50,8 +50,13 @@ variable "image" {
   })
 }
 
+variable "allow_extension_operations" {
+  description = "Allow extension operations on the linux vm."
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "The tags of the linux vm."
   type        = map(string)
 }
-

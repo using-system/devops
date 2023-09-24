@@ -24,17 +24,24 @@ variable "key_size" {
   default     = 4096
 }
 
-variable "auto_rotatation_time_before_expiry" {
+variable "rotation_time_before_expiry" {
   description = "The time before expiry to automatically rotate the key."
   type        = string
   default     = "P7D"
 }
 
-variable "expire_after" {
+variable "rotation_expire_after" {
   description = "The time after which the key expires."
   type        = string
   default     = "P30D"
 }
+
+variable "expiration_date" {
+  description = "The date after which the key expires."
+  type        = string
+  default     = null
+}
+
 
 variable "identity_ids" {
   description = "A list of User Assigned Identity IDs to assign to the Disk Encryption Set."

@@ -15,13 +15,13 @@ resource "azurerm_key_vault_key" "des" {
 
   rotation_policy {
     automatic {
-      time_before_expiry = var.auto_rotatation_time_before_expiry
+      time_before_expiry = var.rotation__time_before_expiry
     }
 
-    expire_after = var.expire_after
+    expire_after = var.rotation_expire_after
   }
 
-  expiration_date = null
+  expiration_date = var.expiration_date
 }
 
 resource "azurerm_disk_encryption_set" "des" {

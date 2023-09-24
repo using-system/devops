@@ -26,7 +26,7 @@ resource "azurerm_key_vault_key" "key" {
     }
   }
 
-  expiration_date = var.rotation.static_expiration_date
+  expiration_date = var.static_expiration_date
 
   lifecycle {
     precondition {

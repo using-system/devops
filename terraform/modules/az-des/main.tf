@@ -20,6 +20,8 @@ resource "azurerm_key_vault_key" "des" {
 
     expire_after = var.expire_after
   }
+
+  expiration_date = null
 }
 
 resource "azurerm_disk_encryption_set" "des" {

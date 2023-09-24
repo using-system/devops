@@ -13,19 +13,32 @@ variable "name" {
   type        = string
 }
 
-variable "kv_key_id_cust_managed_key" {
-  description = "The ID of the Key Vault Key to be used as the Customer Managed Key for the Storage Account."
+variable "kv_id" {
+  description = "The ID of the Key Vault to use for encryption."
   type        = string
+}
+
+variable "key_size" {
+  description = "The size of the key to use for encryption."
+  type        = number
+  default     = 4096
+}
+
+variable "auto_rotatation_time_before_expiry" {
+  description = "The time before expiry to automatically rotate the key."
+  type        = string
+  default     = "P7D"
+}
+
+variable "expire_after" {
+  description = "The time after which the key expires."
+  type        = string
+  default     = "P30D"
 }
 
 variable "identity_ids" {
   description = "A list of User Assigned Identity IDs to assign to the Disk Encryption Set."
   type        = list(string)
-}
-
-variable "expiration_date" {
-  description = "The expiration date of the Key Vault Key."
-  default     = null
 }
 
 variable "tags" {

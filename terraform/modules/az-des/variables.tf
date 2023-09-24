@@ -36,6 +36,12 @@ variable "rotation_expire_after" {
   default     = "P30D"
 }
 
+variable "rotation_notify_before_expiry" {
+  description = "The time before expiry to notify that the key is expiring."
+  type        = string
+  default     = "P2D"
+}
+
 variable "expiration_date" {
   description = "The date after which the key expires."
   type        = string

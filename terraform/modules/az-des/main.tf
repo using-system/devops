@@ -15,7 +15,7 @@ resource "azurerm_key_vault_key" "des" {
 
   rotation_policy {
     automatic {
-      time_before_expiry = var.rotation_time_before_expiry
+      time_before_expiry = var.auto_rotation_time_before_expiry
     }
 
     expire_after = var.rotation_expire_after
@@ -39,9 +39,9 @@ resource "azurerm_disk_encryption_set" "des" {
 }
 
 resource "azurerm_role_assignment" "des" {
-  for_each = var.identity_ids
+  for_each = toset(var.identity_ids)
 
   scope                = var.kv_id
   role_definition_name = "Key Vault Crypto Service Encryption User"
-  principal_id         = each.key
+  principal_id         = each.value
 }

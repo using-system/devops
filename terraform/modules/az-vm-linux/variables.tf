@@ -39,6 +39,11 @@ variable "storage_account_type" {
   default     = "Standard_LRS"
 }
 
+variable "disk_encryption_set_id" {
+  description = "The disk encryption set id of the linux vm."
+  type        = string
+}
+
 variable "image" {
   description = "The image of the linux vm."
   type = object({

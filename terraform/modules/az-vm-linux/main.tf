@@ -29,8 +29,14 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = var.storage_account_type
+    caching                = "ReadOnly"
+    storage_account_type   = var.storage_account_type
+    disk_encryption_set_id = var.disk_encryption_set_id
+
+    diff_disk_settings = {
+      option    = "Local"
+      placement = "CacheDisk"
+    }
   }
 
   source_image_reference {

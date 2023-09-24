@@ -1,8 +1,3 @@
-locals {
-  identity_ids_with_index = { for idx, id in var.identity_ids : idx => id }
-}
-
-
 resource "azurerm_key_vault_key" "des" {
   name         = var.name
   key_vault_id = var.kv_id
@@ -30,7 +25,16 @@ resource "azurerm_key_vault_key" "des" {
   expiration_date = var.expiration_date
 }
 
+resource "azurerm_role_assignment" "des" {
+  scope                = var.kv_id
+  role_definition_name = "Key Vault Crypto Service Encryption User"
+  principal_id         = var.principal_id
+}
+
 resource "azurerm_disk_encryption_set" "des" {
+
+  depends_on = [azurerm_role_assignment.des]
+
   name                = var.name
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -38,16 +42,9 @@ resource "azurerm_disk_encryption_set" "des" {
 
   identity {
     type         = "UserAssigned"
-    identity_ids = var.identity_ids
+    identity_ids = [var.identity_id]
   }
 
   tags = var.tags
 }
 
-resource "azurerm_role_assignment" "des" {
-  for_each = local.identity_ids_with_index
-
-  scope                = var.kv_id
-  role_definition_name = "Key Vault Crypto Service Encryption User"
-  principal_id         = each.value
-}

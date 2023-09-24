@@ -48,9 +48,14 @@ variable "expiration_date" {
   default     = null
 }
 
-variable "identity_ids" {
-  description = "A list of User Assigned Identity IDs to assign to the Disk Encryption Set."
-  type        = list(string)
+variable "identity_id" {
+  description = "The ID of the identity to assign to the disk encryption set."
+  type        = string
+}
+
+variable "principal_id" {
+  description = "The ID of the principal to assign to the disk encryption set."
+  type        = string
 }
 
 variable "tags" {

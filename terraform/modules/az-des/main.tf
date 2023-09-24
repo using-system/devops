@@ -15,7 +15,7 @@ resource "azurerm_key_vault_key" "des" {
 
   rotation_policy {
     automatic {
-      time_before_expiry = var.rotation__time_before_expiry
+      time_before_expiry = var.rotation_time_before_expiry
     }
 
     expire_after = var.rotation_expire_after

@@ -26,7 +26,7 @@ resource "azurerm_disk_encryption_set" "des" {
   name                = var.name
   resource_group_name = var.resource_group_name
   location            = var.location
-  key_vault_key_id    = azurerm_key_vault_key.encryption_set.id
+  key_vault_key_id    = azurerm_key_vault_key.des.id
 
   identity {
     type         = "UserAssigned"

@@ -17,6 +17,7 @@ variable "subnet_id" {
 variable "private_dns_zone_ids" {
   description = "Ids of the private dns zones to use for the pep"
   type        = list(string)
+  default     = []
 }
 
 variable "private_connection_resource_id" {

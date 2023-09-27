@@ -6,9 +6,12 @@ resource "azurerm_private_endpoint" "pep" {
 
   subnet_id = var.subnet_id
 
-  private_dns_zone_group {
-    name                 = "${var.name}-dzg"
-    private_dns_zone_ids = var.private_dns_zone_ids
+  dynamic "private_dns_zone_group" {
+    for_each = length(var.private_dns_zone_ids) > 0 ? [1] : []
+    content {
+      name                 = "${var.name}-dzg"
+      private_dns_zone_ids = var.private_dns_zone_ids
+    }
   }
 
   private_service_connection {

@@ -96,6 +96,12 @@ variable "external_enabled" {
   default     = false
 }
 
+variable "target_port" {
+  description = "Target port of the container app"
+  type        = number
+  default     = 80
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

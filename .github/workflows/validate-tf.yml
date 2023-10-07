@@ -65,6 +65,9 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
+      - name: Terraform Test
+        run: terraform test
+
       - name: Check terraform with Checkov
         id: checkov
         uses: using-system/devops/github/actions/checkov@main

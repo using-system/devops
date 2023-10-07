@@ -85,7 +85,7 @@ jobs:
           OUTPUT=$(terraform test -verbose)
           echo "$OUTPUT"
           if [[ "$OUTPUT" == *"0 passed"* ]]; then
-            echo "::warning::No unit test for ${{ matrix.modules }}."
+            echo "::warning::No test for ${{ matrix.modules }}."
           fi
 
       - name: Check terraform with Checkov

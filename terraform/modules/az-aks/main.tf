@@ -25,13 +25,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count                  = var.configuration.node_pool.count
     vm_size                     = var.configuration.node_pool.vm_size
     zones                       = var.configuration.node_pool.availability_zones
-    os_disk_type                = var.configuration.node_pool.os_disk_type
+    os_disk_type                = "Ephemeral"
     os_disk_size_gb             = var.configuration.node_pool.os_disk_size
     type                        = var.configuration.node_pool.type
     vnet_subnet_id              = var.subnet_id
     max_pods                    = var.configuration.node_pool.max_pods
     temporary_name_for_rotation = var.configuration.node_pool.temporary_name_for_rotation
-    enable_host_encryption      = var.configuration.node_pool.enable_host_encryption
+    enable_host_encryption      = true
   }
 
   identity {

@@ -28,10 +28,11 @@ variable "configuration" {
       count                       = number
       vm_size                     = string
       availability_zones          = list(number)
-      os_disk_type                = string
+      os_disk_type                = optional(string, "Ephemeral")
       os_disk_size                = number,
       max_pods                    = optional(number, 110)
       temporary_name_for_rotation = optional(string)
+      enable_host_encryption      = optional(bool, true)
     })
     rbac = object({
       enabled                = bool

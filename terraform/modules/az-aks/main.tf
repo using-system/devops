@@ -31,6 +31,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id              = var.subnet_id
     max_pods                    = var.configuration.node_pool.max_pods
     temporary_name_for_rotation = var.configuration.node_pool.temporary_name_for_rotation
+    enable_host_encryption      = var.configuration.node_pool.enable_host_encryption
   }
 
   identity {

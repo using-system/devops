@@ -51,7 +51,7 @@ run "apply" {
   }
 
   assert {
-    condition      = output.principal_type == "Application" || output.principal_type == "User"
-    error_message  = "Output principal type must be an application registration or user"
+    condition      = output.principal_type == "ServicePrincipal" || output.principal_type == "User"
+    error_message  = "Output principal type must be a service principal or a user"
   }
 }

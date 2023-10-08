@@ -6,18 +6,18 @@ on:
       - main
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/validate-tf.yml"
+      - ".github/workflows/tf-modules.yml"
   pull_request:
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/validate-tf.yml"
+      - ".github/workflows/tf-modules.yml"
 
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
 permissions:
   id-token: write
-  contents: read
+  contents: write
 
 jobs:
   get-tf-modules:

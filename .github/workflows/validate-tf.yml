@@ -82,7 +82,7 @@ jobs:
            
       - name: Terraform Test
         run: |
-          OUTPUT=$(terraform test -verbose)
+          OUTPUT=$(terraform test)
           echo "$OUTPUT"
           if [[ "$OUTPUT" == *"0 passed"* ]]; then
             echo "::warning::No test for ${{ matrix.modules }}."

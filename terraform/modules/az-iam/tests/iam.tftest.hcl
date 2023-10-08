@@ -11,6 +11,7 @@ run "setup" {
 }
 
 run "plan" {
+
   command = plan
 
   variables {
@@ -37,6 +38,7 @@ run "plan" {
 }
 
 run "apply" {
+  
   command = apply
 
   variables {

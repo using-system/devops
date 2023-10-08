@@ -7,7 +7,7 @@ provider "azurerm" {
 }
 
 variables {
-    name     = "test-rg"
+    name     = "system-az-rg-test-rg"
     location = "East US"
     tags     = { Environment = "Test" }
 }
@@ -17,7 +17,7 @@ run "plan" {
     command = plan
 
     assert {
-        condition   = output.name == "test-rg"
+        condition   = output.name == "system-az-rg-test-rg"
         error_message  = "Resource group name must be set"
     }
 

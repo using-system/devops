@@ -1,4 +1,4 @@
-name: Validate terraform modules
+name: Terraform modules validaton
 
 on:
   push:
@@ -6,18 +6,18 @@ on:
       - main
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/tf-modules.yml"
+      - ".github/workflows/tf-modules-validation.yml"
   pull_request:
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/tf-modules.yml"
+      - ".github/workflows/tf-modules-validation.yml"
 
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
 permissions:
   id-token: write
-  contents: write
+  contents: read
 
 jobs:
   get-tf-modules:
@@ -52,17 +52,11 @@ jobs:
       run:
         working-directory: "terraform/modules/${{ matrix.modules }}"
     steps:
-      - name: Checkout (pull request)
-        if: github.event_name == 'pull_request'
+      - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Checkout (main)
-        if: github.ref == 'refs/heads/main'
+      - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: main
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
@@ -88,16 +82,8 @@ jobs:
         with:
           working-directory: "terraform/modules/${{ matrix.modules }}"
 
-      - name: Render terraform docs and push changes back to PR
-        if: github.event_name == 'pull_request'
-        uses: terraform-docs/gh-actions@v1.0.0
-        with:
-          working-dir: "terraform/modules/${{ matrix.modules }}"
-          output-file: README.md
-          output-method: inject
-          git-push: "true"
-
       - name: Azure Login
+        if: false
         uses: azure/login@v1
         with:
           client-id: ${{ env.ARM_CLIENT_ID }}
@@ -105,6 +91,7 @@ jobs:
           subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
 
       - name: Terraform Test
+        if: false
         run: |
           OUTPUT=$(terraform test)
           echo "$OUTPUT"

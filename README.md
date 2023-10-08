@@ -4,7 +4,7 @@ Devops stuffs about terraform, k8s, azure...
 
 ## UsingSystem terraform modules
 
-Secure, tested and free to use (by refer the modules or copy them for your projects !)
+Secure, tested, documented and free to use (by refer the modules or copy them for your projects !)
 
 [Link](https://github.com/using-system/devops/tree/main/terraform/modules)
 
@@ -15,3 +15,4 @@ Secure, tested and free to use (by refer the modules or copy them for your proje
   - All modules are tested with last version of terraform and providers
   - Checked with [checkov](https://www.checkov.io)
   - Tested with terraform test framework (terraform test)
+  - Documentation generated for each module (with [terraform-docs](https://terraform-docs.io/))

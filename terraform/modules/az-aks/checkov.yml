@@ -1,2 +1,4 @@
 skip-check:
   - CKV_AZURE_168 # "Ensure Azure Kubernetes Cluster (AKS) nodes should use a minimum number of 50 pods." --> not applicable for calico
+  - CKV_AZURE_226 # "Ensure ephemeral disks are used for OS disks" --> checkov bug. It's already done
+  - CKV_AZURE_227 # Ensure that the AKS cluster encrypt temp disks, caches, and data flows between Compute and Storage resources" --> checkov bug. already done

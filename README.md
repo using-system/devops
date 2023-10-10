@@ -14,6 +14,7 @@ Secure, tested, documented and free to use (by refer the modules or copy them fo
 
 ## Features
 
+  - Azure, Kubernetes and helm modules
   - All modules are tested with last version of terraform and providers
   - Checked with [checkov](https://www.checkov.io)
   - Tested with terraform test framework (terraform test)

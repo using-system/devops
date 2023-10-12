@@ -43,7 +43,7 @@ run "apply" {
     }
 
     assert {
-        condition       = output.id != "" || output.id == null
+        condition       = output.id != "" && output.id != null
         error_message  = "output id is empty"
     }
 
@@ -53,7 +53,7 @@ run "apply" {
     }
 
     assert {
-        condition       = output.url != "" || output.url == null
+        condition       = output.url != "" && output.url != null
         error_message  = "output url is empty"
     }
 }

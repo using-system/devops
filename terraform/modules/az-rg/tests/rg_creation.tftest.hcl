@@ -37,7 +37,7 @@ run "apply" {
     command = apply
 
     assert {
-        condition       = output.id != ""
+        condition       = output.id != "" && output.id != null
         error_message  = "Resource group id is empty"
     }
 }

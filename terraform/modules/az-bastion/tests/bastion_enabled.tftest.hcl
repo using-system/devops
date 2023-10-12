@@ -108,12 +108,12 @@ run "apply" {
     }
 
     assert {
-        condition       = output.id != "" || output.id == null
+        condition       = output.id != "" && output.id != null
         error_message  = "output id is empty"
     }
 
     assert {
-        condition       = output.dns_name != "" || output.dns_name == null
+        condition       = output.dns_name != "" && output.dns_name != null
         error_message  = "output dns_name is empty"
     }
 

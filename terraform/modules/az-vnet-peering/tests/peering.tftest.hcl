@@ -80,7 +80,7 @@ run "apply" {
     }
 
     assert {
-        condition       = output.id != "" || output.id == null
+        condition       = output.id != "" && output.id != null
         error_message  = "Peering id is empty"
     }
 }

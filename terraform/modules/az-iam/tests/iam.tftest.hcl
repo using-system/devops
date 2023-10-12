@@ -48,7 +48,7 @@ run "apply" {
   }
 
   assert {
-    condition      = output.id != "" 
+    condition      = output.id != "" && output.id != null
     error_message  = "IAM ID is empty"
   }
 

@@ -42,5 +42,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | n/a |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Disk Encryption Set |
 <!-- END_TF_DOCS -->

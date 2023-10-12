@@ -45,7 +45,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_admin_password"></a> [admin\_password](#output\_admin\_password) | n/a |
-| <a name="output_admin_username"></a> [admin\_username](#output\_admin\_username) | n/a |
-| <a name="output_id"></a> [id](#output\_id) | n/a |
+| <a name="output_admin_password"></a> [admin\_password](#output\_admin\_password) | The admin password of the Windows Virtual Machine |
+| <a name="output_admin_username"></a> [admin\_username](#output\_admin\_username) | The admin username of the Windows Virtual Machine |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Windows Virtual Machine |
 <!-- END_TF_DOCS -->

@@ -35,5 +35,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | Id of the acae |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Container App Environment |
 <!-- END_TF_DOCS -->

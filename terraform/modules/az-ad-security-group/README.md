@@ -30,5 +30,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_object_id"></a> [object\_id](#output\_object\_id) | Object id of the group |
+| <a name="output_object_id"></a> [object\_id](#output\_object\_id) | The object ID of the group |
 <!-- END_TF_DOCS -->

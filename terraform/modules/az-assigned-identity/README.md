@@ -32,8 +32,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_client_id"></a> [client\_id](#output\_client\_id) | n/a |
-| <a name="output_id"></a> [id](#output\_id) | n/a |
-| <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | n/a |
-| <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | n/a |
+| <a name="output_client_id"></a> [client\_id](#output\_client\_id) | The ID of the app associated with the Identity |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the User Assigned Identity |
+| <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | The ID of the Service Principal object associated with the created |
+| <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | The ID of the Tenant which the Identity belongs to |
 <!-- END_TF_DOCS -->

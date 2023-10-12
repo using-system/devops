@@ -29,6 +29,6 @@ No resources.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_resource_name"></a> [resource\_name](#output\_resource\_name) | n/a |
-| <a name="output_resource_name_without_delimiter"></a> [resource\_name\_without\_delimiter](#output\_resource\_name\_without\_delimiter) | n/a |
+| <a name="output_resource_name"></a> [resource\_name](#output\_resource\_name) | The name of the resource |
+| <a name="output_resource_name_without_delimiter"></a> [resource\_name\_without\_delimiter](#output\_resource\_name\_without\_delimiter) | The name of the resource without delimiter |
 <!-- END_TF_DOCS -->

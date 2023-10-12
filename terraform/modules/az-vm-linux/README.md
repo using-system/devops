@@ -42,6 +42,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | n/a |
-| <a name="output_private_ip_address"></a> [private\_ip\_address](#output\_private\_ip\_address) | n/a |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Linux Virtual Machine |
+| <a name="output_private_ip_address"></a> [private\_ip\_address](#output\_private\_ip\_address) | The private IP address of the Linux Virtual Machine |
 <!-- END_TF_DOCS -->

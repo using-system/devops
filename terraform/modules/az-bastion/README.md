@@ -40,7 +40,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dns_name"></a> [dns\_name](#output\_dns\_name) | n/a |
-| <a name="output_id"></a> [id](#output\_id) | n/a |
-| <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | n/a |
+| <a name="output_dns_name"></a> [dns\_name](#output\_dns\_name) | The FQDN for the Bastion Host |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Bastion Host |
+| <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | The public ip for the Bastion Host |
 <!-- END_TF_DOCS -->

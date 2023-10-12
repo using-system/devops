@@ -31,6 +31,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | n/a |
-| <a name="output_principal_type"></a> [principal\_type](#output\_principal\_type) | n/a |
+| <a name="output_id"></a> [id](#output\_id) | The Role Assignment ID |
+| <a name="output_principal_type"></a> [principal\_type](#output\_principal\_type) | The type of the principal\_id, e.g. User, Group, Service Principal, Application, etc |
 <!-- END_TF_DOCS -->

@@ -47,10 +47,10 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | n/a |
-| <a name="output_name"></a> [name](#output\_name) | n/a |
-| <a name="output_primary_access_key"></a> [primary\_access\_key](#output\_primary\_access\_key) | n/a |
-| <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | n/a |
-| <a name="output_secondary_access_key"></a> [secondary\_access\_key](#output\_secondary\_access\_key) | n/a |
-| <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | n/a |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Storage Account |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Storage Account |
+| <a name="output_primary_access_key"></a> [primary\_access\_key](#output\_primary\_access\_key) | The primary access key for the storage account |
+| <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | The Principal ID for the Service Principal associated with the Identity of this Storage Account |
+| <a name="output_secondary_access_key"></a> [secondary\_access\_key](#output\_secondary\_access\_key) | The secondary access key for the storage account |
+| <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | The Tenant ID for the Service Principal associated with the Identity of this Storage Account |
 <!-- END_TF_DOCS -->

@@ -31,7 +31,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | n/a |
-| <a name="output_name"></a> [name](#output\_name) | n/a |
-| <a name="output_url"></a> [url](#output\_url) | n/a |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the File Share |
+| <a name="output_name"></a> [name](#output\_name) | The name of the File Share |
+| <a name="output_url"></a> [url](#output\_url) | The URL of the File Share |
 <!-- END_TF_DOCS -->

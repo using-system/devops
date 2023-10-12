@@ -33,5 +33,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | n/a |
+| <a name="output_id"></a> [id](#output\_id) | The Log Analytics Workspace ID |
 <!-- END_TF_DOCS -->

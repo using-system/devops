@@ -74,18 +74,18 @@ run "apply" {
     command = apply
 
     variables {
-    location                = run.setup.resource_group_location
-    resource_group_name     = run.setup.resource_group_name
-    name                    = "az-analytics-tf-module"
-    configuration           = {
+      location                = run.setup.resource_group_location
+      resource_group_name     = run.setup.resource_group_name
+      name                    = "az-analytics-tf-module"
+      configuration           = {
         sku = "PerGB2018"
         retention_in_days = 90
         internet_ingestion_enabled = true
         internet_query_enabled = true
-    }
+      }
 
-    tags                    = { Environment = "Test" }
-  }
+      tags                    = { Environment = "Test" }
+    }
 
     assert {
         condition       = output.id != "" && output.id != null

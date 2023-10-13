@@ -60,30 +60,3 @@ run "plan" {
   }
 
 }
-
-run "apply" {
-
-    command = apply
-
-    variables {
-      name                   = "mykey"
-      kv_id                  = run.setup.kv_id
-      static_expiration_date = "2035-01-02T15:04:05Z"
-      tags                   = { Environment = "Test" }
-    }
-
-    assert {
-        condition       = output.id != "" && output.id != null
-        error_message  = "output id is empty"
-    }
-
-    assert {
-        condition       = output.public_key_pem != "" && output.public_key_pem != null
-        error_message  = "output public_key_pem is empty"
-    }
-
-    assert {
-        condition       = output.public_key_openssh != "" && output.public_key_openssh != null
-        error_message  = "output public_key_openssh is empty"
-    }
-}

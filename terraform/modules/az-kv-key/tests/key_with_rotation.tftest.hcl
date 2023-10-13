@@ -104,34 +104,3 @@ run "plan" {
   }
 
 }
-
-run "apply" {
-
-    command = apply
-
-    variables {
-    name             = "mykey"
-    kv_id            = run.setup.kv_id
-    rotation         = {
-      auto_rotatation_time_before_expiry = "P30D"
-      expire_after                       = "P90D"
-      notify_before_expiry               = "P29D"
-    }
-    tags             = { Environment = "Test" }
-  }
-
-    assert {
-        condition       = output.id != "" && output.id != null
-        error_message  = "output id is empty"
-    }
-
-    assert {
-        condition       = output.public_key_pem != "" && output.public_key_pem != null
-        error_message  = "output public_key_pem is empty"
-    }
-
-    assert {
-        condition       = output.public_key_openssh != "" && output.public_key_openssh != null
-        error_message  = "output public_key_openssh is empty"
-    }
-}

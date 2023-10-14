@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/tf-modules-documentation.yml.yml"
+      - ".github/workflows/tf-modules-documentation.yml"
 
 concurrency:
   group: ${{ github.workflow }}

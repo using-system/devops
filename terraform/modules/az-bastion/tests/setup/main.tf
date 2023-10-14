@@ -83,7 +83,7 @@ resource "azurerm_virtual_network" "bastion" {
 
 
   tags = {
-    environment = "Production"
+    environment = "Test"
   }
 }
 

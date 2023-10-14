@@ -4,7 +4,7 @@ data "azurerm_resource_group" "test" {
 }
 
 resource "azurerm_container_app_environment" "cae" {
-  name                = "az-acae-storage-cae"
+  name                = "az-aca-cae"
   location            = data.azurerm_resource_group.test.location
   resource_group_name = data.azurerm_resource_group.test.name
 }

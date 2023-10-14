@@ -1,1 +1,2 @@
-framework: all
+skip-path:
+  - tests

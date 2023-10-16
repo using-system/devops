@@ -3,7 +3,7 @@ data "azurerm_resource_group" "test" {
 }
 
 resource "azurerm_log_analytics_workspace" "test" {
-  name                = "system-az-acae-ana-2"
+  name                = "system-az-kv-ana-2"
   location            = data.azurerm_resource_group.test.location
   resource_group_name = data.azurerm_resource_group.test.name
   sku                 = "PerGB2018"

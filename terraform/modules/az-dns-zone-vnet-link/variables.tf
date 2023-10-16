@@ -21,6 +21,7 @@ variable "vnet_id" {
 variable "registration_enabled" {
   description = "Is auto-registration of virtual machine records in the virtual network in the private DNS zone enabled?"
   type        = bool
+  default     = false
 }
 
 variable "tags" {

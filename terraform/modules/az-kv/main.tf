@@ -44,4 +44,11 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
     category = "AllMetrics"
     enabled  = false
   }
+
+  lifecycle {
+    precondition {
+      condition     = var.log_analytics_workspace_id != null
+      error_message = "log_analytics_workspace_id must be specified to enable logging"
+    }
+  }
 }

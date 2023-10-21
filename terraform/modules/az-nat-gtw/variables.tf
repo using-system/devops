@@ -28,7 +28,6 @@ variable "idle_timeout_in_minutes" {
 variable "availability_zones" {
   type        = list(string)
   description = "Availability zones where the NAT Gateway will be created"
-  default     = ["1", "2", "3"]
 }
 
 variable "public_ips" {

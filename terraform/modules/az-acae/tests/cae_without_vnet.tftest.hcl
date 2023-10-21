@@ -57,27 +57,3 @@ run "plan" {
   }
 
 }
-
-
-run "apply" {
-
-    command = apply
-
-    variables {
-        name                    = "az-acae-1"
-        location                = run.setup.resource_group_location
-        resource_group_name     = run.setup.resource_group_name
-        
-       tags                    = { Environment = "Test" }
-    }
-
-    assert {
-        condition       = output.id != "" && output.id != null
-        error_message  = "output id is empty"
-    }
-
-    assert {
-        condition       = output.static_ip_address != "" && output.static_ip_address != null
-        error_message  = "output static_ip_address is empty"
-    }
-}

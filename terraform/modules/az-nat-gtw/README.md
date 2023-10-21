@@ -26,7 +26,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | Availability zones where the NAT Gateway will be created | `list(string)` | <pre>[<br>  "1",<br>  "2",<br>  "3"<br>]</pre> | no |
+| <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | Availability zones where the NAT Gateway will be created | `list(string)` | n/a | yes |
 | <a name="input_idle_timeout_in_minutes"></a> [idle\_timeout\_in\_minutes](#input\_idle\_timeout\_in\_minutes) | Idle timeout in minutes | `number` | `4` | no |
 | <a name="input_location"></a> [location](#input\_location) | Location of the NAT Gateway | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of the NAT Gateway | `string` | n/a | yes |

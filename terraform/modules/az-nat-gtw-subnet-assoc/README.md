@@ -17,7 +17,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_subnet_nat_gateway_association.sn_cluster_nat_gw](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_nat_gateway_association) | resource |
+| [azurerm_subnet_nat_gateway_association.nat_gtw](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_nat_gateway_association) | resource |
 
 ## Inputs
 

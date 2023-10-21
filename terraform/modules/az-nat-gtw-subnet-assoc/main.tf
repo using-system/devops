@@ -1,4 +1,4 @@
-resource "azurerm_subnet_nat_gateway_association" "sn_cluster_nat_gw" {
+resource "azurerm_subnet_nat_gateway_association" "nat_gtw" {
 
   count = length(var.subnet_ids)
 

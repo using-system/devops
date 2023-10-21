@@ -74,17 +74,17 @@ run "plan" {
 
   assert {
     condition      = azurerm_network_security_group.network["az-nsg-default"].name == "az-nsg-default-nsg"
-    error_message  = "azurerm_subnet_nat_gateway_association default name must be set"
+    error_message  = "azurerm_network_security_group default name must be set"
   }
 
   assert {
     condition      = azurerm_network_security_group.network["az-nsg-default"].location == var.location
-    error_message  = "azurerm_subnet_nat_gateway_association default location must be set"
+    error_message  = "azurerm_network_security_group default location must be set"
   }
 
   assert {
     condition      = azurerm_network_security_group.network["az-nsg-default"].resource_group_name == var.resource_group_name
-    error_message  = "azurerm_subnet_nat_gateway_association default resource_group_name must be set"
+    error_message  = "azurerm_network_security_group default resource_group_name must be set"
   }
 
   assert {
@@ -94,17 +94,17 @@ run "plan" {
 
   assert {
     condition      = azurerm_network_security_group.network["az-nsg-bastion"].name == "az-nsg-bastion-nsg"
-    error_message  = "azurerm_subnet_nat_gateway_association bastion name must be set"
+    error_message  = "azurerm_network_security_group bastion name must be set"
   }
 
   assert {
     condition      = azurerm_network_security_group.network["az-nsg-bastion"].location == var.location
-    error_message  = "azurerm_subnet_nat_gateway_association bastion location must be set"
+    error_message  = "azurerm_network_security_group bastion location must be set"
   }
 
   assert {
     condition      = azurerm_network_security_group.network["az-nsg-bastion"].resource_group_name == var.resource_group_name
-    error_message  = "azurerm_subnet_nat_gateway_association bastion resource_group_name must be set"
+    error_message  = "azurerm_network_security_group bastion resource_group_name must be set"
   }
 
   assert {

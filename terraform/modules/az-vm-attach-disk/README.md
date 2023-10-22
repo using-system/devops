@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.77.0 |
 
 ## Modules
 
@@ -17,8 +17,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_disk_encryption_set.vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/disk_encryption_set) | resource |
-| [azurerm_key_vault_key.vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_key) | resource |
 | [azurerm_managed_disk.vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk) | resource |
 | [azurerm_virtual_machine_data_disk_attachment.vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_data_disk_attachment) | resource |
 
@@ -28,10 +26,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_caching"></a> [caching](#input\_caching) | Caching for the disk | `string` | `"ReadWrite"` | no |
 | <a name="input_create_option"></a> [create\_option](#input\_create\_option) | Create option for the disk | `string` | `"Empty"` | no |
-| <a name="input_disk_encryption_kv_id"></a> [disk\_encryption\_kv\_id](#input\_disk\_encryption\_kv\_id) | Key Vault Id for disk encryption | `any` | n/a | yes |
+| <a name="input_des_id"></a> [des\_id](#input\_des\_id) | Id of the disk encryption set to assign to the disk | `any` | `null` | no |
 | <a name="input_disk_size_gb"></a> [disk\_size\_gb](#input\_disk\_size\_gb) | Disk size in GB | `number` | `10` | no |
-| <a name="input_encryption_key_expiration_date"></a> [encryption\_key\_expiration\_date](#input\_encryption\_key\_expiration\_date) | Date when the encryption key expires | `any` | `null` | no |
-| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | List of identity ids to assign to the disk encryption set | `list(string)` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | Azure Region Location | `any` | n/a | yes |
 | <a name="input_lun"></a> [lun](#input\_lun) | Logical unit number for the disk | `number` | `0` | no |
 | <a name="input_name"></a> [name](#input\_name) | Disk name | `any` | n/a | yes |
@@ -43,5 +39,8 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_disk_id"></a> [disk\_id](#output\_disk\_id) | The ID of the disk attached to the Virtual Machine. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Virtual Machine Data Disk attachment. |
 <!-- END_TF_DOCS -->

@@ -3,7 +3,7 @@ variable "algorithm" {
 }
 
 variable "rsa_bits" {
-  type    = string
+  type    = number
   default = null
 }
 

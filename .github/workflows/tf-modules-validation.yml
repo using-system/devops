@@ -52,9 +52,16 @@ jobs:
       run:
         working-directory: "terraform/modules/${{ matrix.modules }}"
     steps:
-      - name: Checkout
+      - name: Checkout (Pull request)
+        if: github.event_name == 'pull_request'
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
 
+      - name: Checkout (push/workflow_dispatch)
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v3     
+          
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -95,6 +102,7 @@ jobs:
           fi
 
       - name: Render terraform docs and push changes back to PR
+        if: github.event_name == 'pull_request'
         uses: terraform-docs/gh-actions@v1.0.0
         with:
           working-dir: "terraform/modules/${{ matrix.modules }}"

@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tls"></a> [tls](#provider\_tls) | n/a |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
 ## Modules
 
@@ -25,7 +25,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_algorithm"></a> [algorithm](#input\_algorithm) | n/a | `string` | `"RSA"` | no |
 | <a name="input_ecdsa_curve"></a> [ecdsa\_curve](#input\_ecdsa\_curve) | n/a | `string` | `null` | no |
-| <a name="input_rsa_bits"></a> [rsa\_bits](#input\_rsa\_bits) | n/a | `string` | `null` | no |
+| <a name="input_rsa_bits"></a> [rsa\_bits](#input\_rsa\_bits) | n/a | `number` | `null` | no |
 
 ## Outputs
 

@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | n/a |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.44.0 |
 
 ## Modules
 

@@ -34,6 +34,7 @@ jobs:
     needs: get-tf-modules
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       fail-fast: false
       matrix:
         modules: ${{ fromJson(needs.get-tf-modules.outputs.modules) }}

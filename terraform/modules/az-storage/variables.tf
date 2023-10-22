@@ -40,7 +40,7 @@ variable "min_tls_version" {
 variable "shared_access_key_enabled" {
   description = "Specifies whether the storage account permits requests to be authorized with the account access key via Shared Key."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "public_network_access_enabled" {
@@ -74,16 +74,6 @@ variable "network_rules_bypass" {
   default     = ["AzureServices"]
 }
 
-variable "kv_id_cust_managed_key" {
-  description = "The ID of the Key Vault containing the key to be used as the Customer Managed Key for the Storage Account."
-  type        = string
-}
-
-variable "kv_key_name_cust_managed_key" {
-  description = "The name of the Key Vault Key to be used as the Customer Managed Key for the Storage Account."
-  type        = string
-}
-
 variable "identity_type" {
   description = "The type of identity used for the Storage Account."
   type        = string
@@ -95,6 +85,18 @@ variable "identity_ids" {
   type        = list(string)
   default     = []
 }
+
+variable "cmk" {
+  description = "Customer Managed Key configuration for Storage Account."
+  type = object({
+    kv_id       = string
+    kv_key_name = string
+
+  })
+  nullable = true
+  default  = null
+}
+
 
 variable "tags" {
   description = "A mapping of tags to assign to the resource."

@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 permissions:
   id-token: write
-  contents: read
+  contents: write
 
 jobs:
   get-tf-modules:
@@ -52,9 +52,6 @@ jobs:
       run:
         working-directory: "terraform/modules/${{ matrix.modules }}"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -96,3 +93,11 @@ jobs:
           if [[ "$OUTPUT" == *"0 passed"* ]]; then
             echo "::warning::No test for ${{ matrix.modules }}."
           fi
+
+      - name: Render terraform docs and push changes back to PR
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: "terraform/modules/${{ matrix.modules }}"
+          output-file: README.md
+          output-method: inject
+          git-push: "true"

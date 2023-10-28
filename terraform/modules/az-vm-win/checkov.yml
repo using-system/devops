@@ -1,2 +1,0 @@
-skip-check:
-  - CKV_AZURE_151 # "Ensure Windows VM enables encryption" --> Please use az-linux-vm module for encryption

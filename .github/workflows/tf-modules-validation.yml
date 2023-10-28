@@ -1,0 +1,95 @@
+name: Terraform modules validaton
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "terraform/modules/**"
+      - ".github/workflows/tf-modules-validation.yml"
+  pull_request:
+    paths:
+      - "terraform/modules/**"
+      - ".github/workflows/tf-modules-validation.yml"
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  get-tf-modules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - id: get-tf-modules
+        name: "Build TF modules matrix"
+        run: |
+          modules=$(ls -d */ | sed 's#/##' | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "modules=$modules" >> $GITHUB_OUTPUT
+        working-directory: "terraform/modules/"
+    outputs:
+      modules: ${{ steps.get-tf-modules.outputs.modules }}
+
+  tf-modules-validation:
+    name: Terraform
+    needs: get-tf-modules
+    runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID  }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_USE_OIDC: "true"
+    strategy:
+      fail-fast: false
+      matrix:
+        modules: ${{ fromJson(needs.get-tf-modules.outputs.modules) }}
+    defaults:
+      run:
+        working-directory: "terraform/modules/${{ matrix.modules }}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3     
+          
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+          terraform_version: latest
+
+      - name: Terraform Version
+        run: terraform version
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        run: terraform init        
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Checkov
+        id: checkov
+        uses: using-system/devops/github/actions/checkov@main
+        with:
+          working-directory: "terraform/modules/${{ matrix.modules }}"
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ env.ARM_CLIENT_ID }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: Terraform Test
+        run: |
+          OUTPUT=$(terraform test)
+          echo "$OUTPUT"
+          if [[ "$OUTPUT" == *"0 passed"* ]]; then
+            echo "::warning::No test for ${{ matrix.modules }}."
+          fi

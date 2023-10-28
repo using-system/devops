@@ -23,6 +23,8 @@ resource "azurerm_key_vault_key" "des" {
   }
 
   expiration_date = var.expiration_date
+
+  tags = var.tags
 }
 
 resource "azurerm_role_assignment" "des" {

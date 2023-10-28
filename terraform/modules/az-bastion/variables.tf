@@ -10,14 +10,14 @@ variable "name" {
   description = "Name of the bastion host"
 }
 
+variable "subnet_id" {
+  description = "Id of the subnet to deploy the bastion host"
+}
+
 variable "enabled" {
   description = "Enable the bastion host"
   type        = bool
   default     = true
-}
-
-variable "subnet_id" {
-  description = "Id of the subnet to deploy the bastion host"
 }
 
 variable "sku" {

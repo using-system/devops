@@ -18,16 +18,19 @@ variable "sku" {
 variable "admin_enabled" {
   description = "Determines if the admin user is enabled"
   type        = bool
+  default     = false
 }
 
 variable "public_network_access_enabled" {
   description = "Determines if the public network access is enabled"
   type        = bool
+  default     = false
 }
 
 variable "network_rule_bypass_option" {
   description = "Determines if the network rule bypass option is enabled"
   type        = string
+  default     = "None"
 }
 
 variable "enable_lock_on_acr" {
@@ -64,6 +67,18 @@ variable "trust_policy_enabled" {
   description = "Determines if the trust policy is enabled"
   type        = bool
   default     = true
+}
+
+variable "identity_type" {
+  description = "The type of identity used for the acr."
+  type        = string
+  default     = "SystemAssigned"
+}
+
+variable "identity_ids" {
+  description = "A list of identities associated with the acr."
+  type        = list(string)
+  default     = []
 }
 
 variable "tags" {

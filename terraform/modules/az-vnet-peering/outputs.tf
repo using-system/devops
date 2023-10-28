@@ -1,3 +1,4 @@
 output "id" {
-  value = azurerm_virtual_network_peering.peering.id
+  description = "The ID of the Virtual Network Peering"
+  value       = azurerm_virtual_network_peering.peering.id
 }

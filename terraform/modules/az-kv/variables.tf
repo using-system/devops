@@ -64,7 +64,7 @@ variable "network_rules_default_action" {
 variable "network_subnet_ids" {
   description = "One or more Subnet IDs which should be able to access this Key Vault."
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "public_network_access_enabled" {
@@ -77,7 +77,6 @@ variable "public_network_access_enabled" {
 variable "log_analytics_workspace_id" {
   description = "Log analytics workspace id where to save diag audit event"
   type        = string
-  default     = null
 }
 
 variable "tags" {

@@ -4,7 +4,8 @@ output "id" {
 }
 
 output "name" {
-  value = var.name
+  description = "The name of the Key Vault Key."
+  value       = var.name
 }
 
 output "public_key_pem" {

@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - "terraform/modules/**"
-      - ".github/workflows/release.yml"
 
 concurrency:
   group: ${{ github.workflow }}

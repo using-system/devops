@@ -1,28 +1,34 @@
 output "id" {
-  value = tls_private_key.key.id
+  description = "Unique identifier for this resource: hexadecimal representation of the SHA1 checksum of the resource"
+  value       = tls_private_key.key.id
 }
 
 output "private_key_openssh" {
-  value     = tls_private_key.key.private_key_openssh
-  sensitive = true
+  description = "Private key data in OpenSSH PEM (RFC 4716) format"
+  value       = tls_private_key.key.private_key_openssh
+  sensitive   = true
 }
 
 output "private_key_pem" {
-  value     = tls_private_key.key.private_key_pem
-  sensitive = true
+  description = "Private key data in PEM (RFC 1421) format"
+  value       = tls_private_key.key.private_key_pem
+  sensitive   = true
 }
 
 output "private_key_pem_pkcs8" {
-  value     = tls_private_key.key.private_key_pem_pkcs8
-  sensitive = true
+  description = "Private key data in PKCS#8 PEM (RFC 5208) format"
+  value       = tls_private_key.key.private_key_pem_pkcs8
+  sensitive   = true
 }
 
 output "public_key_openssh" {
-  value     = tls_private_key.key.public_key_openssh
-  sensitive = true
+  description = "The public key data in Authorized Keys format"
+  value       = tls_private_key.key.public_key_openssh
+  sensitive   = true
 }
 
 output "public_key_pem" {
-  value     = tls_private_key.key.public_key_pem
-  sensitive = true
+  description = "Public key data in PEM (RFC 1421) format"
+  value       = tls_private_key.key.public_key_pem
+  sensitive   = true
 }

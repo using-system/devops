@@ -44,17 +44,8 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
-variable "disk_encryption_kv_id" {
-  description = "Key Vault Id for disk encryption"
-}
-
-variable "identity_ids" {
-  description = "List of identity ids to assign to the disk encryption set"
-  type        = list(string)
-}
-
-variable "encryption_key_expiration_date" {
-  description = "Date when the encryption key expires"
+variable "des_id" {
+  description = "Id of the disk encryption set to assign to the disk"
   default     = null
 }
 

@@ -46,8 +46,11 @@ resource "azurerm_storage_account" "storage" {
 }
 
 resource "azurerm_storage_account_customer_managed_key" "storage" {
+
+  count = (try(var.cmk != null && var.cmk.kv_id != null && var.cmk.kv_key_name != null, false) ? 1 : 0)
+
   storage_account_id        = azurerm_storage_account.storage.id
-  key_vault_id              = var.kv_id_cust_managed_key
-  key_name                  = var.kv_key_name_cust_managed_key
+  key_vault_id              = var.cmk.kv_id
+  key_name                  = var.cmk.kv_key_name
   user_assigned_identity_id = length(var.identity_ids) > 0 ? var.identity_ids[0] : null
 }

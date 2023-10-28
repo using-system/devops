@@ -1,2 +1,4 @@
 skip-check:
   - CKV_AZURE_168 # "Ensure Azure Kubernetes Cluster (AKS) nodes should use a minimum number of 50 pods." --> not applicable for calico
+skip-path:
+  - tests

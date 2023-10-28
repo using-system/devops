@@ -21,6 +21,7 @@ variable "rotation" {
     expire_after                       = optional(string, "P90D")
     notify_before_expiry               = optional(string, "P29D")
   })
+  default = null
 }
 
 variable "static_expiration_date" {
@@ -29,3 +30,8 @@ variable "static_expiration_date" {
   default     = null
 }
 
+variable "tags" {
+  description = "A mapping of tags to assign to the resource."
+  type        = map(string)
+  default     = {}
+}

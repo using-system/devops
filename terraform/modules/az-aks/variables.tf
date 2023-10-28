@@ -34,7 +34,7 @@ variable "configuration" {
     })
     rbac = object({
       enabled                = bool
-      admin_group_object_ids = list(string)
+      admin_group_object_ids = optional(list(string), [])
       tenant_id              = string
     })
     addon = object({

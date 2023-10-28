@@ -51,22 +51,23 @@ module "dns_zone_vnet_link_blob" {
 
 ## checkov
 
-TODO...
+[Link](https://github.com/using-system/devops/tree/main/github/actions/checkov)
 
 ## gh-comment-current-issue
 
-TODO...
+[Link](https://github.com/using-system/devops/tree/main/github/actions/gh-comment-current-issue)
 
 ## terrascan
 
-TODO...
+[Link](https://github.com/using-system/devops/tree/main/github/actions/terrascan)
 
 # Kubernetes certification preparation
 
 ## CKA
 
-TODO...
+[Link](https://github.com/using-system/devops/tree/main/k8s/cka)
+
 
 ## CKS
 
-TODO...
+[Link](https://github.com/using-system/devops/tree/main/k8s/cks)

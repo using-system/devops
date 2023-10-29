@@ -2,14 +2,6 @@ data "azurerm_resource_group" "test" {
   name = "tf-test-rg"
 }
 
-resource "azurerm_log_analytics_workspace" "test" {
-  name                = "system-az-kv-ana-2"
-  location            = data.azurerm_resource_group.test.location
-  resource_group_name = data.azurerm_resource_group.test.name
-  sku                 = "PerGB2018"
-  retention_in_days   = 30
-}
-
 resource "azurerm_virtual_network" "test" {
   name                = "system-az-kv-vnet"
   location            = data.azurerm_resource_group.test.location
@@ -41,10 +33,6 @@ output "resource_group_name" {
 
 output "resource_group_location" {
   value = data.azurerm_resource_group.test.location
-}
-
-output "log_analytics_id" {
-  value = azurerm_log_analytics_workspace.test.id
 }
 
 output "subnet_id" {

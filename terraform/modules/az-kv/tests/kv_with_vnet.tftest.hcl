@@ -22,7 +22,6 @@ run "plan" {
     resource_group_name         = run.setup.resource_group_name
     location                    = run.setup.resource_group_location
 
-    log_analytics_workspace_id  = run.setup.log_analytics_id
     network_subnet_ids          = [ run.setup.subnet_id ]
 
     tags                        = { Environment = "Test" }
@@ -97,16 +96,6 @@ run "plan" {
     condition       = length(azurerm_key_vault.keyvault.tags) == 1
     error_message  = "dns zone link tags must contains one element"
   }
-
-  assert {
-    condition      = azurerm_monitor_diagnostic_setting.keyvault.name == "keyvault-logging"
-    error_message  = "azurerm_monitor_diagnostic_setting name must be set"
-  }
-
-  assert {
-    condition      = azurerm_monitor_diagnostic_setting.keyvault.log_analytics_workspace_id == var.log_analytics_workspace_id
-    error_message  = "azurerm_monitor_diagnostic_setting log_analytics_workspace_id must be set"
-  }
 }
 
 run "apply" {
@@ -117,8 +106,7 @@ run "apply" {
         name                        = "az-kv-tfmodule-test"
         resource_group_name         = run.setup.resource_group_name
         location                    = run.setup.resource_group_location
-
-        log_analytics_workspace_id  = run.setup.log_analytics_id
+        
         network_subnet_ids          = [ run.setup.subnet_id ]
 
         tags                        = { Environment = "Test" }

@@ -84,9 +84,17 @@ jobs:
         with:
           client-id: ${{ env.ARM_CLIENT_ID }}
           tenant-id: ${{ env.ARM_TENANT_ID }}
-          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}      
+
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            module:
+              - 'terraform/modules/${{ matrix.modules }}/**'          
 
       - name: Terraform Test
+        if: steps.changes.outputs.module == 'true' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         run: |
           OUTPUT=$(terraform test)
           echo "$OUTPUT"

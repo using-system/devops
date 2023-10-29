@@ -29,7 +29,7 @@ jobs:
     outputs:
       modules: ${{ steps.get-tf-modules.outputs.modules }}
 
-  tf-modules-validation:
+  tf-modules-documentation:
     name: Terraform
     needs: get-tf-modules
     runs-on: ubuntu-latest

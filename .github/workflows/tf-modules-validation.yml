@@ -98,7 +98,15 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           fi          
 
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            module:
+              - 'terraform/modules/${{ matrix.modules }}/**'          
+
       - name: Terraform Test
+        if: steps.changes.outputs.module == 'true' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         run: |
           OUTPUT=$(terraform test)
           echo "$OUTPUT"

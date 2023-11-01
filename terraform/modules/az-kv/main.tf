@@ -29,26 +29,3 @@ resource "azurerm_key_vault" "keyvault" {
     }
   }
 }
-
-resource "azurerm_monitor_diagnostic_setting" "keyvault" {
-  name               = "keyvault-logging"
-  target_resource_id = azurerm_key_vault.keyvault.id
-
-  log_analytics_workspace_id = var.log_analytics_workspace_id
-
-  enabled_log {
-    category = "AuditEvent"
-  }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = false
-  }
-
-  lifecycle {
-    precondition {
-      condition     = var.log_analytics_workspace_id != null
-      error_message = "log_analytics_workspace_id must be specified to enable logging"
-    }
-  }
-}

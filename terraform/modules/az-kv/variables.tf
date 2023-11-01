@@ -73,12 +73,6 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
-
-variable "log_analytics_workspace_id" {
-  description = "Log analytics workspace id where to save diag audit event"
-  type        = string
-}
-
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

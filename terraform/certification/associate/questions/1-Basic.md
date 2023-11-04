@@ -129,6 +129,23 @@ provider "digitalocean" {
 </p>
 </details>
 
+### Specify terraform version higher than 0.15 and aws provider in range 2.X
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+terraform {
+  required_version = "< 0.11"
+  required_providers {
+    aws = "~> 2.0"
+  }
+}
+```
+
+</p>
+</details>
+
 # State
 
 ### Name of the local state file
@@ -160,6 +177,54 @@ provider "digitalocean" {
 <p>
 
 `terraform destroy -target aws_instance.myec2`
+
+</p>
+</details>
+
+### Command for check syntax format
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform fmt`
+
+</p>
+</details>
+
+### Command for validate terraform files
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform validate`
+
+</p>
+</details>
+
+### Commands for svg graph
+<details>
+<summary>show</summary>
+<p>
+
+`terraform graph > graph.dot`
+
+`yum install graphviz`
+
+`cat graph.dot | dot -Tsvg > mygraph.svg`
+
+</p>
+</details>
+
+### Commands for savez plan to a file and apply it
+<details>
+<summary>show</summary>
+<p>
+
+`terraform plan -out=tfplan`
+
+`terraform apply tfplan`
 
 </p>
 </details>

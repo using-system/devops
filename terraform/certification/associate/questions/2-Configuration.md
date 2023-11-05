@@ -176,6 +176,18 @@ resource "aws_instance" "jumpbox" {
 </p>
 </details>
 
+### Build a map with a list of keys and a list of values
+
+<details>
+<summary>show</summary>
+<p>
+
+
+`zipmap(mykeys, myvaluyes)`
+
+</p>
+</details>
+
 # Datasource
 
 ### get the most recent aws ami owened by amazon 
@@ -317,5 +329,91 @@ output "arns" {
 
 `terraform output arns`
 
+</p>
+</details>
+
+# Comments
+
+
+### Differents syntax for comments line(s)
+
+<details>
+<summary>show</summary>
+<p>
+
+ - `//` or `#` for a signle line to comment
+ - `/*` and `*/` for multiple lines to comment
+
+</p>
+</details>
+
+# List and set
+
+### Differences between list and set
+
+<details>
+<summary>show</summary>
+<p>
+
+ - List a ordered, set not
+ - List allo duplicata values, set non
+
+</p>
+</details>
+
+### Convert list to set
+
+<details>
+<summary>show</summary>
+<p>
+
+`toset(mylist)`
+
+</p>
+</details>
+
+### Define a set
+
+<details>
+<summary>show</summary>
+<p>
+
+`myset = {"value1", "value2", "value3"}`
+
+</p>
+</details>
+
+### Foreach ["value1","value2"]
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_iam_user" "iam" {
+  for_each = toset( ["value1","value2"] )
+  name     = each.key
+}
+```
+</p>
+</details>
+
+### Foreach a map
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvms" {
+  ami = "ami-0cea098ed2ac54925"
+  for_each  = {
+      key1 = "t2.micro"
+      key2 = "t2.medium"
+   }
+  instance_type    = each.value
+  key_name         = each.key
+}
+```
 </p>
 </details>

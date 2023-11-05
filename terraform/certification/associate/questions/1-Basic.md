@@ -159,6 +159,99 @@ terraform {
 </p>
 </details>
 
+### Ingore change on tags resource
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+    ami = "ami-0f34c5ae932e6f0e4"
+    instance_type = "t2.small"
+
+    tags = {
+        Name = "UsingSystem"
+    }
+
+    lifecycle {
+        ignore_changes = [tags]
+    }
+}
+```
+
+### Ingore all changes on a resource
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+    ami = "ami-0f34c5ae932e6f0e4"
+    instance_type = "t2.small"
+
+    tags = {
+        Name = "UsingSystem"
+    }
+
+    lifecycle {
+        ignore_changes = all
+    }
+}
+```
+
+</p>
+</details>
+
+### Syntax to create new resource before remove the oldest
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+    ami = "ami-0f34c5ae932e6f0e4"
+    instance_type = "t2.small"
+
+    tags = {
+        Name = "UsingSystem"
+    }
+
+    lifecycle {
+        create_before_destroy = true
+    }
+}
+```
+
+</p>
+</details>
+
+### Syntax to forbiden removing of a resource
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+    ami = "ami-0f34c5ae932e6f0e4"
+    instance_type = "t2.small"
+
+    tags = {
+        Name = "UsingSystem"
+    }
+
+    lifecycle {
+        prevent_destroy  = true
+    }
+}
+```
+
+</p>
+</details>
+
+# Cli
+
 ### Command for destroy
 
 <details>
@@ -217,7 +310,7 @@ terraform {
 </p>
 </details>
 
-### Commands for savez plan to a file and apply it
+### Commands for save plan to a file and apply it
 <details>
 <summary>show</summary>
 <p>
@@ -225,6 +318,18 @@ terraform {
 `terraform plan -out=tfplan`
 
 `terraform apply tfplan`
+
+</p>
+</details>
+
+### Commands for plan without refresh the state and targetting resource aws_security_group.mygroup
+<details>
+<summary>show</summary>
+<p>
+
+`terraform plan -refresh=false`
+
+`terraform plan -refresh=false -target=aws_security_group.mygroup`
 
 </p>
 </details>

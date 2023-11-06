@@ -159,7 +159,7 @@ terraform {
 </p>
 </details>
 
-### Ingore change on tags resource
+### Ignore change on tags resource
 <details>
 <summary>show</summary>
 <p>
@@ -178,6 +178,9 @@ resource "aws_instance" "myvm" {
     }
 }
 ```
+
+</p>
+</details>
 
 ### Ingore all changes on a resource
 <details>
@@ -330,6 +333,150 @@ resource "aws_instance" "myvm" {
 `terraform plan -refresh=false`
 
 `terraform plan -refresh=false -target=aws_security_group.mygroup`
+
+</p>
+</details>
+
+# Provisionners
+
+### Where is doc of provisionners
+
+<details>
+<summary>show</summary>
+<p>
+
+[Configuration language> Resources> Provisionners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
+
+</p>
+</details>
+
+### Different types of provisionners
+
+<details>
+<summary>show</summary>
+<p>
+
+ - local-exec
+ - remote-exec
+
+</p>
+</details>
+
+### How to execute command via shh
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+   //...
+
+   connection {
+   type     = "ssh"
+   user     = "ec2-user"
+   private_key = file("./terraform-key.pem")
+   host     = self.public_ip
+    }
+
+ provisioner "remote-exec" {
+   inline = [
+    # Updating with the latest command for Amazon Linux machine
+     "sudo yum install -y nginx",
+     "sudo systemctl start nginx"
+   ]
+ }
+}
+```
+
+</p>
+</details>
+
+### How to execute command on local workstation
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+   //...
+
+   provisioner "local-exec" {
+    command = "echo 'helloworld'"
+  }
+}
+```
+
+</p>
+</details>
+
+### How to execute command on destroy
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+   //...
+
+   provisioner "local-exec" {
+    when    = destroy
+    command = "echo 'helloworld'"
+  }
+}
+```
+
+</p>
+</details>
+
+### When the provisionner is called
+
+<details>
+<summary>show</summary>
+<p>
+
+On creation, destroy, not update.
+
+</p>
+</details>
+
+### How to specify to continue on error
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+   //...
+
+   provisioner "local-exec" {
+    on_failure = continue
+    command = "echo 'helloworld'"
+  }
+}
+```
+
+</p>
+</details>
+
+### How to associate provisionner without resource
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "null_resource" "check" {
+   //...
+
+   provisioner "local-exec" {
+    command = "curl https://google.com"
+  }
+}
+```
 
 </p>
 </details>

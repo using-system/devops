@@ -253,6 +253,114 @@ resource "aws_instance" "myvm" {
 </p>
 </details>
 
+### Implement aws s3 backend ans dynamo
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+terraform {
+  backend "s3" {
+    bucket = "usingsystem-terraform-backend"
+    key    = "myproject/terraform.tfstate"
+    region = "eu-central-1"
+    dynamodb_table = "terraform-state-locking"
+  }
+}
+```
+
+</p>
+</details>
+
+### Refer remote state
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+data "terraform_remote_state" "myproject" {
+  backend = "s3"
+  config = {
+    bucket = "usingsystem-terraform-backend"
+    key    = "myproject/terraform.tfstate"
+    region = "eu-central-1"
+  }
+}
+```
+
+Then
+
+```hcl
+ cidr_blocks      = ["${data.terraform_remote_state.myproject.outputs.mycidr}/32"]
+```
+
+</p>
+</details>
+
+### Import in code
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+import {
+  to = aws_instance.myvm
+  id = "sg-07f13feb262ba8b6f"
+}
+```
+
+</p>
+</details>
+
+### Cli command to show state
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform state list`
+
+</p>
+</details>
+
+### Cli command to get state file
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform state pull`
+
+</p>
+</details>
+
+### Cli command to remove aws_instance.myvm resource in state
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform state rm aws_instance.myvm`
+
+</p>
+</details>
+
+### Cli command to show aws_instance.myvm resource in state
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform state show aws_instance.myvm`
+
+</p>
+</details>
+
+
+
+
 # Cli
 
 ### Command for destroy
@@ -477,6 +585,131 @@ resource "null_resource" "check" {
   }
 }
 ```
+
+</p>
+</details>
+
+# Modules
+
+### Http module reference
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+module "dns_zone_vnet_link_blob" {
+
+  source = "git::https://github.com/using-system/devops.git//terraform/modules/az-iam?ref=8d898691b4001e0fe5de3c97d7c7fe2183adb70a"
+
+}
+```
+
+
+</p>
+</details>
+
+### ssh module reference
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+module "dns_zone_vnet_link_blob" {
+
+  source = "git::ssh://username@github.com/using-system/devops.git//terraform/modules/az-iam?ref=8d898691b4001e0fe5de3c97d7c7fe2183adb70a"
+
+}
+```
+
+</p>
+</details>
+
+### Publishing modules requirements
+
+<details>
+<summary>show</summary>
+<p>
+
+ - Must be on a public github repo with name terraform-PROVIDER-NAME
+ - Have a description to the repo
+ - Standard module structure (readme, main, variables,  outputs)
+ - vX.Y.Z semantic git version tag
+
+</p>
+</details>
+
+# Workspaces
+
+### What is the default workspace
+<details>
+<summary>show</summary>
+<p>
+
+`default`
+
+</p>
+</details>
+
+### Show in cli the current workspace
+<details>
+<summary>show</summary>
+<p>
+
+`terraform workspace show`
+
+</p>
+</details>
+
+### Create in cli new dev workspace
+<details>
+<summary>show</summary>
+<p>
+
+`terraform workspace new dev`
+
+</p>
+</details>
+
+### How to associate variable with a workspace
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+resource "aws_instance" "myvm" {
+   //...
+   instance_type = lookup(var.instance_size,terraform.workspace)
+}
+
+variable "instance_size" {
+  type = "map"
+
+  default = {
+    default = "t2.nano"
+    dev     = "t2.micro"
+    prd     = "t2.large"
+  }
+}
+```
+
+</p>
+</details>
+
+# CICD
+
+### Wich files must be excluded with .gitignore
+
+<details>
+<summary>show</summary>
+<p>
+
+ - .terraform
+ - terraform.tfvars (optionnal)
+ - terraform.tfstate
+ - crash.log
 
 </p>
 </details>

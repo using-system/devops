@@ -359,7 +359,42 @@ import {
 </details>
 
 
+### Specify 2 region aws provider
 
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+provider "aws" {
+  region     =  "eu-central-1"
+}
+
+provider "aws" {
+  alias      =  "awsus"
+  region     =  "us-west-1"
+  profile    =  "account02"
+}
+
+resource "aws_eip" "myeip01" {
+  domain = "vpc"
+  provider = "aws.awsus"
+}
+```
+
+</p>
+</details>
+
+### Command for unlock state
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform force-unlock`
+
+</p>
+</details>
 
 # Cli
 
@@ -698,6 +733,22 @@ variable "instance_size" {
 </p>
 </details>
 
+### Set sensitive output
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+output "my_password" {
+  value = local.server_password
+  sensitive   = true
+}
+```
+
+</p>
+</details>
+
 # CICD
 
 ### Wich files must be excluded with .gitignore
@@ -710,6 +761,71 @@ variable "instance_size" {
  - terraform.tfvars (optionnal)
  - terraform.tfstate
  - crash.log
+
+</p>
+</details>
+
+### Name of the dependency lock file
+
+<details>
+<summary>show</summary>
+<p>
+
+.terraform.lock.hcl
+
+</p>
+</details>
+
+### How to upgrade providers
+
+<details>
+<summary>show</summary>
+<p>
+
+`terraform init -upgrade`
+
+</p>
+</details>
+
+
+# Terraform cloud
+
+### Implement sentinel rule
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+main = rule {
+  all tfplan.resources.aws_instance as _, instances {
+    all instances as _, r {
+      (length(r.applied.tags) else 0) > 0
+    }
+  }
+}
+```
+
+</p>
+</details>
+
+### Terraform cloud backend
+
+<details>
+<summary>show</summary>
+<p>
+
+```hcl
+terraform {
+  cloud {
+    organization = "usingsystem"
+
+    workspaces {
+      name = "my-workspace"
+    }
+  }
+}
+```
 
 </p>
 </details>

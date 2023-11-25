@@ -49,25 +49,17 @@ module "dns_zone_vnet_link_blob" {
 
 # Github actions
 
-## checkov
-
-[Link](https://github.com/using-system/devops/tree/main/github/actions/checkov)
-
-## gh-comment-current-issue
-
-[Link](https://github.com/using-system/devops/tree/main/github/actions/gh-comment-current-issue)
-
-## terrascan
-
-[Link](https://github.com/using-system/devops/tree/main/github/actions/terrascan)
+ - [checkov](https://github.com/using-system/devops/tree/main/github/actions/checkov)
+ - [gh-comment-current-issue](https://github.com/using-system/devops/tree/main/github/actions/gh-comment-current-issue)
+ - [terrascan](https://github.com/using-system/devops/tree/main/github/actions/terrascan)
 
 # Kubernetes certification preparation
 
-## CKA
+ - [CKA](https://github.com/using-system/devops/tree/main/k8s/cka)
+ - [CKS](https://github.com/using-system/devops/tree/main/k8s/cks)
 
-[Link](https://github.com/using-system/devops/tree/main/k8s/cka)
+# hashicorp certification preparation
+
+ - [Terraform Associate 003](https://github.com/using-system/devops/tree/main/terraform/certification/associate-003)
 
 
-## CKS
-
-[Link](https://github.com/using-system/devops/tree/main/k8s/cks)

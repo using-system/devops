@@ -8,23 +8,18 @@ resource "azurerm_virtual_network" "test" {
   resource_group_name = data.azurerm_resource_group.test.name
   address_space       = ["10.0.0.0/16"]
 
-  subnet {
-    name           = "Subnet1"
-    address_prefix = "10.0.0.0/23"
-  }
-
   tags = {
     environment = "Test"
   }
 }
 
-data "azurerm_subnet" "test" {
-
-  depends_on = [azurerm_virtual_network.test]
-
+resource "azurerm_subnet" "test" {
   name                 = "Subnet1"
-  virtual_network_name = azurerm_virtual_network.test.name
   resource_group_name  = data.azurerm_resource_group.test.name
+  virtual_network_name = azurerm_virtual_network.test.name
+  address_prefixes     = ["10.0.0.0/23"]
+
+  service_endpoints = ["Microsoft.KeyVault"]
 }
 
 output "resource_group_name" {
@@ -36,5 +31,5 @@ output "resource_group_location" {
 }
 
 output "subnet_id" {
-  value = data.azurerm_subnet.test.id
+  value = azurerm_subnet.test.id
 }

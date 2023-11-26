@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.78.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.82.0 |
 
 ## Modules
 
@@ -40,6 +40,7 @@ No modules.
 | <a name="input_sku"></a> [sku](#input\_sku) | The SKU name of the container registry. | `string` | `"Premium"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to associate with resources. | `map(string)` | n/a | yes |
 | <a name="input_trust_policy_enabled"></a> [trust\_policy\_enabled](#input\_trust\_policy\_enabled) | Determines if the trust policy is enabled | `bool` | `true` | no |
+| <a name="input_zone_redundancy_enabled"></a> [zone\_redundancy\_enabled](#input\_zone\_redundancy\_enabled) | Determines if the zone redundancy is enabled | `bool` | `true` | no |
 
 ## Outputs
 

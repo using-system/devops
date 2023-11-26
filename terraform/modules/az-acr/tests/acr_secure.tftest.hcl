@@ -102,7 +102,7 @@ run "plan" {
   }
 
   assert {
-    condition       = azurerm_container_registry.zone_redundancy_enabled == true
+    condition       = azurerm_container_registry.acr.zone_redundancy_enabled == true
     error_message  = "acr zone_redundancy_enabled must be set to true"
   }
 

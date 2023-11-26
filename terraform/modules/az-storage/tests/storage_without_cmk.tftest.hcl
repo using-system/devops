@@ -25,6 +25,8 @@ run "plan" {
     identity_type           = "UserAssigned"
     identity_ids            = [run.setup.identity_id]
 
+    shared_access_key_enabled  = true
+
     tags                    = { Environment = "Test" }
   }
 
@@ -111,6 +113,8 @@ run "apply" {
 
       identity_type           = "UserAssigned"
       identity_ids            = [run.setup.identity_id]
+
+      shared_access_key_enabled  = true
 
       tags                    = { Environment = "Test" }
     }

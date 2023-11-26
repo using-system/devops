@@ -40,7 +40,7 @@ variable "min_tls_version" {
 variable "shared_access_key_enabled" {
   description = "Specifies whether the storage account permits requests to be authorized with the account access key via Shared Key."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "public_network_access_enabled" {

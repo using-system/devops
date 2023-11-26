@@ -24,13 +24,14 @@ variable "configuration" {
     automatic_channel_upgrade    = optional(string)
     kv_key_management_service_id = optional(string)
     node_pool = object({
-      type                        = string
-      count                       = number
-      vm_size                     = string
-      availability_zones          = list(number)
-      os_disk_size                = number,
-      max_pods                    = optional(number, 110)
-      temporary_name_for_rotation = optional(string)
+      type                         = string
+      count                        = number
+      vm_size                      = string
+      availability_zones           = list(number)
+      os_disk_size                 = number,
+      max_pods                     = optional(number, 110)
+      temporary_name_for_rotation  = optional(string)
+      only_critical_addons_enabled = optional(bool, true)
     })
     rbac = object({
       enabled                = bool

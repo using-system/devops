@@ -69,6 +69,12 @@ variable "trust_policy_enabled" {
   default     = true
 }
 
+variable "zone_redundancy_enabled" {
+  description = "Determines if the zone redundancy is enabled"
+  type        = bool
+  default     = true
+}
+
 variable "identity_type" {
   description = "The type of identity used for the acr."
   type        = string

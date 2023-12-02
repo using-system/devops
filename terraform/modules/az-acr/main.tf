@@ -21,9 +21,12 @@ resource "azurerm_container_registry" "acr" {
     for_each = var.georeplication_locations
 
     content {
-      location = georeplications.value
+      location                = georeplications.value
+      zone_redundancy_enabled = true
     }
   }
+
+  zone_redundancy_enabled = var.zone_redundancy_enabled
 
   identity {
     type         = var.identity_type

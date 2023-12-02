@@ -25,6 +25,7 @@ run "plan" {
     trust_policy_enabled            = false
     retention_policy_enabled        = false
     enable_lock_on_acr              = false
+    zone_redundancy_enabled         = false
     network_rule_bypass_option      = "AzureServices"
 
     tags                        = { Environment = "Test" }
@@ -106,6 +107,11 @@ run "plan" {
   }
 
   assert {
+    condition       = azurerm_container_registry.acr.zone_redundancy_enabled == false
+    error_message  = "acr zone_redundancy_enabled must be set to true"
+  }
+
+  assert {
     condition       = length(azurerm_container_registry.acr.tags) == 1
     error_message  = "acr tags must contains one element"
   }
@@ -133,6 +139,7 @@ run "apply" {
       trust_policy_enabled            = false
       retention_policy_enabled        = false
       enable_lock_on_acr              = false
+      zone_redundancy_enabled         = false
       network_rule_bypass_option      = "AzureServices"
 
       tags                        = { Environment = "Test" }

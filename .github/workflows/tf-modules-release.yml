@@ -38,7 +38,7 @@ jobs:
           escape_json: false
           dir_names: 'true'
           files: terraform/modules/**
-          dir_names_max_depth: '2'
+          dir_names_max_depth: '3'
       - name: List all changed files
         run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
 

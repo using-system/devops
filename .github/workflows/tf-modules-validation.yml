@@ -1,4 +1,4 @@
-name: Terraform modules validaton
+name: TF Modules - Validaton
 
 on:
   push:
@@ -14,8 +14,9 @@ on:
   workflow_dispatch:
     
 concurrency:
-  group: ${{ github.workflow }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
+
 permissions:
   id-token: write
   contents: read
@@ -25,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - id: get-tf-modules
         name: "Build TF modules matrix"

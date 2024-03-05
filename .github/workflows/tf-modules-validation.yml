@@ -1,4 +1,4 @@
-name: TF Modules - Validaton
+name: TF Modules - Validation
 
 on:
   push:

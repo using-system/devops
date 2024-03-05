@@ -1,4 +1,4 @@
-name: Create a new release
+name: Create a new release for tf modules
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "terraform/modules/**"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}
@@ -16,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Bump version and push tag
         id: tag_version

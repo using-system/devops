@@ -72,7 +72,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          name: TF module ${{ steps.tag_version.outputs.new_tag }}
+          name: ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           generate_release_notes: true

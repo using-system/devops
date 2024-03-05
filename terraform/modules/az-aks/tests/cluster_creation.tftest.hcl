@@ -18,7 +18,7 @@ run "plan" {
     resource_group_name     = run.setup.resource_group_name
     name                    = "az-aks-cluster"
     configuration           = {
-        version                      = "1.27.3"
+        version                      = "1.28.5"
         sku                          = "Free"
         private_cluster              = true
         user_assigned_identity_id    = run.setup.assigned_identity_id
@@ -99,7 +99,7 @@ run "apply" {
         resource_group_name     = run.setup.resource_group_name
         name                    = "az-aks-cluster"
         configuration           = {
-            version                      = "1.27.3"
+            version                      = "1.28.5"
             sku                          = "Free"
             private_cluster              = true
             user_assigned_identity_id    = run.setup.assigned_identity_id

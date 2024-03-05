@@ -1,4 +1,4 @@
-name: TF Modules - Validaton
+name: TF Modules - Validation
 
 on:
   push:
@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}
   cancel-in-progress: false
 
 permissions:
@@ -46,6 +46,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       ARM_USE_OIDC: "true"
+      TERRAFORM_VERSION: "1.6.2"
     strategy:
       fail-fast: false
       matrix:
@@ -61,7 +62,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_wrapper: false
-          terraform_version: latest
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
 
       - name: Terraform Version
         run: terraform version
@@ -96,7 +97,7 @@ jobs:
               - 'terraform/modules/${{ matrix.modules }}/**'          
 
       - name: Terraform Test
-        if: steps.changes.outputs.module == 'true' || (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch')
+        if: steps.changes.outputs.module == 'true' || (github.event_name == 'workflow_dispatch')
         run: |
           OUTPUT=$(terraform test)
           echo "$OUTPUT"

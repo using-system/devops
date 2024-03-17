@@ -18,7 +18,7 @@ run "plan" {
   command = plan
 
   variables {
-    name                            = "azasbstandard"
+    name                            = "azasbpremium"
     location                        = run.setup.resource_group_location
     resource_group_name             = run.setup.resource_group_name
 

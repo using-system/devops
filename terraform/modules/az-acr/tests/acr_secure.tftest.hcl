@@ -14,11 +14,11 @@ run "plan" {
   command = plan
 
   variables {
-    name                        = "usingsystemazacrtest1"
-    location                    = run.setup.resource_group_location
-    resource_group_name         = run.setup.resource_group_name
-    
-    tags                        = { Environment = "Test" }
+    name                          = "usingsystemazacrtest1"
+    location                      = run.setup.resource_group_location
+    resource_group_name           = run.setup.resource_group_name
+    ip_rules                      = ["20.75.211.8/29", "20.99.157.152/29"]
+    tags                          = { Environment = "Test" }
   }
 
   assert {
@@ -126,7 +126,8 @@ run "apply" {
         name                        = "usingsystemazacrtest1"
         location                    = run.setup.resource_group_location
         resource_group_name         = run.setup.resource_group_name
-    
+        ip_rules                    = ["20.75.211.8/29", "20.99.157.152/29"]
+        
         tags                        = { Environment = "Test" }
     }
 

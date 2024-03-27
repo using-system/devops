@@ -26,6 +26,23 @@ resource "azurerm_container_registry" "acr" {
     }
   }
 
+  dynamic "network_rule_set" {
+    for_each = length(var.ip_rules) > 0 ? [1] : []
+
+    content {
+      default_action = "Deny"
+
+      dynamic "ip_rule" {
+        for_each = var.ip_rules
+
+        content {
+          action   = "Allow"
+          ip_range = ip_rule.value
+        }
+      }
+    }
+  }
+
   zone_redundancy_enabled = var.zone_redundancy_enabled
 
   identity {

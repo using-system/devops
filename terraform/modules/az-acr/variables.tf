@@ -87,6 +87,12 @@ variable "identity_ids" {
   default     = []
 }
 
+variable "ip_rules" {
+  description = "List of IP rules to allow on the acr."
+  type        = list(string)
+  default     = []
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

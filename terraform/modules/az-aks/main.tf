@@ -19,6 +19,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   private_cluster_enabled   = var.configuration.private_cluster
   local_account_disabled    = var.configuration.local_account_disabled
   automatic_channel_upgrade = var.configuration.automatic_channel_upgrade
+  private_dns_zone_id       = var.private_dns_zone_id
 
   default_node_pool {
     name                         = "defaultpool"

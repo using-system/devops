@@ -60,6 +60,11 @@ variable "subnet_id" {
   description = "Id of the subnet to attach aks nodes"
 }
 
+variable "private_dns_zone_id" {
+  description = "Id of the private dns zone to attach aks"
+  default     = null
+}
+
 variable "tags" {
   description = "Tags to associate with resources."
   type        = map(string)

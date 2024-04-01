@@ -19,7 +19,7 @@ run "plan" {
     name                    = "az-aks-cluster"
     configuration           = {
         version                      = "1.28.5"
-        sku                          = "Free"
+        sku                          = "Standard"
         private_cluster              = true
         user_assigned_identity_id    = run.setup.assigned_identity_id
         local_account_disabled       = true
@@ -100,7 +100,7 @@ run "apply" {
         name                    = "az-aks-cluster"
         configuration           = {
             version                      = "1.28.5"
-            sku                          = "Free"
+            sku                          = "Standard"
             private_cluster              = true
             user_assigned_identity_id    = run.setup.assigned_identity_id
             local_account_disabled       = true

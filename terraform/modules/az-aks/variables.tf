@@ -23,6 +23,7 @@ variable "configuration" {
     public_ssh_key               = optional(string)
     automatic_channel_upgrade    = optional(string)
     kv_key_management_service_id = optional(string)
+    enable_microsoft_defender    = optional(bool, true)
     node_pool = object({
       type                         = string
       count                        = number
@@ -32,6 +33,7 @@ variable "configuration" {
       max_pods                     = optional(number, 110)
       temporary_name_for_rotation  = optional(string)
       only_critical_addons_enabled = optional(bool, true)
+      upgrade_max_surge            = optional(string, "10%")
     })
     rbac = object({
       enabled                = bool

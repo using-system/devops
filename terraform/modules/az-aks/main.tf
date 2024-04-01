@@ -34,6 +34,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     temporary_name_for_rotation  = var.configuration.node_pool.temporary_name_for_rotation
     enable_host_encryption       = true
     only_critical_addons_enabled = var.configuration.node_pool.only_critical_addons_enabled
+
+    upgrade_settings {
+      max_surge = var.configuration.node_pool.upgrade_max_surge
+    }
   }
 
   identity {
@@ -46,7 +50,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
   oms_agent {
     log_analytics_workspace_id = var.log_analytics_id
   }
-
+  dynamic "microsoft_defender" {
+    for_each = var.configuration.enable_microsoft_defender == false ? [] : ["microsoft_defender"]
+    content {
+      log_analytics_workspace_id = var.log_analytics_id
+    }
+  }
   dynamic "key_management_service" {
     for_each = var.configuration.kv_key_management_service_id == null ? [] : ["key_management_service"]
 

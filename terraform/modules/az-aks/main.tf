@@ -47,9 +47,23 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   azure_policy_enabled      = var.configuration.addon.enable_azure_policy
   open_service_mesh_enabled = var.configuration.addon.enable_open_service_mesh
-  oms_agent {
-    log_analytics_workspace_id = var.log_analytics_id
+  dynamic "service_mesh_profile" {
+    for_each = var.configuration.addon.service_mesh_profile == null ? [] : ["service_mesh_profile"]
+    content {
+      mode                             = var.configuration.addon.service_mesh_profile.mode
+      external_ingress_gateway_enabled = var.configuration.addon.service_mesh_profile.external_ingress_gateway_enabled
+      internal_ingress_gateway_enabled = var.configuration.addon.service_mesh_profile.internal_ingress_gateway_enabled
+    }
   }
+
+  dynamic "oms_agent" { # Azure Monitor for containers
+    for_each = var.configuration.addon.enable_oms_agent ? ["oms_agent"] : []
+    content {
+      log_analytics_workspace_id      = var.log_analytics_id
+      msi_auth_for_monitoring_enabled = var.configuration.msi_auth_for_monitoring_enabled
+    }
+  }
+
   dynamic "microsoft_defender" {
     for_each = var.configuration.enable_microsoft_defender == false ? [] : ["microsoft_defender"]
     content {
@@ -93,6 +107,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
     admin_group_object_ids = var.configuration.rbac.admin_group_object_ids
     azure_rbac_enabled     = var.configuration.rbac.enabled
     tenant_id              = var.configuration.rbac.tenant_id
+  }
+
+  dynamic "monitor_metrics" {
+    for_each = var.configuration.monitor_metrics != null ? ["monitor_metrics"] : []
+
+    content {
+      annotations_allowed = var.configuration.monitor_metrics.annotations_allowed
+      labels_allowed      = var.configuration.monitor_metrics.labels_allowed
+    }
   }
 
   tags = var.tags

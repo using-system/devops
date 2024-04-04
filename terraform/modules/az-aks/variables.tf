@@ -13,17 +13,18 @@ variable "name" {
 variable "configuration" {
   description = "AKS configuration"
   type = object({
-    version                      = string
-    sku                          = string
-    private_cluster              = bool
-    user_assigned_identity_id    = string
-    admin_username               = optional(string)
-    local_account_disabled       = optional(bool, true)
-    disk_encryption_set_id       = optional(string)
-    public_ssh_key               = optional(string)
-    automatic_channel_upgrade    = optional(string)
-    kv_key_management_service_id = optional(string)
-    enable_microsoft_defender    = optional(bool, true)
+    version                         = string
+    sku                             = string
+    private_cluster                 = bool
+    user_assigned_identity_id       = string
+    admin_username                  = optional(string)
+    local_account_disabled          = optional(bool, true)
+    disk_encryption_set_id          = optional(string)
+    public_ssh_key                  = optional(string)
+    automatic_channel_upgrade       = optional(string)
+    kv_key_management_service_id    = optional(string)
+    enable_microsoft_defender       = optional(bool, true)
+    msi_auth_for_monitoring_enabled = optional(bool, false)
     node_pool = object({
       type                         = string
       count                        = number
@@ -41,8 +42,14 @@ variable "configuration" {
       tenant_id              = string
     })
     addon = object({
+      enable_oms_agent         = optional(bool, false)
       enable_open_service_mesh = bool
       enable_azure_policy      = bool
+      service_mesh_profile = optional(object({
+        mode                             = string
+        external_ingress_gateway_enabled = optional(bool, true)
+        internal_ingress_gateway_enabled = optional(bool, false)
+      }), null)
     })
     network_profile = object({
       network_plugin    = optional(string, "azure"),
@@ -50,12 +57,17 @@ variable "configuration" {
       load_balancer_sku = optional(string, "standard"),
       outbound_type     = optional(string, "userDefinedRouting"),
     })
+    monitor_metrics = optional(object({
+      annotations_allowed = optional(string)
+      labels_allowed      = optional(string)
+    }), null)
 
   })
 }
 
 variable "log_analytics_id" {
   description = "Log analytics identifier"
+  default     = null
 }
 
 variable "subnet_id" {
